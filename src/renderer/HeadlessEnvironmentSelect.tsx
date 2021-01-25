@@ -1,38 +1,30 @@
 import React from 'react';
 import {
-	FlySelect,
-	BasicInput,
+	Checkbox
 } from '@getflywheel/local-components';
 import { HeadlessFrameworkTypes } from '../types';
 import { store, actions, useStoreSelector, selectors } from './store/store';
+import * as Local from '@getflywheel/local';
 
-export const HeadlessEnvironmentSelect = () => {
+interface IProps {
+	siteInfo: Partial<Local.NewSiteInfo>;
+}
+
+export const HeadlessEnvironmentSelect = (props: IProps) => {
+
+	console.log(props);
 
 	const state = useStoreSelector(selectors.selectHeadlessEnvironmentData);
 
+	console.log(state);
+
 	return (
-		<div className="FormRow FormRow__Half" style={{ marginTop: 20 }}>
-			<div className="FormField" style={{ height: 99 }}>
-				<label>Headless Framework</label>
-				<FlySelect
-					placeholder="Select Headless Framework"
-					value={state.addHeadlessEnvironment.HeadlessFrameworkValue}
-					options={{
-						[HeadlessFrameworkTypes.NONE]: 'None',
-						[HeadlessFrameworkTypes.ATLAS]: 'Atlas (Next.js)',
-						[HeadlessFrameworkTypes.OTHER]: 'Bring your own',
-					}}
-					onChange={(value) => store.dispatch(actions.addHeadlessEnvironment(value))}
-				/>
-			</div>
-
-			{state.addHeadlessEnvironment.requiresSourceUrl &&
-			<div className="FormField">
-				<label>Framework Source URL</label>
-				<BasicInput />
-			</div>
-			}
-
+		<div className="FormRow FormRow__Third FormRow__Half" style={{ marginTop: 20 }}>
+			<Checkbox
+				checked={state[props.siteInfo.siteName]}
+				label="Use Atlas Framework?"
+				onChange={(checked) => store.dispatch(actions.addHeadlessEnvironment({ siteName: props.siteInfo.siteName, isChecked: checked }))}
+			/>
 		</div>
 	);
 };

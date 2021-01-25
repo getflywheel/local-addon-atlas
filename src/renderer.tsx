@@ -17,7 +17,8 @@ export default function (context) {
 	const SiteOverviewHOC = withStoreProvider(SiteOverviewDisplayTestData);
 
 	// Create the additional selection option to be displayed during site creation
-	hooks.addContent('NewSiteEnvironment_FlySelect', () => <NewSiteEnvironmentHOC />);
+	hooks.addContent('NewSiteEnvironment_FlySelect', ({ siteInfo }) => <NewSiteEnvironmentHOC siteInfo = { siteInfo } />);
+
 
 	hooks.addContent('SiteInfoOverview', () => <SiteOverviewHOC />);
 }

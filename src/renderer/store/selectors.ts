@@ -4,7 +4,7 @@ import { store, State } from './store';
 
 const selectHeadlessEnvironmentData = createSelector(
 	(state: State) => state,
-	(state) => state,
+	(state) => state.addHeadlessEnvironment,
 );
 
 export const selectors = {
