@@ -6,9 +6,9 @@ const { execFilePromise, getServiceContainer } = LocalMain;
 const serviceContainer = getServiceContainer();
 
 export default class LightningServiceNodeJS extends LocalMain.LightningService {
-	readonly serviceName:string = 'nodejs';
+	readonly serviceName: string = 'nodejs';
 
-	readonly binVersion:string = '1.0.0';
+	readonly binVersion: string = '1.0.0';
 
 	get requiredPorts() {
 		return {
@@ -16,7 +16,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		};
 	}
 
-	get appNodePath() : string {
+	get appNodePath(): string {
 		return path.join(this._site.longPath, 'app-node');
 	}
 
@@ -34,7 +34,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		};
 	}
 
-	get electronifiedPATH() : string {
+	get electronifiedPATH(): string {
 		const PATH = process.env.PATH!.split(path.delimiter);
 
 		/**
@@ -46,7 +46,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		return PATH.join(path.delimiter);
 	}
 
-	get defaultEnv() : GenericObject {
+	get defaultEnv(): GenericObject {
 		return {
 			LOCAL_ELECTRON_PATH: this.bin!.electron,
 			ELECTRON_RUN_AS_NODE: '1',
@@ -71,7 +71,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		 *
 		 * @see https://github.com/vercel/next.js/issues/10338
 		 */
-		await replaceInFileAsync(path.join(this._site.longPath, 'app-node', 'package.json'), [
+		await LocalMain.replaceInFileAsync(path.join(this._site.longPath, 'app-node', 'package.json'), [
 			['"dev": "next",', '"dev": "next -p $PORT",'],
 		]);
 	}
@@ -80,7 +80,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	 * @todo show stdout/stderr to user
 	 */
 	async preprovision(): Promise<void> {
-		switch (this._site.headlessFramework) {
+		switch (this._site.services.nodejs) {
 			case 'next':
 				return this.preprovisionNext();
 
@@ -93,49 +93,46 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		const { wpCli, siteDatabase } = serviceContainer.cradle;
 
 		// eslint-disable-next-line default-case
-		switch (this._site.headlessFramework) {
-			case 'next':
-				await siteDatabase.waitForDB(this._site);
+		await siteDatabase.waitForDB(this._site);
 
-				await wpCli.run(this._site, [
-					'plugin',
-					'install',
-					'https://github.com/wp-graphql/wp-graphql/archive/v0.13.2.zip',
-					'--activate',
-				]);
+		await wpCli.run(this._site, [
+			'plugin',
+			'install',
+			'https://github.com/wp-graphql/wp-graphql/archive/v0.13.2.zip',
+			'--activate',
+		]);
 
-				await wpCli.run(this._site, [
-					'plugin',
-					'install',
-					'https://github.com/wp-graphql/wp-graphiql/archive/v1.0.1.zip',
-					'--activate',
-				]);
+		await wpCli.run(this._site, [
+			'plugin',
+			'install',
+			'https://github.com/wp-graphql/wp-graphiql/archive/v1.0.1.zip',
+			'--activate',
+		]);
 
-				/**
-				 * @todo The Next.js example throws errors if posts don't have a featured image. This is a temporary
-				 *   workaround for demonstraton purposes.
-				 */
-				await wpCli.run(this._site, [
-					'media',
-					'import',
-					'https://localwp.com/wp-content/themes/flywheel15/images/local-pro-ui.png',
-				]);
+		/**
+		 * @todo The Next.js example throws errors if posts don't have a featured image. This is a temporary
+		 *   workaround for demonstraton purposes.
+		 */
+		await wpCli.run(this._site, [
+			'media',
+			'import',
+			'https://localwp.com/wp-content/themes/flywheel15/images/local-pro-ui.png',
+		]);
 
-				await wpCli.run(this._site, [
-					'post',
-					'meta',
-					'update',
-					'1',
-					'_thumbnail_id',
-					'4',
-				]);
-				break;
-		}
+		await wpCli.run(this._site, [
+			'post',
+			'meta',
+			'update',
+			'1',
+			'_thumbnail_id',
+			'4',
+		]);
+
 	}
 
-	get devEnvVars() : GenericObject {
-		let env:GenericObject = {
-			LOCAL_WP_HOST: `localhost:${this._site.wpPort}`,
+	get devEnvVars(): GenericObject {
+		let env: GenericObject = {
+			LOCAL_WP_HOST: `localhost:${this._site.httpPort}`,
 		};
 
 		switch (this._site.headlessFramework) {
