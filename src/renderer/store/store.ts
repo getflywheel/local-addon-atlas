@@ -1,6 +1,8 @@
 import { useSelector, TypedUseSelectorHook } from 'react-redux';
-import { createSlice, PayloadAction, current, configureStore } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, configureStore } from '@reduxjs/toolkit';
 import { SiteEnvironmentData } from '../../types';
+import * as LocalRenderer from '@getflywheel/local/renderer';
+import { IPC_EVENTS } from '../../constants';
 
 export { selectors } from './selectors';
 
@@ -9,6 +11,10 @@ export const addHeadlessEnvironmentSlice = createSlice({
 	initialState: {} as SiteEnvironmentData,
 	reducers: {
 		addHeadlessEnvironment: (state, action: PayloadAction<{siteName: string, isChecked: boolean}>) => {
+			LocalRenderer.ipcAsync(
+				IPC_EVENTS.HEADLESS_CHECKED,
+				action.payload.isChecked,
+			);
 			state[action.payload.siteName] = action.payload.isChecked;
 			return state;
 		},
