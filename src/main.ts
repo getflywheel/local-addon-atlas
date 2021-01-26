@@ -3,6 +3,7 @@ import * as Local from '@getflywheel/local';
 import { IPC_EVENTS } from './constants';
 import NodeJSService from './NodeJSService';
 
+const OPTIONS_GROUP = 'local-headless';
 let headlessSelected = false;
 
 export default function (): void {
