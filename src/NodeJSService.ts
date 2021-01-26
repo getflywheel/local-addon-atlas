@@ -1,10 +1,15 @@
 import path from 'path';
+import { app } from 'electron';
 import * as LocalMain from '@getflywheel/local/main';
 
 const { execFilePromise, getServiceContainer } = LocalMain;
 
 const serviceContainer = getServiceContainer();
 
+type GenericObject = { [key: string]: any };
+
+const appPath = app.getAppPath();
+const resourcesPath = path.resolve(appPath, '../extraResources');
 export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	readonly serviceName: string = 'nodejs';
 
@@ -40,8 +45,8 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		/**
 		 * Add node_modules/.bin to path.
 		 */
-		PATH.unshift(path.resolve(process.electronPaths.resourcesPath, 'npm-bundled', 'node_modules', '.bin'));
-		PATH.unshift(path.join(process.electronPaths.resourcesPath, 'electron-node'));
+		PATH.unshift(path.resolve(resourcesPath, 'npm-bundled', 'node_modules', '.bin'));
+		PATH.unshift(path.join(resourcesPath, 'electron-node'));
 
 		return PATH.join(path.delimiter);
 	}
@@ -54,9 +59,13 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		};
 	}
 
-	async preprovisionNext(): Promise<void> {
+	/**
+	 * @todo show stdout/stderr to user
+	 */
+	async preprovision(): Promise<void> {
+		const appPath = app.getAppPath();
 		await execFilePromise(this.bin!.electron, [
-			path.resolve(process.electronPaths.resourcesPath, 'npm-bundled', 'node_modules', '.bin', 'npx'),
+			path.resolve(resourcesPath, 'npm-bundled', 'node_modules', '.bin', 'npx'),
 			'create-next-app',
 			'--example',
 			'cms-wordpress',
@@ -74,19 +83,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		await LocalMain.replaceInFileAsync(path.join(this._site.longPath, 'app-node', 'package.json'), [
 			['"dev": "next",', '"dev": "next -p $PORT",'],
 		]);
-	}
-
-	/**
-	 * @todo show stdout/stderr to user
-	 */
-	async preprovision(): Promise<void> {
-		switch (this._site.services.nodejs) {
-			case 'next':
-				return this.preprovisionNext();
-
-			default:
-				throw new Error('Unsupported Headless Framework.');
-		}
 	}
 
 	async finalizeNewSite(): Promise<void> {
@@ -131,31 +127,19 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	}
 
 	get devEnvVars(): GenericObject {
-		let env: GenericObject = {
-			LOCAL_WP_HOST: `localhost:${this._site.httpPort}`,
+		const LOCAL_WP_HOST = `localhost:${this._site.httpPort}`;
+		return {
+			LOCAL_WP_HOST,
+			PORT: this.port!.toString(),
+			WORDPRESS_API_URL: `http://${LOCAL_WP_HOST}/graphql`,
 		};
-
-		switch (this._site.headlessFramework) {
-			case 'next':
-				env = {
-					...env,
-					PORT: this.port!.toString(),
-					WORDPRESS_API_URL: `http://${env.LOCAL_WP_HOST}/graphql`,
-				};
-				break;
-
-			default:
-				throw new Error('Unsupported Headless Framework.');
-		}
-
-		return env;
 	}
 
 	start() {
 		return [
 			{
 				name: 'nodejs',
-				binPath: path.resolve(process.electronPaths.resourcesPath, 'npm-bundled', 'node_modules', '.bin', 'npm'),
+				binPath: path.resolve(resourcesPath, 'npm-bundled', 'node_modules', '.bin', 'npm'),
 				args: ['run', 'dev'],
 				cwd: this.appNodePath,
 				env: {

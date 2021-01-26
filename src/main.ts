@@ -7,6 +7,7 @@ import * as Electron from 'electron';
 import { IPC_EVENTS } from './constants';
 import NodeJSService from './NodeJSService';
 
+const OPTIONS_GROUP = 'local-headless';
 let headlessSelected = false;
 
 export default function (context: { electron: typeof Electron }): void {
@@ -17,6 +18,22 @@ export default function (context: { electron: typeof Electron }): void {
 
 	ipcMain.addListener(IPC_EVENTS.HEADLESS_CHECKED , (isChecked) => {
 		headlessSelected = isChecked;
+	});
+
+	LocalMain.HooksMain.addAction('beforeFinalize', (site) => {
+		if (headlessSelected) {
+			// Store the current headlessFramework without erasing existing site's options.
+			const currentOptions = LocalMain.getServiceContainer().cradle.userData.get(OPTIONS_GROUP);
+			LocalMain.getServiceContainer().cradle.userData.set(
+				OPTIONS_GROUP,
+				{
+					...currentOptions,
+					[site.id]: {
+						headlessFramework: 'atlas',
+					},
+				},
+			);
+		}
 	});
 
 	LocalMain.HooksMain.addFilter('siteServices', (services) => {

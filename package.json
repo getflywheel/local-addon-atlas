@@ -55,7 +55,7 @@
     "react-svg-loader": "^3.0.3",
     "ts-jest": "^26.3.0",
     "ts-loader": "^8.0.4",
-    "typescript": "^4.0.5",
+    "typescript": "^3",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   },
@@ -71,6 +71,7 @@
     "dateformat": "^3.0.3",
     "fs-extra": "^9.0.1",
     "glob-escape": "^0.0.2",
+    "graphql": "^15.5.0",
     "lodash": "^4.17.20",
     "md5": "^2.3.0",
     "prop-types": "^15.6.2",
@@ -84,9 +85,9 @@
     "@getflywheel/local-components",
     "classnames",
     "dateformat",
-	"fs-extra",
-	"glob",
-	"glob-escape",
+    "fs-extra",
+    "glob",
+    "glob-escape",
     "lodash",
     "md5",
     "prop-types",
@@ -96,10 +97,10 @@
     "redux"
   ],
   "files": [
-	"lib/**/*",
-	"vendor/**/*",
-	"icon.svg",
-	"style.css"
+    "lib/**/*",
+    "vendor/**/*",
+    "icon.svg",
+    "style.css"
   ],
   "engines": {
     "local-by-flywheel": "^5.9.2"
