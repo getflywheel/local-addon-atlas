@@ -3,24 +3,25 @@ import * as LocalMain from '@getflywheel/local/main';
 import * as Local from '@getflywheel/local';
 import { IPC_EVENTS } from './constants';
 // import { Preferences } from './types';
-import * as Electron from 'electron';
-import { IPC_EVENTS } from './constants';
 import NodeJSService from './NodeJSService';
 
 const OPTIONS_GROUP = 'local-headless';
 let headlessSelected = false;
 
-export default function (context: { electron: typeof Electron }): void {
-	const { electron } = context;
-	const { ipcMain } = electron;
+export default function (): void {
 
-	LocalMain.registerLightningService(NodeJSService, 'php', '8.0.0');
+	LocalMain.registerLightningService(NodeJSService, 'nodejs', '1.0.0');
 
-	ipcMain.addListener(IPC_EVENTS.HEADLESS_CHECKED , (isChecked) => {
+	// TODO: We need a way for addons to get the values of fields added to site creation.
+	// One option is to modify Local to grab the values of all named inputs during site creation
+	// and pass them to the beforeFinalize hook below.
+	LocalMain.addIpcAsyncListener(IPC_EVENTS.HEADLESS_CHECKED , (isChecked) => {
+		LocalMain.getServiceContainer().cradle.localLogger.log('info', isChecked);
 		headlessSelected = isChecked;
 	});
 
 	LocalMain.HooksMain.addAction('beforeFinalize', (site) => {
+		LocalMain.getServiceContainer().cradle.localLogger.log('info', `beforeFinalize: ${headlessSelected}`);
 		if (headlessSelected) {
 			// Store the current headlessFramework without erasing existing site's options.
 			const currentOptions = LocalMain.getServiceContainer().cradle.userData.get(OPTIONS_GROUP);
@@ -37,6 +38,7 @@ export default function (context: { electron: typeof Electron }): void {
 	});
 
 	LocalMain.HooksMain.addFilter('siteServices', (services) => {
+		LocalMain.getServiceContainer().cradle.localLogger.log('info', `headless selected: ${headlessSelected}`);
 		if (headlessSelected) {
 			services.nodejs = {
 				version: '1.0.0',
@@ -44,5 +46,7 @@ export default function (context: { electron: typeof Electron }): void {
 				role: Local.SiteServiceRole.OTHER,
 			};
 		}
+
+		return services;
 	});
 }
