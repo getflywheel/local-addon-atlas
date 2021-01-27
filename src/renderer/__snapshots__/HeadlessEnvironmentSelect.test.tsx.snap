@@ -20,21 +20,18 @@ exports[`HeadlessEnvironmentSelect renders a </Checkbox> with correct label text
     }
   >
     <div
-      className="FormRow FormRow__Half"
+      className="FormRow FormRow__Center AtlasCheckboxSelect"
       style={
         Object {
-          "marginTop": 20,
+          "marginTop": 30,
         }
       }
     >
       <div>
-        <label>
-          Node.JS
-        </label>
         <_
           checked={false}
           disabled={false}
-          label="Use Atlas Framework?"
+          label="Use Atlas framework to build this site headless (beta)"
           onChange={[Function]}
           style={
             Object {
@@ -66,7 +63,7 @@ exports[`HeadlessEnvironmentSelect renders a </Checkbox> with correct label text
               <div
                 className="Checkbox_LabelContents_UOdqj_v15-0-1"
               >
-                Use Atlas Framework?
+                Use Atlas framework to build this site headless (beta)
               </div>
             </label>
           </div>

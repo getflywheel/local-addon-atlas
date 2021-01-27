@@ -1,6 +1,9 @@
+import path from 'path';
 import { Provider } from 'react-redux';
 import { HeadlessEnvironmentSelect } from './renderer/HeadlessEnvironmentSelect';
 import { store } from './renderer/store/store';
+
+const stylesheetPath = path.resolve(__dirname, '../style.css');
 
 export default function (context) {
 	const { React, hooks } = context;
@@ -10,6 +13,14 @@ export default function (context) {
 			<Component {...props} />
 		</Provider>
 	);
+
+	hooks.addContent('stylesheets', () => (
+		<link
+			rel="stylesheet"
+			key="localAtlas-addon-stylesheet"
+			href={stylesheetPath}
+		/>
+	));
 
 	const NewSiteEnvironmentHOC = withStoreProvider(HeadlessEnvironmentSelect);
 

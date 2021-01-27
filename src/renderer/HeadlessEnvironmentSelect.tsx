@@ -12,13 +12,12 @@ export const HeadlessEnvironmentSelect = (props: IProps) => {
 	const state = useStoreSelector(selectors.selectHeadlessEnvironmentData);
 
 	return (
-		<div className="FormRow FormRow__Half" style={{ marginTop: 20 }}>
+		<div className="FormRow FormRow__Center AtlasCheckboxSelect" style={{ marginTop: 30 }}>
 			<div>
-				<label>Node.JS</label>
 				<Checkbox
 					style={{ marginTop: 10 }}
 					checked={state[props.siteInfo.siteName]}
-					label="Use Atlas Framework?"
+					label="Use Atlas framework to build this site headless (beta)"
 					onChange={(checked) => store.dispatch(actions.addHeadlessEnvironment({ siteName: props.siteInfo.siteName, isChecked: checked }))}
 				/>
 			</div>

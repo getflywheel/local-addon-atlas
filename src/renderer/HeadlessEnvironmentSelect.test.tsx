@@ -10,6 +10,7 @@ import { HeadlessEnvironmentSelect } from './HeadlessEnvironmentSelect';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import Adapter from 'enzyme-adapter-react-16';
+import * as LocalRenderer from '@getflywheel/local/renderer';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -29,7 +30,7 @@ describe('HeadlessEnvironmentSelect', () => {
 			</Provider>,
 		);
 
-		const checkboxLabelText = 'Use Atlas Framework?';
+		const checkboxLabelText = 'Use Atlas framework to build this site headless (beta)';
 
 		const checkbox = componentNode.find(Checkbox);
 
@@ -60,5 +61,7 @@ describe('HeadlessEnvironmentSelect', () => {
 		const state = componentNode.props().store.getState();
 
 		expect(state.addHeadlessEnvironment[siteName]).toBeTruthy();
+
+		expect(LocalRenderer.ipcAsync).toHaveBeenCalledTimes(1);
 	});
 });

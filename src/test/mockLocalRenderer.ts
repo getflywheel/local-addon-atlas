@@ -1,1 +1,1 @@
-export const ipcAsync = () => jest.fn();
+export const ipcAsync = jest.fn();
