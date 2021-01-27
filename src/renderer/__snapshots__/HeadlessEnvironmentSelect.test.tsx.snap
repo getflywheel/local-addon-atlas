@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeadlessEnvironmentSelect renders a </Checkbox> with correct label text 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <Component
+    siteInfo={
+      Object {
+        "siteName": "Jacks Flapjacks",
+      }
+    }
+  >
+    <div
+      className="FormRow FormRow__Half"
+      style={
+        Object {
+          "marginTop": 20,
+        }
+      }
+    >
+      <div>
+        <label>
+          Node.JS
+        </label>
+        <_
+          checked={false}
+          disabled={false}
+          label="Use Atlas Framework?"
+          onChange={[Function]}
+          style={
+            Object {
+              "marginTop": 10,
+            }
+          }
+        >
+          <div
+            className="Checkbox_1GDEs_v15-0-1"
+            style={
+              Object {
+                "marginTop": 10,
+              }
+            }
+          >
+            <label
+              className="Checkbox_Label_23ova_v15-0-1"
+            >
+              <input
+                checked={false}
+                className="Checkbox_InputHidden_2NZeg_v15-0-1"
+                disabled={false}
+                onChange={[Function]}
+                type="checkbox"
+              />
+              <div
+                className="Checkbox_GraphicsCont_1NHXT_v15-0-1"
+              />
+              <div
+                className="Checkbox_LabelContents_UOdqj_v15-0-1"
+              >
+                Use Atlas Framework?
+              </div>
+            </label>
+          </div>
+        </_>
+      </div>
+    </div>
+  </Component>
+  ,
+</Provider>
+`;
