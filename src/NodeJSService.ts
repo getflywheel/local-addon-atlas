@@ -63,7 +63,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	 * @todo show stdout/stderr to user
 	 */
 	async preprovision(): Promise<void> {
-		serviceContainer.cradle.localLogger.log('info', 'In preprovision');
 		await execFilePromise(this.bin!.electron, [
 			path.resolve(resourcesPath, 'npm-bundled', 'node_modules', '.bin', 'npx'),
 			'create-next-app',
@@ -86,7 +85,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	}
 
 	async finalizeNewSite(): Promise<void> {
-		serviceContainer.cradle.localLogger.log('info', 'finalizeNewSite');
 		const { wpCli, siteDatabase } = serviceContainer.cradle;
 
 		// eslint-disable-next-line default-case
@@ -128,7 +126,8 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	}
 
 	get devEnvVars(): GenericObject {
-		const LOCAL_WP_HOST = `localhost:${this._site.httpPort}`;
+		const LOCAL_WP_HOST = this._site.host;
+
 		return {
 			LOCAL_WP_HOST,
 			PORT: this.port!.toString(),
@@ -137,7 +136,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	}
 
 	start() {
-		serviceContainer.cradle.localLogger.log('info', 'nodejs service start');
 		return [
 			{
 				name: 'nodejs',
