@@ -1,8 +1,6 @@
 import * as LocalMain from '@getflywheel/local/main';
-
 import * as Local from '@getflywheel/local';
 import { IPC_EVENTS } from './constants';
-// import { Preferences } from './types';
 import NodeJSService from './NodeJSService';
 
 let headlessSelected = false;

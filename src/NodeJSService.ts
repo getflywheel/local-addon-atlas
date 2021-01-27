@@ -7,9 +7,8 @@ const { execFilePromise, getServiceContainer } = LocalMain;
 const serviceContainer = getServiceContainer();
 
 type GenericObject = { [key: string]: any };
+const resourcesPath = path.resolve(__dirname, '..');
 
-const appPath = app.getAppPath();
-const resourcesPath = path.resolve(appPath, '../extraResources');
 export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	readonly serviceName: string = 'nodejs';
 
@@ -45,7 +44,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		/**
 		 * Add node_modules/.bin to path.
 		 */
-		PATH.unshift(path.resolve(resourcesPath, 'npm-bundled', 'node_modules', '.bin'));
+		PATH.unshift(path.resolve(resourcesPath, 'node_modules', '.bin'));
 		PATH.unshift(path.join(resourcesPath, 'electron-node'));
 
 		return PATH.join(path.delimiter);
@@ -64,7 +63,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	 */
 	async preprovision(): Promise<void> {
 		await execFilePromise(this.bin!.electron, [
-			path.resolve(resourcesPath, 'npm-bundled', 'node_modules', '.bin', 'npx'),
+			path.resolve(resourcesPath, 'node_modules', '.bin', 'npx'),
 			'create-next-app',
 			'--example',
 			'cms-wordpress',
@@ -139,7 +138,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		return [
 			{
 				name: 'nodejs',
-				binPath: path.resolve(resourcesPath, 'npm-bundled', 'node_modules', '.bin', 'npm'),
+				binPath: path.resolve(resourcesPath, 'node_modules', '.bin', 'npm'),
 				args: ['run', 'dev'],
 				cwd: this.appNodePath,
 				env: {
