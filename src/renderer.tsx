@@ -1,18 +1,11 @@
 import path from 'path';
-import { Provider } from 'react-redux';
 import { HeadlessEnvironmentSelect } from './renderer/HeadlessEnvironmentSelect';
-import { store } from './renderer/store/store';
+import { withStoreProvider } from './helpers/WithStoreProviderHOC';
 
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 
 export default function (context) {
 	const { React, hooks } = context;
-
-	const withStoreProvider = (Component) => (props) => (
-		<Provider store={store}>
-			<Component {...props} />
-		</Provider>
-	);
 
 	hooks.addContent('stylesheets', () => (
 		<link
@@ -25,5 +18,5 @@ export default function (context) {
 	const NewSiteEnvironmentHOC = withStoreProvider(HeadlessEnvironmentSelect);
 
 	// Create the additional selection option to be displayed during site creation
-	hooks.addContent('NewSiteEnvironment_FlySelect', ({ siteInfo }) => <NewSiteEnvironmentHOC siteInfo = { siteInfo } />);
+	hooks.addContent('NewSiteEnvironment_ EnvironmentDetails', ({ siteInfo }) => <NewSiteEnvironmentHOC siteInfo = { siteInfo } />);
 }

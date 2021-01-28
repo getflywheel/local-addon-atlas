@@ -11,11 +11,13 @@ export const addHeadlessEnvironmentSlice = createSlice({
 	initialState: {} as SiteEnvironmentData,
 	reducers: {
 		addHeadlessEnvironment: (state, action: PayloadAction<{siteName: string, isChecked: boolean}>) => {
+			const { isChecked, siteName } = action.payload;
+
 			LocalRenderer.ipcAsync(
 				IPC_EVENTS.HEADLESS_CHECKED,
-				action.payload.isChecked,
+				isChecked,
 			);
-			state[action.payload.siteName] = action.payload.isChecked;
+			state[siteName] = isChecked;
 			return state;
 		},
 	},

@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import Adapter from 'enzyme-adapter-react-16';
 import * as LocalRenderer from '@getflywheel/local/renderer';
+import { IPC_EVENTS } from '../constants';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -30,7 +31,7 @@ describe('HeadlessEnvironmentSelect', () => {
 			</Provider>,
 		);
 
-		const checkboxLabelText = 'Use Atlas framework to build this site headless (beta)';
+		const checkboxLabelText = 'Enable Node.js frontend powered by WP Engine Atlas Framework';
 
 		const checkbox = componentNode.find(Checkbox);
 
@@ -63,5 +64,10 @@ describe('HeadlessEnvironmentSelect', () => {
 		expect(state.addHeadlessEnvironment[siteName]).toBeTruthy();
 
 		expect(LocalRenderer.ipcAsync).toHaveBeenCalledTimes(1);
+
+		expect(LocalRenderer.ipcAsync).toHaveBeenCalledWith(
+			IPC_EVENTS.HEADLESS_CHECKED,
+			true,
+		);
 	});
 });

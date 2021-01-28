@@ -19,55 +19,84 @@ exports[`HeadlessEnvironmentSelect renders a </Checkbox> with correct label text
       }
     }
   >
-    <div
-      className="FormRow FormRow__Center AtlasCheckboxSelect"
-      style={
-        Object {
-          "marginTop": 30,
-        }
-      }
-    >
-      <div>
-        <_
-          checked={false}
-          disabled={false}
-          label="Use Atlas framework to build this site headless (beta)"
-          onChange={[Function]}
-          style={
-            Object {
-              "marginTop": 10,
-            }
+    <div>
+      <div
+        className="FormRow FormRow__Center AtlasCheckboxSelect"
+        style={
+          Object {
+            "marginTop": 30,
           }
-        >
-          <div
-            className="Checkbox_1GDEs_v15-0-1"
+        }
+      >
+        <div>
+          <_
+            checked={false}
+            disabled={false}
+            label="Enable Node.js frontend powered by WP Engine Atlas Framework"
+            onChange={[Function]}
             style={
               Object {
                 "marginTop": 10,
               }
             }
           >
-            <label
-              className="Checkbox_Label_23ova_v15-0-1"
+            <div
+              className="Checkbox_1GDEs_v15-0-1"
+              style={
+                Object {
+                  "marginTop": 10,
+                }
+              }
             >
-              <input
-                checked={false}
-                className="Checkbox_InputHidden_2NZeg_v15-0-1"
-                disabled={false}
-                onChange={[Function]}
-                type="checkbox"
-              />
-              <div
-                className="Checkbox_GraphicsCont_1NHXT_v15-0-1"
-              />
-              <div
-                className="Checkbox_LabelContents_UOdqj_v15-0-1"
+              <label
+                className="Checkbox_Label_23ova_v15-0-1"
               >
-                Use Atlas framework to build this site headless (beta)
-              </div>
-            </label>
-          </div>
-        </_>
+                <input
+                  checked={false}
+                  className="Checkbox_InputHidden_2NZeg_v15-0-1"
+                  disabled={false}
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <div
+                  className="Checkbox_GraphicsCont_1NHXT_v15-0-1"
+                />
+                <div
+                  className="Checkbox_LabelContents_UOdqj_v15-0-1"
+                >
+                  Enable Node.js frontend powered by WP Engine Atlas Framework
+                </div>
+              </label>
+            </div>
+          </_>
+          <Component
+            className="AtlasTextLink"
+            size="default"
+            tag="span"
+          >
+            <f
+              className="Text AtlasTextLink"
+              color="graydark_gray15_text"
+              fontSize="s"
+              fontWeight="normal"
+              tag="span"
+            >
+              <Component>
+                <span
+                  className="TextBase_2s61x_v15-0-1 TextBase Text AtlasTextLink TextBase__Color_GrayDark_Gray15_RHF92_v15-0-1 TextBase__FontSize_Small_5CLt-_v15-0-1 TextBase__FontWeight_300_1KDi6_v15-0-1"
+                >
+                  (Use Atlas Add-on to create a 
+                  <a
+                    href="#"
+                  >
+                    Headless WordPress
+                  </a>
+                   site.)
+                </span>
+              </Component>
+            </f>
+          </Component>
+        </div>
       </div>
     </div>
   </Component>
