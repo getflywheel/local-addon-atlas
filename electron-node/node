@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+# Coerce Local's Electron binary to be used in place of Node when shebangs are referenced in NPM binaries such as 'npm'
+# and 'npx'. This was added as part of Local Atlas.
+_term() {
+  kill -TERM "$child" 2>/dev/null
+}
+
+_int() {
+  kill -INT "$child" 2>/dev/null
+}
+
+_exit() {
+  kill -TERM "$child" 2>/dev/null
+}
+
+trap _term TERM
+trap _exit EXIT
+trap _int INT
+
+ELECTRON_RUN_AS_NODE=1 $LOCAL_ELECTRON_PATH "$@" &
+
+child=$!
+wait "$child"
