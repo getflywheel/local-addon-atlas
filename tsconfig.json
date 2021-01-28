@@ -15,7 +15,8 @@
 		"rootDir": "./src",
 		"sourceMap": true,
 		"strict": false,
-		"target": "es2015"
+		"target": "es2015",
+		"skipLibCheck": true
 	},
 	"exclude": [
 		"src/**/*.test.ts",
