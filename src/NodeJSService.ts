@@ -84,6 +84,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	}
 
 	async finalizeNewSite(): Promise<void> {
+		serviceContainer.cradle.localLogger.log('info', 'finalizeNewSite');
 		const { wpCli, siteDatabase } = serviceContainer.cradle;
 
 		// eslint-disable-next-line default-case
@@ -135,6 +136,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	}
 
 	start() {
+		serviceContainer.cradle.localLogger.log('info', 'nodejs service start');
 		return [
 			{
 				name: 'nodejs',
