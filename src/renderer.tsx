@@ -1,8 +1,9 @@
 import path from 'path';
 import { HeadlessEnvironmentSelect } from './renderer/HeadlessEnvironmentSelect';
 import { withStoreProvider } from './helpers/WithStoreProviderHOC';
-import SiteOverviewRow from './renderer/SiteOverviewRow';
+import { PlaceholderDetails, Xterm } from './renderer/PlaceholderDetails';
 import type { Site } from '@getflywheel/local';
+import SiteOverviewRow from './renderer/SiteOverviewRow';
 
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 
@@ -31,8 +32,14 @@ export default function (context) {
 
 	const NewSiteEnvironmentHOC = withStoreProvider(HeadlessEnvironmentSelect);
 
+	const PlaceholderDetailsHOC = withStoreProvider(PlaceholderDetails);
+
+	const XtermHOC = withStoreProvider(Xterm);
+
 	// Create the additional selection option to be displayed during site creation
 	hooks.addContent('NewSiteEnvironment_EnvironmentDetails', ({ siteInfo }) => <NewSiteEnvironmentHOC siteInfo={siteInfo} />);
 
+	hooks.addContent('SiteInfoOverview_TableList', () => <PlaceholderDetailsHOC/>);
+	hooks.addContent('SiteInfoOverview_TableList', () => <XtermHOC/>);
 	nodeJSSiteOverviewRowHook(hooks);
 }
