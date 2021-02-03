@@ -11,13 +11,14 @@ import React, { createRef, useEffect } from 'react';
 import { Terminal, ITerminalOptions } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { ipcRenderer } from 'electron';
+import { Site } from '@getflywheel/local';
 
 interface Props {
-	xtermOptions: ITerminalOptions
+	xtermOptions?: ITerminalOptions
 	ipcChannel: string
 }
 
-export const Xterm = () => {
+export const Xterm = (props: Props) => {
 	const xtermContainer:React.RefObject<HTMLDivElement> = createRef();
 
 	let term:Terminal;
@@ -33,7 +34,7 @@ export const Xterm = () => {
 
 		termFitAddon.fit();
 
-		ipcRenderer.on(IPC_EVENTS.WRITE_XTERM, (event, data: string) => {
+		ipcRenderer.on(props.ipcChannel, (event, data: string) => {
 			term.write(data.replace(/\n/g, '\n\r'));
 		});
 
@@ -41,25 +42,9 @@ export const Xterm = () => {
 			term.dispose();
 			termFitAddon.dispose();
 		};
-	}, [IPC_EVENTS.WRITE_XTERM]);
+	}, [props.ipcChannel]);
+
+	console.log('renderside', props.ipcChannel);
 
 	return <div style={{ flex: 1, overflow: 'hidden' }} ref={xtermContainer} />;
-};
-
-export const PlaceholderDetails = () => {
-
-	//const state = useStoreSelector(selectors.selectHeadlessEnvironmentData);
-
-	return (
-		<div>
-			<Button onClick={() => LocalRenderer.ipcAsync(IPC_EVENTS.OPEN_XTERM)}>
-				Details
-			</Button>
-			<Button onClick={() => LocalRenderer.ipcAsync(IPC_EVENTS.CLICK_XTERM)}>
-				Test Click
-			</Button>
-
-
-		</div>
-	);
 };
