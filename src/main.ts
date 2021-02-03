@@ -40,7 +40,6 @@ export default function (): void {
 	});
 
 	LocalMain.HooksMain.addAction('siteStarted', (site: Site, processes: LocalMain.Process[]) => {
-		registerTerminalChannel(site.id);
 		connectTerminalChannel(site.id, processes);
 	});
 }

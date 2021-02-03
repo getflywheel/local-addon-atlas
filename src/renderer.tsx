@@ -4,6 +4,7 @@ import { withStoreProvider } from './helpers/WithStoreProviderHOC';
 import { Xterm } from './renderer/PlaceholderDetails';
 import type { Site } from '@getflywheel/local';
 import SiteOverviewRow from './renderer/SiteOverviewRow';
+import { terminalIpcChannel } from './constants';
 
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 
@@ -22,8 +23,6 @@ const nodeJSSiteOverviewRowHook = (hooks) => {
 		});
 	}
 };
-
-const terminalIpcChannel = (siteID: string) => `ipc_event_headless:${siteID}`;
 
 export default function (context) {
 	const { React, hooks } = context;
@@ -45,5 +44,7 @@ export default function (context) {
 
 	nodeJSSiteOverviewRowHook(hooks);
 
+	// @todo-tyler create a store to hold terminal output
+	// create a new slice for each site, set up IPC listener for the store, store output in slice, connect store to React component
 	hooks.addContent('SiteInfoOverview_TableList', (site) => <XtermHOC ipcChannel={terminalIpcChannel(site.id)}/>);
 }
