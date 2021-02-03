@@ -1,6 +1,7 @@
 import * as LocalMain from '@getflywheel/local/main';
+import { terminalIpcChannel } from '../constants';
 
-export let terminalWindows: {[key: string]: string} = {};
+let terminalWindows: {[key: string]: string} = {};
 
 export const registerTerminalChannel = (siteID: string): void => {
 	if (terminalWindows[siteID]) {
@@ -9,15 +10,17 @@ export const registerTerminalChannel = (siteID: string): void => {
 
 	terminalWindows = {
 		...terminalWindows,
-		[siteID]: `ipc_event_headless:${siteID}`,
+		[siteID]: terminalIpcChannel(siteID),
 	};
 };
 
 export const connectTerminalChannel = (siteID: string, processes: LocalMain.Process[]): void => {
+	// @todo-tyler create an object of childProcesses and register/deregister like the IPC channels.
 	let childProcess;
 
 	for (const process of processes) {
 		if (process.name === 'nodejs') {
+			registerTerminalChannel(siteID);
 			childProcess = process.childProcess;
 		}
 	}
