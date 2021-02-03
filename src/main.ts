@@ -2,6 +2,7 @@ import path from 'path';
 import * as LocalMain from '@getflywheel/local/main';
 import * as Local from '@getflywheel/local';
 import NodeJSService from './NodeJSService';
+import { registerTerminalChannel, connectTerminalChannel } from './helpers/terminalWindowManager';
 import { BrowserWindow } from 'electron';
 import type { Site } from '@getflywheel/local';
 
@@ -16,12 +17,7 @@ export default function (): void {
 		headlessSelected = isChecked;
 	});
 
-	LocalMain.addIpcAsyncListener(IPC_EVENTS.OPEN_XTERM , () => {
-		const win = new BrowserWindow({
-			width: 765,
-			height: 408,
-		});
-		win.loadFile(path.resolve(__dirname, '../src/renderer/_browserWindows/xterm.html'));
+	LocalMain.addIpcAsyncListener(IPC_EVENTS.OPEN_XTERM, (site: Site) => {
 	});
 
 	LocalMain.addIpcAsyncListener(IPC_EVENTS.CLICK_XTERM , () => {
@@ -43,17 +39,8 @@ export default function (): void {
 		return services;
 	});
 
-	LocalMain.HooksMain.addAction('processStarted', (process) => {
-		process.childProcess?.stdout?.on('data', (data) => {
-			if (process.name === 'nodejs') {
-				LocalMain.sendIPCEvent(IPC_EVENTS.WRITE_XTERM, data.toString());
-			}
-		});
-
-		process.childProcess?.stderr?.on('data', (data) => {
-			if (process.name === 'nodejs') {
-				LocalMain.sendIPCEvent(IPC_EVENTS.WRITE_XTERM, data.toString());
-			}
-		});
+	LocalMain.HooksMain.addAction('siteStarted', (site: Site, processes: LocalMain.Process[]) => {
+		registerTerminalChannel(site.id);
+		connectTerminalChannel(site.id, processes);
 	});
 }
