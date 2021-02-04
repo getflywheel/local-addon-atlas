@@ -4,4 +4,5 @@ export const IPC_EVENTS = {
 	CLICK_XTERM: 'localHeadless:clickXterm',
 };
 
+// returns a string to be used for IPC channels that will always be the same based on the siteID input
 export const terminalIpcChannel = (siteID: string): string => `ipc_event_headless:${siteID}`;
