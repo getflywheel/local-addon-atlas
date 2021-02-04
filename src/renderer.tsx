@@ -1,24 +1,23 @@
 import path from 'path';
 import { HeadlessEnvironmentSelect } from './renderer/HeadlessEnvironmentSelect';
 import { withStoreProvider } from './helpers/WithStoreProviderHOC';
+import SiteOverviewRow from './renderer/SiteOverview';
 import type { Site } from '@getflywheel/local';
-import SiteOverviewRow from './renderer/SiteOverviewRow';
-
-
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 
 const nodeJSSiteOverviewRowHook = (hooks) => {
-	const SiteOverviewRowHOC = withStoreProvider(SiteOverviewRow);
+	const SiteOverviewHOC = withStoreProvider(SiteOverviewRow);
 	if (global.localhostRouting) {
-		hooks.addContent('SiteInfoOverview_TableList', (site: Site) => {
-			const hasNodeJSHeadlessSite = site?.services?.nodejs?.ports?.HTTP[0];
-			const nodeJSHeadlessLocalUrl = `localhost:${site?.services?.nodejs?.ports?.HTTP[0]}`;
+		hooks.addContent('SiteInfoOverview_TableList', (site: Site, siteStatus: string) => {
+			const hasNodeJSHeadlessSite = site?.services?.nodejs?.ports?.NODEJS[0];
+			const nodeJSHeadlessLocalUrl = `localhost:${site?.services?.nodejs?.ports?.NODEJS[0]}`;
 
-			return (hasNodeJSHeadlessSite && <SiteOverviewRowHOC
-				key={nodeJSHeadlessLocalUrl}
-				localUrl={nodeJSHeadlessLocalUrl}
-				site={site}
-			/>);
+			return (hasNodeJSHeadlessSite
+				&& <SiteOverviewHOC
+					key={nodeJSHeadlessLocalUrl}
+					localUrl={nodeJSHeadlessLocalUrl}
+					siteStatus={siteStatus}
+				/>);
 		});
 	}
 };

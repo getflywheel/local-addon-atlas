@@ -4,3 +4,10 @@ export const IPC_EVENTS = {
 	CLEAR_XTERM: 'localHeadless:clearXterm',
 	RESIZE_XTERM: 'localHeadless:resizeXterm',
 };
+
+export const SITE_STATUS = {
+	STOPPING: 'stopping',
+	HALTED: 'halted',
+	STARTING: 'starting',
+	RUNNING: 'running',
+};
