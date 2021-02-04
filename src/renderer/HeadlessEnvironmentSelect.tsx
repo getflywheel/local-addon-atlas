@@ -16,6 +16,7 @@ export const HeadlessEnvironmentSelect = (props: IProps) => {
 			<div className="FormRow FormRow__Center AtlasCheckboxSelect" style={{ marginTop: 30 }}>
 				<div>
 					<Checkbox
+						name="useAtlasFramework"
 						style={{ marginTop: 10 }}
 						checked={state[props.siteInfo.siteName]}
 						label="Enable Node.js frontend powered by WP Engine Atlas Framework"
