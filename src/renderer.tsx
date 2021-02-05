@@ -4,7 +4,9 @@ import { withStoreProvider } from './helpers/WithStoreProviderHOC';
 import { Xterm } from './renderer/PlaceholderDetails';
 import type { Site } from '@getflywheel/local';
 import SiteOverviewRow from './renderer/SiteOverviewRow';
-import { terminalIpcChannel } from './constants';
+import { IPC_EVENTS, terminalIpcChannel, registerRendererChannel } from './constants';
+import { ipcRenderer } from 'electron';
+import * as LocalRenderer from '@getflywheel/local/renderer';
 
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 
@@ -26,6 +28,21 @@ const nodeJSSiteOverviewRowHook = (hooks) => {
 
 export default function (context) {
 	const { React, hooks } = context;
+
+	if (!ipcRenderer.listenerCount(IPC_EVENTS.REGISTER_RENDER_CHANNEL)) {
+		ipcRenderer.on(IPC_EVENTS.REGISTER_RENDER_CHANNEL,
+			(_, siteID: string) => {
+
+				// set up IPC listener with site specific ID
+				const channelName = terminalIpcChannel(siteID);
+				if (!ipcRenderer.listenerCount(channelName)) {
+					ipcRenderer.on(channelName, (_, data: string) => {
+						console.log(data);
+					});
+				}
+			},
+		);
+	}
 
 	hooks.addContent('stylesheets', () => (
 		<link

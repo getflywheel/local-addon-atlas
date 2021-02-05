@@ -20,13 +20,6 @@ export default function (): void {
 	LocalMain.addIpcAsyncListener(IPC_EVENTS.OPEN_XTERM, (site: Site) => {
 	});
 
-	LocalMain.addIpcAsyncListener(IPC_EVENTS.CLICK_XTERM , () => {
-		LocalMain.sendIPCEvent(
-			IPC_EVENTS.WRITE_XTERM,
-			'hahahahah',
-		);
-	});
-
 	LocalMain.HooksMain.addFilter('defaultSiteServices', (services) => {
 		if (headlessSelected) {
 			services.nodejs = {

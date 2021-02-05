@@ -1,5 +1,5 @@
 import * as LocalMain from '@getflywheel/local/main';
-import { terminalIpcChannel } from '../constants';
+import { terminalIpcChannel, IPC_EVENTS } from '../constants';
 
 let terminalWindows: {[key: string]: string} = {};
 
@@ -32,6 +32,10 @@ export const connectTerminalChannel = (siteID: string, processes: LocalMain.Proc
 
 	for (const process of processes) {
 		if (process.name === 'nodejs') {
+			LocalMain.sendIPCEvent(
+				IPC_EVENTS.REGISTER_RENDER_CHANNEL,
+				siteID,
+			);
 			registerTerminalChannel(siteID);
 			registerNodeProcess(siteID, process);
 		}
