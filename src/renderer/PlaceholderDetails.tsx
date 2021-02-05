@@ -34,17 +34,15 @@ export const Xterm = (props: Props) => {
 
 		termFitAddon.fit();
 
-		ipcRenderer.on(props.ipcChannel, (event, data: string) => {
-			term.write(data.replace(/\n/g, '\n\r'));
-		});
+		// ipcRenderer.on(props.ipcChannel, (event, data: string) => {
+		// 	term.write(data.replace(/\n/g, '\n\r'));
+		// });
 
 		return function cleanup() {
 			term.dispose();
 			termFitAddon.dispose();
 		};
 	}, [props.ipcChannel]);
-
-	console.log('renderside', props.ipcChannel);
 
 	return <div style={{ flex: 1, overflow: 'hidden' }} ref={xtermContainer} />;
 };
