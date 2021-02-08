@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
 	entry: {
 		renderer: path.join(__dirname, 'src', 'renderer.tsx'),
-		terminal: path.join(__dirname, 'src', 'renderer', '_browserWindows', 'terminal.js'),
+		terminal: path.join(__dirname, 'src', 'renderer', '_browserWindows', 'terminal.tsx'),
 	},
 	externals: [
 		'@getflywheel/local/renderer',
@@ -64,6 +64,6 @@ module.exports = {
 	output: {
 		filename: '[name].js',
 		path: path.join(__dirname, 'lib'),
-		libraryTarget: 'umd',
+		libraryTarget: 'commonjs2',
 	},
 };
