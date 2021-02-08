@@ -2,7 +2,7 @@ import path from 'path';
 import * as LocalMain from '@getflywheel/local/main';
 import * as Local from '@getflywheel/local';
 import NodeJSService from './NodeJSService';
-import { registerTerminalChannel, connectTerminalChannel } from './helpers/terminalWindowManager';
+import { connectTerminalOutput, openTerminal} from './helpers/terminalWindowManager';
 import { BrowserWindow } from 'electron';
 import type { Site } from '@getflywheel/local';
 
@@ -18,6 +18,7 @@ export default function (): void {
 	});
 
 	LocalMain.addIpcAsyncListener(IPC_EVENTS.OPEN_XTERM, (site: Site) => {
+		openTerminal(site.id);
 	});
 
 	LocalMain.HooksMain.addFilter('defaultSiteServices', (services) => {
@@ -33,6 +34,6 @@ export default function (): void {
 	});
 
 	LocalMain.HooksMain.addAction('siteStarted', (site: Site, processes: LocalMain.Process[]) => {
-		connectTerminalChannel(site.id, processes);
+		connectTerminalOutput(site.id, processes);
 	});
 }
