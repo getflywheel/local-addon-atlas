@@ -10,8 +10,8 @@ const nodeJSSiteOverviewRowHook = (hooks) => {
 	const SiteOverviewRowHOC = withStoreProvider(SiteOverviewRow);
 	if (global.localhostRouting) {
 		hooks.addContent('SiteInfoOverview_TableList', (site: Site) => {
-			const hasNodeJSHeadlessSite = site?.services?.nodejs?.ports?.NODEJS[0];
-			const nodeJSHeadlessLocalUrl = `localhost:${site?.services?.nodejs?.ports?.NODEJS[0]}`;
+			const hasNodeJSHeadlessSite = site?.services?.nodejs?.ports?.HTTP[0];
+			const nodeJSHeadlessLocalUrl = `localhost:${site?.services?.nodejs?.ports?.HTTP[0]}`;
 
 			return (hasNodeJSHeadlessSite && <SiteOverviewRowHOC key={nodeJSHeadlessLocalUrl} localUrl={nodeJSHeadlessLocalUrl} />);
 		});

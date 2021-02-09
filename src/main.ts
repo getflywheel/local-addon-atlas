@@ -22,7 +22,7 @@ export default function (): void {
 			services.nodejs = {
 				version: '1.0.0',
 				type: Local.SiteServiceType.LIGHTNING,
-				role: Local.SiteServiceRole.OTHER,
+				role: Local.SiteServiceRole.FRONTEND,
 			};
 		}
 
