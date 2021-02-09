@@ -2,6 +2,7 @@ import * as LocalMain from '@getflywheel/local/main';
 import { IPC_EVENTS } from '../constants';
 import { BrowserWindow } from 'electron';
 import path from 'path';
+import { Site } from '@getflywheel/local';
 
 let terminalWindows: {[key: string]: BrowserWindow} = {};
 
@@ -9,7 +10,6 @@ let terminalOutput: {[key: string]: string[]} = {};
 
 // @todo-tyler update the type from 'any' to 'child process' here
 let childProcesses: {[key: string]: any} = {};
-
 
 /*
  * logs all terminal output to string array in the terminalOutput object
@@ -85,7 +85,11 @@ export const deregisterNodeProcess = (siteID: string): void => {
  * returns an existing browser window object if one already exists for the site
  * otherwise creates and returns a new browser window object
  */
-export const createNewTerminalWindow = (siteID: string): BrowserWindow => {
+export const createNewTerminalWindow = (site: Site): BrowserWindow => {
+	const siteID = site.id;
+	const siteName = site.name;
+
+	// if window already exists, bring it to focus and return
 	if (terminalWindows[siteID]) {
 		terminalWindows[siteID].focus();
 		return terminalWindows[siteID];
@@ -93,14 +97,15 @@ export const createNewTerminalWindow = (siteID: string): BrowserWindow => {
 
 	const terminalWindow = new BrowserWindow({
 		acceptFirstMouse: true,
-		useContentSize: true,
 		show: false,
+		title: `Local - Atlas - ${siteName}`,
 		webPreferences: {
 			nodeIntegration: true,
 			enableRemoteModule: true,
 		},
 	});
 
+	// save reference to window in terminalWindows object
 	registerBrowserWindowBySiteID(siteID, terminalWindow);
 
 	terminalWindow.webContents.on('will-navigate', (event) => {
@@ -111,16 +116,34 @@ export const createNewTerminalWindow = (siteID: string): BrowserWindow => {
 		event.preventDefault();
 	});
 
+	// wait to show window
 	terminalWindow.once('ready-to-show', () => {
 		terminalWindow.show();
 	});
 
+	// once window is ready, populate with data from terminalOutput
 	terminalWindow.once('show', () => {
 		terminalOutput[siteID].forEach((element) => {
 			terminalWindows[siteID].webContents.send(IPC_EVENTS.WRITE_XTERM, element);
 		});
 	});
 
+	// resize xterm to fit window
+	terminalWindow.on('will-resize', () => {
+		terminalWindows[siteID].webContents.send(IPC_EVENTS.RESIZE_XTERM);
+	});
+
+	// resize xterm to fit window
+	terminalWindow.on('maximize', () => {
+		terminalWindows[siteID].webContents.send(IPC_EVENTS.RESIZE_XTERM);
+	});
+
+	// resize xterm to fit window
+	terminalWindow.on('unmaximize', () => {
+		terminalWindows[siteID].webContents.send(IPC_EVENTS.RESIZE_XTERM);
+	});
+
+	// delete window reference from terminalWindows object
 	terminalWindow.on('close', () => {
 		deregisterBrowserWindowBySiteID(siteID);
 	});
@@ -157,23 +180,25 @@ export const connectTerminalOutput = (siteID: string, processes: LocalMain.Proce
  *
  * connects terminal window to node process output
  */
-export const openTerminal = (siteID: string): void => {
+export const openTerminal = (site: Site): void => {
 
-	if (!childProcesses[siteID]) {
+	if (!childProcesses[site.id]) {
 		return;
 	}
 
-	createNewTerminalWindow(siteID);
+	createNewTerminalWindow(site);
 };
 
 /*
  * clears specific terminal window of all output
  */
 export const clearTerminal = (siteID: string): void => {
+	// clear terminal output array contents
+	delete terminalOutput[siteID];
 
 	if (!terminalWindows[siteID]) {
 		return;
 	}
-
+	// clear xterm window contents
 	terminalWindows[siteID].webContents.send(IPC_EVENTS.CLEAR_XTERM);
 };

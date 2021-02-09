@@ -10,12 +10,12 @@ export const Xterm = () => {
 
 	useEffect(() => {
 		const term = new Terminal();
+		// {theme: {background: 'white'}}
 
 		const termFitAddon = new FitAddon();
 
 		term.loadAddon(termFitAddon);
 		term.open(xtermContainer.current);
-
 		termFitAddon.fit();
 
 		if (!ipcRenderer.listenerCount(IPC_EVENTS.WRITE_XTERM)) {
@@ -30,13 +30,19 @@ export const Xterm = () => {
 			});
 		}
 
+		if (!ipcRenderer.listenerCount(IPC_EVENTS.RESIZE_XTERM)) {
+			ipcRenderer.on(IPC_EVENTS.RESIZE_XTERM, () => {
+				termFitAddon.fit();
+			});
+		}
+
 		return function cleanup () {
 			term.dispose();
 			termFitAddon.dispose();
 		};
-	},[IPC_EVENTS.WRITE_XTERM, IPC_EVENTS.CLEAR_XTERM]);
+	},[IPC_EVENTS.WRITE_XTERM, IPC_EVENTS.CLEAR_XTERM, IPC_EVENTS.RESIZE_XTERM]);
 
-	return <div ref={xtermContainer} />;
+	return <div id='xtermComponent' ref={xtermContainer} />;
 };
 
 render(
