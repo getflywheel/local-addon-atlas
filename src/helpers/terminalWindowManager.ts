@@ -3,16 +3,24 @@ import { IPC_EVENTS } from '../constants';
 import { BrowserWindow } from 'electron';
 import path from 'path';
 import { Site } from '@getflywheel/local';
+import { ChildProcess } from 'child_process';
 
+
+// stores reference to existing terminal windows by site id
 let terminalWindows: {[key: string]: BrowserWindow} = {};
 
+// stores reference to nodejs process output data by site id
 let terminalOutput: {[key: string]: string[]} = {};
 
-// @todo-tyler update the type from 'any' to 'child process' here
-let childProcesses: {[key: string]: any} = {};
+// stores reference to nodejs child process by site id
+let childProcesses: {[key: string]: ChildProcess} = {};
 
-/*
- * logs all terminal output to string array in the terminalOutput object
+/**
+ * Logs all terminal output to string array in the terminalOutput object
+ * Will also attempt to send terminal output via ipc event to terminal window if it exists
+ * @param {string} siteID arg 1: unique site ID hash
+ * @param {string} data arg 2: data to be output to terminal window
+ * @returns {void}
  */
 export const logTerminalOutputBySiteID = (siteID: string, data: string): void => {
 	if (!terminalOutput[siteID]) {
@@ -29,8 +37,11 @@ export const logTerminalOutputBySiteID = (siteID: string, data: string): void =>
 	terminalOutput[siteID].push(data.toString());
 };
 
-/*
- * adds electron window by site id to terminalWindows object
+/**
+ * Adds BrowserWindow to terminalWindows object by siteID
+ * @param {string} siteID: unique site ID hash
+ * @param {BrowserWindow} window: electron browser window for xterm
+ * @returns {void}
  */
 export const registerBrowserWindowBySiteID = (siteID: string, window: BrowserWindow): void => {
 	if (terminalWindows[siteID]) {
@@ -43,9 +54,10 @@ export const registerBrowserWindowBySiteID = (siteID: string, window: BrowserWin
 	};
 };
 
-
-/*
- * deletes browser window from terminalWindows object
+/**
+ * Deletes browser window from terminalWindows object
+ * @param {string} siteID: unique site ID hash
+ * @returns {void}
  */
 export const deregisterBrowserWindowBySiteID = (siteID: string): void => {
 	if (!terminalWindows[siteID]) {
@@ -55,8 +67,11 @@ export const deregisterBrowserWindowBySiteID = (siteID: string): void => {
 	delete terminalWindows[siteID];
 };
 
-/*
- * adds node process by site id to childProcesses object
+/**
+ * Adds node process by site id to childProcesses object
+ * @param {string} siteID arg 1: unique site ID hash
+ * @param {LocalMain.Process} process arg 2: nodejs child process
+ * @returns {void}
  */
 export const registerNodeProcess = (siteID: string, process: LocalMain.Process): void => {
 	if (childProcesses[siteID]) {
@@ -69,8 +84,10 @@ export const registerNodeProcess = (siteID: string, process: LocalMain.Process):
 	};
 };
 
-/*
- * deletes node process from childProcesses object
+/**
+ * Deletes node process from childProcesses object
+ * @param {string} siteID: unique site ID hash
+ * @returns {void}
  */
 export const deregisterNodeProcess = (siteID: string): void => {
 	if (!childProcesses[siteID]) {
@@ -80,10 +97,10 @@ export const deregisterNodeProcess = (siteID: string): void => {
 	delete childProcesses[siteID];
 };
 
-/*
- * creates a new electron window to display xterm component
- * returns an existing browser window object if one already exists for the site
- * otherwise creates and returns a new browser window object
+/**
+ * Creates a new electron window to display xterm component
+ * @param {Site} site: Local site that this terminal is being created for
+ * @returns {BrowserWindow}: returns an existing window if one exists, or creates and returns a new window
  */
 export const createNewTerminalWindow = (site: Site): BrowserWindow => {
 	const siteID = site.id;
@@ -128,17 +145,17 @@ export const createNewTerminalWindow = (site: Site): BrowserWindow => {
 		});
 	});
 
-	// resize xterm to fit window
+	// resize xterm to fit window on m resize
 	terminalWindow.on('will-resize', () => {
 		terminalWindows[siteID].webContents.send(IPC_EVENTS.RESIZE_XTERM);
 	});
 
-	// resize xterm to fit window
+	// resize xterm to fit window on maximize
 	terminalWindow.on('maximize', () => {
 		terminalWindows[siteID].webContents.send(IPC_EVENTS.RESIZE_XTERM);
 	});
 
-	// resize xterm to fit window
+	// resize xterm to fit window on unmaximize
 	terminalWindow.on('unmaximize', () => {
 		terminalWindows[siteID].webContents.send(IPC_EVENTS.RESIZE_XTERM);
 	});
@@ -153,9 +170,12 @@ export const createNewTerminalWindow = (site: Site): BrowserWindow => {
 	return terminalWindow;
 };
 
-/*
- *
- * connects terminal window to node process output
+/**
+ * Registers node process
+ * Connects node process output to terminalOutput object and terminal window
+ * @param {string} siteID: arg 1 unique site ID hash
+ * @param {LocalMain.Process[]} processes: arg 2 array of Process objects from Local site
+ * @returns {void}
  */
 export const connectTerminalOutput = (siteID: string, processes: LocalMain.Process[]): void => {
 
@@ -176,9 +196,10 @@ export const connectTerminalOutput = (siteID: string, processes: LocalMain.Proce
 	}
 };
 
-/*
- *
- * connects terminal window to node process output
+/**
+ * Creates and opens new terminal window
+ * @param {Site} site: active Local site
+ * @returns {void}
  */
 export const openTerminal = (site: Site): void => {
 
@@ -189,8 +210,11 @@ export const openTerminal = (site: Site): void => {
 	createNewTerminalWindow(site);
 };
 
-/*
- * clears specific terminal window of all output
+/**
+ * Deletes terminal output from terminalOutput array
+ * Clears specified terminal window of all output by siteID
+ * @param {string} siteID: unique site ID hash
+ * @returns {void}
  */
 export const clearTerminal = (siteID: string): void => {
 	// clear terminal output array contents
