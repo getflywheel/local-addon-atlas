@@ -10,7 +10,6 @@ export const Xterm = () => {
 
 	useEffect(() => {
 		const term = new Terminal();
-		// {theme: {background: 'white'}}
 
 		const termFitAddon = new FitAddon();
 
@@ -18,18 +17,21 @@ export const Xterm = () => {
 		term.open(xtermContainer.current);
 		termFitAddon.fit();
 
+		// listener for incoming data
 		if (!ipcRenderer.listenerCount(IPC_EVENTS.WRITE_XTERM)) {
 			ipcRenderer.on(IPC_EVENTS.WRITE_XTERM, (event, data: string) => {
 				term.write(data.replace(/\n/g, '\n\r'));
 			});
 		}
 
+		// listener for clear terminal event
 		if (!ipcRenderer.listenerCount(IPC_EVENTS.CLEAR_XTERM)) {
 			ipcRenderer.on(IPC_EVENTS.CLEAR_XTERM, () => {
 				term.clear();
 			});
 		}
 
+		// listener for resize event
 		if (!ipcRenderer.listenerCount(IPC_EVENTS.RESIZE_XTERM)) {
 			ipcRenderer.on(IPC_EVENTS.RESIZE_XTERM, () => {
 				termFitAddon.fit();
