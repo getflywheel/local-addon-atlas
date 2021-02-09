@@ -6,7 +6,6 @@ import {
 	openTerminal,
 	deregisterNodeProcess,
 	clearTerminal,
-	deregisterBrowserWindowBySiteID,
 } from './helpers/terminalWindowManager';
 import type { Site } from '@getflywheel/local';
 
@@ -22,7 +21,7 @@ export default function (): void {
 	});
 
 	LocalMain.addIpcAsyncListener(IPC_EVENTS.OPEN_XTERM, (site: Site) => {
-		openTerminal(site.id);
+		openTerminal(site);
 	});
 
 	LocalMain.HooksMain.addFilter('defaultSiteServices', (services) => {
