@@ -32,7 +32,7 @@ export default function (context) {
 	const NewSiteEnvironmentHOC = withStoreProvider(HeadlessEnvironmentSelect);
 
 	// Create the additional selection option to be displayed during site creation
-	hooks.addContent('NewSiteEnvironment_ EnvironmentDetails', ({ siteInfo }) => <NewSiteEnvironmentHOC siteInfo={siteInfo} />);
+	hooks.addContent('NewSiteEnvironment_EnvironmentDetails', ({ siteInfo }) => <NewSiteEnvironmentHOC siteInfo={siteInfo} />);
 
 	nodeJSSiteOverviewRowHook(hooks);
 }
