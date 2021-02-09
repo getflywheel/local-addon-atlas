@@ -23,7 +23,18 @@ export const Xterm = () => {
 				term.write(data.replace(/\n/g, '\n\r'));
 			});
 		}
-	},[IPC_EVENTS.WRITE_XTERM]);
+
+		if (!ipcRenderer.listenerCount(IPC_EVENTS.CLEAR_XTERM)) {
+			ipcRenderer.on(IPC_EVENTS.CLEAR_XTERM, () => {
+				term.clear();
+			});
+		}
+
+		return function cleanup () {
+			term.dispose();
+			termFitAddon.dispose();
+		};
+	},[IPC_EVENTS.WRITE_XTERM, IPC_EVENTS.CLEAR_XTERM]);
 
 	return <div ref={xtermContainer} />;
 };
