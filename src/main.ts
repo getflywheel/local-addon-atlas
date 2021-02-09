@@ -1,9 +1,13 @@
-import path from 'path';
 import * as LocalMain from '@getflywheel/local/main';
 import * as Local from '@getflywheel/local';
 import NodeJSService from './NodeJSService';
-import { connectTerminalOutput, openTerminal} from './helpers/terminalWindowManager';
-import { BrowserWindow } from 'electron';
+import {
+	connectTerminalOutput,
+	openTerminal,
+	deregisterNodeProcess,
+	clearTerminal,
+	deregisterBrowserWindowBySiteID,
+} from './helpers/terminalWindowManager';
 import type { Site } from '@getflywheel/local';
 
 export default function (): void {
@@ -35,5 +39,10 @@ export default function (): void {
 
 	LocalMain.HooksMain.addAction('siteStarted', (site: Site, processes: LocalMain.Process[]) => {
 		connectTerminalOutput(site.id, processes);
+	});
+
+	LocalMain.HooksMain.addAction('siteStopped', (site: Site) => {
+		deregisterNodeProcess(site.id);
+		clearTerminal(site.id);
 	});
 }
