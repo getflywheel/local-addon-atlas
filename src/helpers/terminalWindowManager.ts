@@ -22,7 +22,11 @@ export const logTerminalOutputBySiteID = (siteID: string, data: string): void =>
 		};
 	}
 
-	terminalOutput[siteID].push(data);
+	if (terminalWindows[siteID]) {
+		terminalWindows[siteID].webContents.send(IPC_EVENTS.WRITE_XTERM, data.toString());
+	}
+
+	terminalOutput[siteID].push(data.toString());
 };
 
 /*
@@ -78,21 +82,26 @@ export const deregisterNodeProcess = (siteID: string): void => {
 
 /*
  * creates a new electron window to display xterm component
+ * returns an existing browser window object if one already exists for the site
+ * otherwise creates and returns a new browser window object
  */
 export const createNewTerminalWindow = (siteID: string): BrowserWindow => {
 	if (terminalWindows[siteID]) {
+		terminalWindows[siteID].focus();
 		return terminalWindows[siteID];
 	}
 
 	const terminalWindow = new BrowserWindow({
 		acceptFirstMouse: true,
-		show: false,
 		useContentSize: true,
+		show: false,
 		webPreferences: {
 			nodeIntegration: true,
 			enableRemoteModule: true,
 		},
 	});
+
+	registerBrowserWindowBySiteID(siteID, terminalWindow);
 
 	terminalWindow.webContents.on('will-navigate', (event) => {
 		event.preventDefault();
@@ -102,10 +111,18 @@ export const createNewTerminalWindow = (siteID: string): BrowserWindow => {
 		event.preventDefault();
 	});
 
-	// hide terminal window instead of close, as this allows us to persist output
-	terminalWindow.on('close', (event) => {
-		event.preventDefault();
-		terminalWindow.hide();
+	terminalWindow.once('ready-to-show', () => {
+		terminalWindow.show();
+	});
+
+	terminalWindow.once('show', () => {
+		terminalOutput[siteID].forEach((element) => {
+			terminalWindows[siteID].webContents.send(IPC_EVENTS.WRITE_XTERM, element);
+		});
+	});
+
+	terminalWindow.on('close', () => {
+		deregisterBrowserWindowBySiteID(siteID);
 	});
 
 	terminalWindow.loadFile(path.resolve(__dirname, '../../src/renderer/_browserWindows/xterm.html'));
@@ -114,40 +131,39 @@ export const createNewTerminalWindow = (siteID: string): BrowserWindow => {
 };
 
 /*
+ *
  * connects terminal window to node process output
  */
 export const connectTerminalOutput = (siteID: string, processes: LocalMain.Process[]): void => {
 
 	for (const process of processes) {
 		if (process.name === 'nodejs') {
-			const win = createNewTerminalWindow(siteID);
-			registerBrowserWindowBySiteID(siteID, win);
 			registerNodeProcess(siteID, process);
 		}
 	}
 
-	if (terminalWindows[siteID]) {
+	if (childProcesses[siteID]) {
 		childProcesses[siteID].stdout?.on('data', (data) => {
-			terminalWindows[siteID].webContents.send(IPC_EVENTS.WRITE_XTERM, data.toString());
+			logTerminalOutputBySiteID(siteID, data);
 		});
 
 		childProcesses[siteID].stderr?.on('data', (data) => {
-			terminalWindows[siteID].webContents.send(IPC_EVENTS.WRITE_XTERM, data.toString());
+			logTerminalOutputBySiteID(siteID, data);
 		});
 	}
 };
 
 /*
- * opens the terminal window from the render thread
- * called by IPC event when clicking "show output"
+ *
+ * connects terminal window to node process output
  */
 export const openTerminal = (siteID: string): void => {
 
-	if (!terminalWindows[siteID]) {
+	if (!childProcesses[siteID]) {
 		return;
 	}
 
-	terminalWindows[siteID].show();
+	createNewTerminalWindow(siteID);
 };
 
 /*
