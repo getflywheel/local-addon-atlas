@@ -8,24 +8,18 @@ import {
 	clearTerminal,
 } from './helpers/terminalWindowManager';
 import type { Site } from '@getflywheel/local';
+import { IPC_EVENTS } from './constants';
 
 export default function (): void {
 
 	LocalMain.registerLightningService(NodeJSService, 'nodejs', '1.0.0');
 
-	// TODO: We need a way for addons to get the values of fields added to site creation.
-	// One option is to modify Local to grab the values of all named inputs during site creation
-	// and pass them to the siteAdded hook.
-	LocalMain.addIpcAsyncListener(IPC_EVENTS.HEADLESS_CHECKED , (isChecked) => {
-		headlessSelected = isChecked;
-	});
-
 	LocalMain.addIpcAsyncListener(IPC_EVENTS.OPEN_XTERM, (site: Site) => {
 		openTerminal(site);
 	});
 
-	LocalMain.HooksMain.addFilter('defaultSiteServices', (services) => {
-		if (headlessSelected) {
+	LocalMain.HooksMain.addFilter('defaultSiteServices', (services, siteSettings) => {
+		if (siteSettings?.customOptions?.useAtlasFramework === 'on') {
 			services.nodejs = {
 				version: '1.0.0',
 				type: Local.SiteServiceType.LIGHTNING,
