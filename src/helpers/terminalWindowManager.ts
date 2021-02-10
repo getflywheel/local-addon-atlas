@@ -24,17 +24,14 @@ let childProcesses: {[key: string]: ChildProcess} = {};
  */
 export const logTerminalOutputBySiteID = (siteID: string, data: string): void => {
 	if (!terminalOutput[siteID]) {
-		terminalOutput = {
-			...terminalOutput,
-			[siteID]: [],
-		};
+		terminalOutput[siteID] = [];
 	}
 
 	if (terminalWindows[siteID]) {
-		terminalWindows[siteID].webContents.send(IPC_EVENTS.WRITE_XTERM, data.toString());
+		terminalWindows[siteID].webContents.send(IPC_EVENTS.WRITE_XTERM, data);
 	}
 
-	terminalOutput[siteID].push(data.toString());
+	terminalOutput[siteID].push(data);
 };
 
 /**
@@ -70,7 +67,7 @@ export const deregisterBrowserWindowBySiteID = (siteID: string): void => {
 /**
  * Adds node process by site id to childProcesses object
  * @param {string} siteID arg 1: unique site ID hash
- * @param {LocalMain.Process} process arg 2: nodejs child process
+ * @param {LocalMain.Process} process arg 2: nodejs site process
  * @returns {void}
  */
 export const registerNodeProcess = (siteID: string, process: LocalMain.Process): void => {
@@ -187,11 +184,11 @@ export const connectTerminalOutput = (siteID: string, processes: LocalMain.Proce
 
 	if (childProcesses[siteID]) {
 		childProcesses[siteID].stdout?.on('data', (data) => {
-			logTerminalOutputBySiteID(siteID, data);
+			logTerminalOutputBySiteID(siteID, data.toString());
 		});
 
 		childProcesses[siteID].stderr?.on('data', (data) => {
-			logTerminalOutputBySiteID(siteID, data);
+			logTerminalOutputBySiteID(siteID, data.toString());
 		});
 	}
 };
