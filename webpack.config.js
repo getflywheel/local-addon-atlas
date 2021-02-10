@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
 	entry: {
 		renderer: path.join(__dirname, 'src', 'renderer.tsx'),
-		terminal: path.join(__dirname, 'src', 'renderer', '_browserWindows', 'terminal.tsx'),
+		terminal: path.join(__dirname, 'src', 'renderer', '_browserWindows', 'terminal.ts'),
 	},
 	externals: [
 		'@getflywheel/local/renderer',
