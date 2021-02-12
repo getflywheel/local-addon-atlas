@@ -3,10 +3,7 @@ import { HeadlessEnvironmentSelect } from './renderer/HeadlessEnvironmentSelect'
 import { withStoreProvider } from './helpers/WithStoreProviderHOC';
 import type { Site } from '@getflywheel/local';
 import SiteOverviewRow from './renderer/SiteOverviewRow';
-import { IPC_EVENTS, terminalIpcChannel } from './constants';
-import { ipcRenderer } from 'electron';
-import { store, actions, useStoreSelector, selectors } from './renderer/store/store';
-import { STATUS_CODES } from 'http';
+
 
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 

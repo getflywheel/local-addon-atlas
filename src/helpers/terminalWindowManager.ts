@@ -7,13 +7,13 @@ import { ChildProcess } from 'child_process';
 
 
 // stores reference to existing terminal windows by site id
-let terminalWindows: {[key: string]: BrowserWindow} = {};
+export let terminalWindows: {[key: string]: BrowserWindow} = {};
 
 // stores reference to nodejs process output data by site id
-let terminalOutput: {[key: string]: string[]} = {};
+export let terminalOutput: {[key: string]: string[]} = {};
 
 // stores reference to nodejs child process by site id
-let childProcesses: {[key: string]: ChildProcess} = {};
+export let childProcesses: {[key: string]: ChildProcess} = {};
 
 /**
  * Logs all terminal output to string array in the terminalOutput object
@@ -45,10 +45,7 @@ export const registerBrowserWindowBySiteID = (siteID: string, window: BrowserWin
 		return;
 	}
 
-	terminalWindows = {
-		...terminalWindows,
-		[siteID]: window,
-	};
+	terminalWindows[siteID] = window;
 };
 
 /**
@@ -75,10 +72,7 @@ export const registerNodeProcess = (siteID: string, process: LocalMain.Process):
 		return;
 	}
 
-	childProcesses = {
-		...childProcesses,
-		[siteID]: process.childProcess,
-	};
+	childProcesses[siteID] = process.childProcess;
 };
 
 /**
@@ -115,7 +109,6 @@ export const createNewTerminalWindow = (site: Site): BrowserWindow => {
 		title: `Local - Atlas - ${siteName}`,
 		webPreferences: {
 			nodeIntegration: true,
-			enableRemoteModule: true,
 		},
 	});
 
