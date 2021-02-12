@@ -16,7 +16,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 
 	get requiredPorts() {
 		return {
-			NODEJS: 1,
+			HTTP: 1,
 		};
 	}
 
@@ -84,7 +84,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	}
 
 	async finalizeNewSite(): Promise<void> {
-		serviceContainer.cradle.localLogger.log('info', 'finalizeNewSite');
 		const { wpCli, siteDatabase } = serviceContainer.cradle;
 
 		// eslint-disable-next-line default-case
@@ -126,12 +125,9 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	}
 
 	get devEnvVars(): GenericObject {
-		const LOCAL_WP_HOST = this._site.host;
-
 		return {
-			LOCAL_WP_HOST,
 			PORT: this.port!.toString(),
-			WORDPRESS_API_URL: `http://${LOCAL_WP_HOST}/graphql`,
+			WORDPRESS_API_URL: `${this._site.backendUrl}/graphql`,
 		};
 	}
 
