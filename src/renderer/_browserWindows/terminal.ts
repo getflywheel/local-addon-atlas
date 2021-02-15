@@ -3,7 +3,13 @@ import { FitAddon } from 'xterm-addon-fit';
 import { ipcRenderer } from 'electron';
 import { IPC_EVENTS } from '../../constants';
 
-const term = new Terminal({ convertEol: true });
+const term = new Terminal({
+	convertEol: true,
+	theme: {
+		background: '#26272700',
+	},
+	allowTransparency: true,
+});
 
 const termFitAddon = new FitAddon();
 
