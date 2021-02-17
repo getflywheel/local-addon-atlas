@@ -1,15 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Checkbox, Text } from '@getflywheel/local-components';
-import { store, actions, useStoreSelector, selectors } from './store/store';
-import * as Local from '@getflywheel/local';
+import { atlasDocsUrl } from '../renderer';
 
-interface IProps {
-	siteInfo: Partial<Local.NewSiteInfo>;
-}
 
-export const HeadlessEnvironmentSelect = (props: IProps) => {
+export const HeadlessEnvironmentSelect = () => {
 
-	const state = useStoreSelector(selectors.selectHeadlessEnvironmentData);
+	const [checked, setChecked] = useState();
 
 	return (
 		<div>
@@ -18,11 +14,11 @@ export const HeadlessEnvironmentSelect = (props: IProps) => {
 					<Checkbox
 						name="useAtlasFramework"
 						style={{ marginTop: 10 }}
-						checked={state[props.siteInfo.siteName]}
+						checked={checked}
 						label="Enable Node.js frontend powered by WP Engine Atlas Framework"
-						onChange={(checked) => store.dispatch(actions.addHeadlessEnvironment({ siteName: props.siteInfo.siteName, isChecked: checked }))}
+						onChange={(checked) => setChecked(checked)}
 					/>
-					<Text className="AtlasTextLink">(Use Atlas Add-on to create a <a href="#">Headless WordPress</a> site.)</Text>
+					<Text className="AtlasTextLink">(Use Atlas Add-on to create a <a href={atlasDocsUrl}>Headless WordPress</a> site.)</Text>
 				</div>
 			</div>
 		</div>

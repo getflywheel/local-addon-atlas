@@ -71,8 +71,7 @@
     "react-router-dom": "^4.3.1"
   },
   "dependencies": {
-    "@getflywheel/local-components": "^15.0.0",
-    "@reduxjs/toolkit": "^1.4.0",
+    "@getflywheel/local-components": "^15.6.1",
     "classnames": "^2.2.6",
     "dateformat": "^3.0.3",
     "fs-extra": "^9.0.1",
@@ -85,7 +84,6 @@
     "prop-types": "^15.6.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-redux": "^7.2.1",
     "react-router-dom": "^5.1.2",
     "recursive-readdir": "^2.2.2",
     "xterm": "^4.10.0",
