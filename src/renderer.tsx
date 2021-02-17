@@ -18,6 +18,7 @@ const nodeJSSiteOverviewHook = (site: Site, siteStatus: string) => {
 			key={nodeJSHeadlessLocalUrl}
 			localUrl={nodeJSHeadlessLocalUrl}
 			siteStatus={siteStatus}
+			site={site}
 		/>);
 };
 
