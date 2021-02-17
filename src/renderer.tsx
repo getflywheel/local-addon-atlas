@@ -10,17 +10,15 @@ const atlasDocsUrl = `http://developers.wpengine.com`;
 
 const nodeJSSiteOverviewHook = (site: Site, siteStatus: string) => {
 	const SiteOverviewHOC = withStoreProvider(SiteOverviewAddonSection);
-	if (global.localhostRouting) {
-		const hasNodeJSHeadlessSite = site?.services?.nodejs?.ports?.NODEJS[0];
-		const nodeJSHeadlessLocalUrl = `localhost:${site?.services?.nodejs?.ports?.NODEJS[0]}`;
+	const hasNodeJSHeadlessSite = site?.services?.nodejs?.ports?.NODEJS[0];
+	const nodeJSHeadlessLocalUrl = `localhost:${site?.services?.nodejs?.ports?.NODEJS[0]}`;
 
-		return (hasNodeJSHeadlessSite
-			&& <SiteOverviewHOC
-				key={nodeJSHeadlessLocalUrl}
-				localUrl={nodeJSHeadlessLocalUrl}
-				siteStatus={siteStatus}
-			/>);
-	}
+	return (hasNodeJSHeadlessSite
+		&& <SiteOverviewHOC
+			key={nodeJSHeadlessLocalUrl}
+			localUrl={nodeJSHeadlessLocalUrl}
+			siteStatus={siteStatus}
+		/>);
 };
 
 const renderTooltip = () => (
