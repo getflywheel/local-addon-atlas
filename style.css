@@ -7,3 +7,13 @@
 	line-height: 2;
 	padding-left: 28px;
 }
+
+.SiteOverviewAddonSectionTooltip {
+	max-width: 215px;
+	margin: 10px 10px;
+}
+
+.SiteOverviewAddonSectionTooltipLink {
+	font-weight: bold;
+	margin-top: 20px;
+}

@@ -1,27 +1,35 @@
 import path from 'path';
 import { HeadlessEnvironmentSelect } from './renderer/HeadlessEnvironmentSelect';
 import { withStoreProvider } from './helpers/WithStoreProviderHOC';
+import SiteOverviewAddonSection from './renderer/SiteOverviewAddonSection';
 import type { Site } from '@getflywheel/local';
-import SiteOverviewRow from './renderer/SiteOverviewRow';
-
-
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 
-const nodeJSSiteOverviewRowHook = (hooks) => {
-	const SiteOverviewRowHOC = withStoreProvider(SiteOverviewRow);
-	if (global.localhostRouting) {
-		hooks.addContent('SiteInfoOverview_TableList', (site: Site) => {
-			const hasNodeJSHeadlessSite = site?.services?.nodejs?.ports?.HTTP[0];
-			const nodeJSHeadlessLocalUrl = `localhost:${site?.services?.nodejs?.ports?.HTTP[0]}`;
+const title = `Front-end Node.js`;
+const atlasDocsUrl = `http://developers.wpengine.com`;
 
-			return (hasNodeJSHeadlessSite && <SiteOverviewRowHOC
-				key={nodeJSHeadlessLocalUrl}
-				localUrl={nodeJSHeadlessLocalUrl}
-				site={site}
-			/>);
-		});
-	}
+const nodeJSSiteOverviewHook = (site: Site, siteStatus: string) => {
+	const SiteOverviewHOC = withStoreProvider(SiteOverviewAddonSection);
+	const hasNodeJSHeadlessSite = site?.services?.nodejs?.ports?.NODEJS[0];
+	const nodeJSHeadlessLocalUrl = `localhost:${site?.services?.nodejs?.ports?.NODEJS[0]}`;
+
+	return (hasNodeJSHeadlessSite
+		&& <SiteOverviewHOC
+			key={nodeJSHeadlessLocalUrl}
+			localUrl={nodeJSHeadlessLocalUrl}
+			siteStatus={siteStatus}
+			site={site}
+		/>);
 };
+
+const renderTooltip = () => (
+	<div className="SiteOverviewAddonSectionTooltip">
+		Learn more about WP Engine Headless framework.
+		<div className="SiteOverviewAddonSectionTooltipLink">
+			<a href={atlasDocsUrl}>GO TO DOCS</a>
+		</div>
+	</div>
+);
 
 export default function (context) {
 	const { React, hooks } = context;
@@ -39,5 +47,14 @@ export default function (context) {
 	// Create the additional selection option to be displayed during site creation
 	hooks.addContent('NewSiteEnvironment_EnvironmentDetails', ({ siteInfo }) => <NewSiteEnvironmentHOC siteInfo={siteInfo} />);
 
-	nodeJSSiteOverviewRowHook(hooks);
+	hooks.addFilter('SiteInfoOverview_Addon_Section', (content, site: Site, siteStatus: string) => {
+
+		const nodeJSSection = {
+			title,
+			tooltip: renderTooltip(),
+			component: (nodeJSSiteOverviewHook(site, siteStatus)),
+		};
+		content.push(nodeJSSection);
+		return content;
+	});
 }
