@@ -15,15 +15,30 @@ const showTerminalOutput = (site: Site) => LocalRenderer.ipcAsync(
 	site,
 );
 
+const renderLocalUrlHyperlink = (isSiteRunning: boolean, localUrl: string) => {
+	if (isSiteRunning) {
+		return (
+			<a href={`http://${localUrl}`}>{localUrl}</a>
+		);
+	}
+
+	return (<p>{localUrl}</p>);
+};
+
 const SiteOverview = (props: Props) => {
 	const { localUrl, siteStatus, site } = props;
+	const isSiteRunning = siteStatus === 'running';
 
 	return (
 		<TableList>
 			<TableListRow label="Status" selectable>
 				<div style={{ flex: 1, display: 'flex', alignContent: 'center' }}>
 					<p style={{ textTransform: 'capitalize' }}>{siteStatus}</p>
-					<TextButton size="tiny" onClick={() => showTerminalOutput(site)}>
+					<TextButton
+						size="tiny"
+						onClick={() => showTerminalOutput(site)}
+						disabled={!isSiteRunning}
+					>
 						Show Output
 					</TextButton>
 				</div>
@@ -32,8 +47,7 @@ const SiteOverview = (props: Props) => {
 				label="Node.js host"
 				selectable
 			>
-				<a href={`http://${localUrl}`}>{localUrl}</a>
-
+				{renderLocalUrlHyperlink(isSiteRunning, localUrl)}
 			</TableListRow>
 		</TableList>
 	);
