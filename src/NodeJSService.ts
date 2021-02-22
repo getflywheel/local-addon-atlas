@@ -63,7 +63,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	 */
 	async preprovision(): Promise<void> {
 		await execFilePromise(this.bin!.electron, [
-			path.resolve(resourcesPath, 'node_modules', '.bin', 'npx'),
+			path.resolve(resourcesPath, 'node_modules', 'npx', 'index.js'),
 			'create-next-app',
 			'--example',
 			'cms-wordpress',
