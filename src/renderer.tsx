@@ -8,8 +8,8 @@ const title = `Front-end Node.js`;
 export const atlasDocsUrl = `https://developers.wpengine.com`;
 
 const nodeJSSiteOverviewHook = (site: Site, siteStatus: string) => {
-	const hasNodeJSHeadlessSite = site?.services?.nodejs?.ports?.NODEJS[0];
-	const nodeJSHeadlessLocalUrl = `localhost:${site?.services?.nodejs?.ports?.NODEJS[0]}`;
+	const hasNodeJSHeadlessSite = site?.services?.nodejs?.role;
+	const nodeJSHeadlessLocalUrl = `localhost:${site?.services?.nodejs?.ports?.HTTP[0]}`;
 
 	return (hasNodeJSHeadlessSite
 		&& <SiteOverviewAddonSection
