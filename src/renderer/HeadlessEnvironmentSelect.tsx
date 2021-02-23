@@ -15,10 +15,15 @@ export const HeadlessEnvironmentSelect = () => {
 						name="useAtlasFramework"
 						style={{ marginTop: 10 }}
 						checked={checked}
-						label="Enable Node.js frontend powered by WP Engine Atlas Framework"
+						label="Enable Atlas Add-on on this site."
 						onChange={(checked) => setChecked(checked)}
 					/>
-					<Text className="AtlasTextLink">(Use Atlas Add-on to create a <a href={atlasDocsUrl}>Headless WordPress</a> site.)</Text>
+					<div className="AtlasTextLink">
+						<Text>
+							(Site will be built with a Node.js front-end powered <br/>
+							by <a href={atlasDocsUrl} style={{ fontWeight: 'bold' }}>WP Engine's Headless WordPress framework</a>)
+						</Text>
+					</div>
 				</div>
 			</div>
 		</div>
