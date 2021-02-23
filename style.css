@@ -4,8 +4,9 @@
 }
 
 .AtlasTextLink {
-	line-height: 2;
-	padding-left: 28px;
+	line-height: 1.5;
+	margin-top: 5px;
+	margin-left: 28px;
 }
 
 .SiteOverviewAddonSectionTooltip {
