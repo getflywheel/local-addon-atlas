@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import * as LocalMain from '@getflywheel/local/main';
 import fs from 'fs-extra';
+import { exec } from 'child_process';
 
 const { execFilePromise, getServiceContainer } = LocalMain;
 
@@ -64,7 +65,23 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	 */
 	async preprovision(): Promise<void> {
 		const appNodeExists = fs.existsSync(path.resolve(this._site.longPath, headlessDirectoryName));
-		if (!appNodeExists) {
+		if (appNodeExists) {
+			await new Promise((resolve, reject) => {
+				exec(
+					'npm install',
+					{
+						cwd: path.join(this._site.longPath, headlessDirectoryName),
+						env: this.defaultEnv,
+					},
+					(error, stdout, stderr) => {
+						if (error) {
+							reject(error);
+							return;
+						}
+						resolve((stdout as string).trim());
+					});
+			});
+		} else {
 			await execFilePromise(this.bin!.electron, [
 				path.resolve(resourcesPath, 'node_modules', 'npx', 'index.js'),
 				'create-next-app',
