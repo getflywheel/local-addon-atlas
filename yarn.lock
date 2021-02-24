@@ -442,10 +442,10 @@
   resolved "https://registry.yarnpkg.com/@getflywheel/eslint-config-local/-/eslint-config-local-1.0.4.tgz#2fab6bb77b63ec123e831534f50e1d3c7c135571"
   integrity sha512-GvnhhT3XaNipDdVvHifWbKjoFpLAbezkKsYBGfDF4uG/9gWo5UX9YLANPlzSLRyvgBrX0+27S5Cu8YE/yM7kPg==
 
-"@getflywheel/local-components@^15.6.1":
-  version "15.6.1"
-  resolved "https://registry.yarnpkg.com/@getflywheel/local-components/-/local-components-15.6.1.tgz#e0a5c300047ddcb5c9a736fa2921a394151673d1"
-  integrity sha512-uG0loerLFbkiPkvlBHP2ymMWr1EEfkMiE/SwTMyiER47n7C888UUTlpcopxL0iZ6ywR6v0jYGhhNxb5tDBG3qg==
+"@getflywheel/local-components@^15.7.1":
+  version "15.7.1"
+  resolved "https://registry.yarnpkg.com/@getflywheel/local-components/-/local-components-15.7.1.tgz#c43799e469b3553e4c99b97f7b16445918fcf9a4"
+  integrity sha512-3vOHifD0kifZi3E4mQjRg0IYAdrBdPun3MMHsgTV9iYgs5oGS7rFSYpO4oa1l4BxANLRkkOP0uW8jqgaxhFdRQ==
   dependencies:
     "@getflywheel/memoize-one-ts" "^0.0.2"
     "@popperjs/core" "^2.6.0"
@@ -454,6 +454,7 @@
     clipboard-copy "^3.1.0"
     highlight.js "^9.13.1"
     lodash.isequal "^4.5.0"
+    react-animate-height "^2.0.23"
     react-lowlight "^2.0.0"
     react-markdown "^4.0.3"
     react-modal "^3.5.1"
@@ -2461,7 +2462,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.6:
+classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -8562,7 +8563,7 @@ prop-types-exact@^1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -8763,6 +8764,14 @@ rc@^1.0.1, rc@^1.1.6:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-animate-height@^2.0.23:
+  version "2.0.23"
+  resolved "https://registry.yarnpkg.com/react-animate-height/-/react-animate-height-2.0.23.tgz#2e14ac707b20ae67b87766ccfd581e693e0e7ec7"
+  integrity sha512-DucSC/1QuxWEFzR9IsHMzrf2nrcZ6qAmLIFoENa2kLK7h72XybcMA9o073z7aHccFzdMEW0/fhAdnQG7a4rDow==
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.1"
 
 react-dom@^16.10.2:
   version "16.12.0"

@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import * as LocalMain from '@getflywheel/local/main';
+import fs from 'fs-extra';
 
 const { execFilePromise, getServiceContainer } = LocalMain;
 
@@ -8,7 +9,7 @@ const serviceContainer = getServiceContainer();
 
 type GenericObject = { [key: string]: any };
 const resourcesPath = path.resolve(__dirname, '..');
-
+const headlessDirectoryName = 'app-node';
 export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	readonly serviceName: string = 'nodejs';
 
@@ -62,19 +63,22 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	 * @todo show stdout/stderr to user
 	 */
 	async preprovision(): Promise<void> {
-		await execFilePromise(this.bin!.electron, [
-			path.resolve(resourcesPath, 'node_modules', 'npx', 'index.js'),
-			'create-next-app',
-			'--example',
-			'https://github.com/wpengine/headless-framework/tree/canary',
-			'--example-path',
-			'examples/getting-started',
-			'--use-npm',
-			'app-node',
-		], {
-			cwd: this._site.longPath,
-			env: this.defaultEnv,
-		});
+		const appNodeExists = fs.existsSync(path.resolve(this._site.longPath, headlessDirectoryName));
+		if (!appNodeExists) {
+			await execFilePromise(this.bin!.electron, [
+				path.resolve(resourcesPath, 'node_modules', 'npx', 'index.js'),
+				'create-next-app',
+				'--example',
+				'https://github.com/wpengine/headless-framework/tree/canary',
+				'--example-path',
+				'examples/getting-started',
+				'--use-npm',
+				headlessDirectoryName,
+			], {
+				cwd: this._site.longPath,
+				env: this.defaultEnv,
+			});
+		}
 
 		/**
 		 * @todo Next.js doesn't support an env var for the start port. This is a termpoary hack around it.
