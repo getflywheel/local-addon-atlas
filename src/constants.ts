@@ -4,3 +4,5 @@ export const IPC_EVENTS = {
 	CLEAR_XTERM: 'localHeadless:clearXterm',
 	RESIZE_XTERM: 'localHeadless:resizeXterm',
 };
+
+export const headlessDirectoryName = 'app-node';
