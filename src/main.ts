@@ -8,7 +8,7 @@ import {
 	clearTerminal,
 } from './helpers/terminalWindowManager';
 import type { Site } from '@getflywheel/local';
-import { IPC_EVENTS } from './constants';
+import { IPC_EVENTS, headlessDirectoryName } from './constants';
 
 export default function (): void {
 
@@ -28,6 +28,15 @@ export default function (): void {
 		}
 
 		return services;
+	});
+
+	LocalMain.HooksMain.addFilter('exportSiteFileFilter', (allowFile, file, pathInArchive) => {
+		// exclude node modules from being exported on headless sites
+		if (pathInArchive.indexOf(`/${headlessDirectoryName}/node_modules`) === 0) {
+			allowFile = false;
+		}
+
+		return allowFile;
 	});
 
 	LocalMain.HooksMain.addAction('siteStarted', (site: Site, processes: LocalMain.Process[]) => {

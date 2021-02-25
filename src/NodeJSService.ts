@@ -3,6 +3,7 @@ import fs from 'fs-extra';
 import * as LocalMain from '@getflywheel/local/main';
 import fs from 'fs-extra';
 import { exec } from 'child_process';
+import { headlessDirectoryName } from './constants';
 
 const { execFilePromise, getServiceContainer } = LocalMain;
 
@@ -10,7 +11,7 @@ const serviceContainer = getServiceContainer();
 
 type GenericObject = { [key: string]: any };
 const resourcesPath = path.resolve(__dirname, '..');
-const headlessDirectoryName = 'app-node';
+
 export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	readonly serviceName: string = 'nodejs';
 
