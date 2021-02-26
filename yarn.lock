@@ -466,10 +466,10 @@
     untildify "^4.0.0"
     url-parse "^1.4.4"
 
-"@getflywheel/local@^5.9.0":
-  version "5.9.8"
-  resolved "https://registry.yarnpkg.com/@getflywheel/local/-/local-5.9.8.tgz#6041b348e1467f0883c3c85412c3aa774b1f3f1b"
-  integrity sha512-Z5ZyDRnBQPnjQ/RfmhV0SR/fDgpRm+sluz8IpR3lfGMxZdGom89+4CsdoF+mfC1F/q8W5GtmuG+Wj2ZT2QKkyA==
+"@getflywheel/local@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/@getflywheel/local/-/local-5.10.0.tgz#0d802c6c1c7126f07379c976f24eebcec58446ff"
+  integrity sha512-LrDmtle1sbdNO0My02INnmvmp13PtbvpAFuej33CIckJnOmdFs4UYdcGxStEOaOpQFB9ZNAKfkD1b3MZLma3jg==
   dependencies:
     "@types/node" "^12.7.12"
     awilix "^4.2.5"
