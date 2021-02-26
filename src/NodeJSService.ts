@@ -1,7 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
 import * as LocalMain from '@getflywheel/local/main';
-import fs from 'fs-extra';
 import { exec } from 'child_process';
 import { headlessDirectoryName } from './constants';
 
@@ -24,7 +23,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	}
 
 	get appNodePath(): string {
-		return path.join(this._site.longPath, 'app-node');
+		return path.join(this._site.longPath, headlessDirectoryName);
 	}
 
 	get bins() {
@@ -65,7 +64,8 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	 * @todo show stdout/stderr to user
 	 */
 	async preprovision(): Promise<void> {
-		const appNodeExists = fs.existsSync(path.resolve(this._site.longPath, headlessDirectoryName));
+		const appNodeExists = await fs.pathExists(path.resolve(this._site.longPath, headlessDirectoryName));
+
 		if (appNodeExists) {
 			await new Promise((resolve, reject) => {
 				exec(
