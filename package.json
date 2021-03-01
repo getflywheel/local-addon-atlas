@@ -30,7 +30,10 @@
     "prepare": "yarn run build",
     "lint": "eslint .",
     "test": "yarn jest src/**/*.test.ts",
-    "test:watch": "yarn test --watch"
+    "test:watch": "yarn test --watch",
+    "postinstall": "cd ./package/npm-bundled && yarn install",
+    "addnpm": "scripts/addnpm.sh",
+    "postpack": "yarn run addnpm"
   },
   "devDependencies": {
     "@getflywheel/eslint-config-local": "1.0.4",
@@ -105,8 +108,7 @@
     "redux"
   ],
   "files": [
-    "lib/**/*",
-    "vendor/**/*",
+    "lib/",
     "icon.svg",
     "style.css"
   ],
