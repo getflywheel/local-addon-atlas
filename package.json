@@ -31,7 +31,7 @@
     "lint": "eslint .",
     "test": "yarn jest src/**/*.test.ts",
     "test:watch": "yarn test --watch",
-    "postinstall": "cd ./package/npm-bundled && yarn install",
+    "postinstall": "cd ./npm-bundled && yarn install",
     "addnpm": "scripts/addnpm.sh",
     "postpack": "yarn run addnpm"
   },
