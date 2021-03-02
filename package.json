@@ -110,7 +110,8 @@
   "files": [
     "lib/",
     "icon.svg",
-    "style.css"
+	"style.css",
+	"src/renderer/_browserWindows/xterm.html"
   ],
   "engines": {
     "local-by-flywheel": "^5.9.2"
