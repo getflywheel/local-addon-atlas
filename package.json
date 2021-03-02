@@ -105,13 +105,15 @@
     "react-redux",
     "react-router-navigation-prompt",
     "recursive-readdir",
-    "redux"
+    "redux",
+	"xterm"
   ],
   "files": [
     "lib/",
     "icon.svg",
 	"style.css",
-	"src/renderer/_browserWindows/xterm.html"
+	"src/renderer/_browserWindows/xterm.html",
+	"src/renderer/_browserWindows/local-logo-background.png"
   ],
   "engines": {
     "local-by-flywheel": "^5.9.2"
