@@ -69,6 +69,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 
 		if (appNodeExists) {
 			await new Promise((resolve, reject) => {
+				// TODO: Update this to use electron binary included with the addon.
 				exec(
 					`${path.resolve(npmPath, '.bin', 'npm')} install`,
 					{
