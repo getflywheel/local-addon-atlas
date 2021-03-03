@@ -30,7 +30,10 @@
     "prepare": "yarn run build",
     "lint": "eslint .",
     "test": "yarn jest src/**/*.test.ts",
-    "test:watch": "yarn test --watch"
+    "test:watch": "yarn test --watch",
+    "postinstall": "cd ./npm-bundled && yarn install",
+    "addnpm": "scripts/addnpm.sh",
+    "postpack": "yarn run addnpm"
   },
   "devDependencies": {
     "@getflywheel/eslint-config-local": "1.0.4",
@@ -102,13 +105,15 @@
     "react-redux",
     "react-router-navigation-prompt",
     "recursive-readdir",
-    "redux"
+    "redux",
+    "xterm"
   ],
   "files": [
-    "lib/**/*",
-    "vendor/**/*",
+    "lib/",
     "icon.svg",
-    "style.css"
+    "style.css",
+    "src/renderer/_browserWindows/xterm.html",
+    "src/renderer/_browserWindows/local-logo-background.png"
   ],
   "engines": {
     "local-by-flywheel": "^5.10.0"

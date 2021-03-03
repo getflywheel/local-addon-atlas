@@ -10,6 +10,7 @@ const serviceContainer = getServiceContainer();
 
 type GenericObject = { [key: string]: any };
 const resourcesPath = path.resolve(__dirname, '..');
+const npmPath = path.resolve(resourcesPath, 'npm-bundled', 'node_modules');
 
 export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	readonly serviceName: string = 'nodejs';
@@ -46,7 +47,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		/**
 		 * Add node_modules/.bin to path.
 		 */
-		PATH.unshift(path.resolve(resourcesPath, 'node_modules', '.bin'));
+		PATH.unshift(path.resolve(npmPath, '.bin'));
 		PATH.unshift(path.join(resourcesPath, 'electron-node'));
 
 		return PATH.join(path.delimiter);
@@ -68,13 +69,14 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 
 		if (appNodeExists) {
 			await new Promise((resolve, reject) => {
+				// TODO: Update this to use electron binary included with the addon.
 				exec(
-					'npm install',
+					`${path.resolve(npmPath, '.bin', 'npm')} install`,
 					{
 						cwd: path.join(this._site.longPath, headlessDirectoryName),
 						env: this.defaultEnv,
 					},
-					(error, stdout, stderr) => {
+					(error, stdout) => {
 						if (error) {
 							reject(error);
 							return;
@@ -84,7 +86,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			});
 		} else {
 			await execFilePromise(this.bin!.electron, [
-				path.resolve(resourcesPath, 'node_modules', 'npx', 'index.js'),
+				path.resolve(npmPath, 'npx', 'index.js'),
 				'create-next-app',
 				'--example',
 				'https://github.com/wpengine/headless-framework/tree/canary',
@@ -163,7 +165,7 @@ WP_HEADLESS_SECRET=${secretKey}
 		return [
 			{
 				name: 'nodejs',
-				binPath: path.resolve(resourcesPath, 'node_modules', '.bin', 'npm'),
+				binPath: path.resolve(npmPath, '.bin', 'npm'),
 				args: ['run', 'dev'],
 				cwd: this.appNodePath,
 				env: {
