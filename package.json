@@ -6,7 +6,7 @@
   "keywords": [
     "local-addon"
   ],
-  "bgColor": "#50C6DB",
+  "bgColor": "#7A1BA6",
   "icon": "icon.svg",
   "slug": "local-addon-headless",
   "description": "",
@@ -111,6 +111,6 @@
     "style.css"
   ],
   "engines": {
-    "local-by-flywheel": "^5.9.2"
+    "local-by-flywheel": "^5.10.0"
   }
 }
