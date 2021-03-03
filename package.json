@@ -111,6 +111,6 @@
     "style.css"
   ],
   "engines": {
-    "local-by-flywheel": "^5.9.2"
+    "local-by-flywheel": "^5.10.0"
   }
 }
