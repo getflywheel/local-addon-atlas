@@ -1,6 +1,6 @@
 {
   "name": "@getflywheel/local-addon-headless",
-  "productName": "Local Headless",
+  "productName": "Atlas: Headless WP",
   "version": "1.0.0",
   "author": "Local Team",
   "keywords": [
@@ -111,6 +111,7 @@
   "files": [
     "lib/",
     "icon.svg",
+	"electron-node/",
     "style.css",
     "src/renderer/_browserWindows/xterm.html",
     "src/renderer/_browserWindows/local-logo-background.png"

@@ -6,7 +6,7 @@ gzip -d getflywheel-local-addon-headless-*.tgz
 mkdir package
 # npm pack puts everything in the `package` subdirectory, so we need to do the same.
 mv npm-bundled package/
-gtar -rf getflywheel-local-addon-headless-*.tar package/npm-bundled/
+tar -rf getflywheel-local-addon-headless-*.tar package/npm-bundled/
 # Re-compress
 echo "Re-compressing package"
 gzip getflywheel-local-addon-headless-*.tar

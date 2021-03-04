@@ -1,7 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
 import * as LocalMain from '@getflywheel/local/main';
-import { exec } from 'child_process';
 import { headlessDirectoryName } from './constants';
 
 const { execFilePromise, getServiceContainer } = LocalMain;
@@ -43,13 +42,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 
 	get electronifiedPATH(): string {
 		const PATH = process.env.PATH!.split(path.delimiter);
-
-		/**
-		 * Add node_modules/.bin to path.
-		 */
-		PATH.unshift(path.resolve(npmPath, '.bin'));
 		PATH.unshift(path.join(resourcesPath, 'electron-node'));
-
 		return PATH.join(path.delimiter);
 	}
 
@@ -68,21 +61,13 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		const appNodeExists = await fs.pathExists(path.resolve(this._site.longPath, headlessDirectoryName));
 
 		if (appNodeExists) {
-			await new Promise((resolve, reject) => {
-				// TODO: Update this to use electron binary included with the addon.
-				exec(
-					`${path.resolve(npmPath, '.bin', 'npm')} install`,
-					{
-						cwd: path.join(this._site.longPath, headlessDirectoryName),
-						env: this.defaultEnv,
-					},
-					(error, stdout) => {
-						if (error) {
-							reject(error);
-							return;
-						}
-						resolve((stdout as string).trim());
-					});
+			// node_modules are excluded from exports so install them on import.
+			await execFilePromise(this.bin!.electron, [
+				path.resolve(npmPath, 'npm', 'bin', 'npm-cli.js'),
+				'install',
+			], {
+				cwd: path.join(this._site.longPath, headlessDirectoryName),
+				env: this.defaultEnv,
 			});
 		} else {
 			await execFilePromise(this.bin!.electron, [
@@ -165,8 +150,8 @@ WP_HEADLESS_SECRET=${secretKey}
 		return [
 			{
 				name: 'nodejs',
-				binPath: path.resolve(npmPath, '.bin', 'npm'),
-				args: ['run', 'dev'],
+				binPath: path.resolve(this.appNodePath, 'node_modules', 'next', 'dist', 'bin', 'next'),
+				args: ['dev', '-p', this.port!.toString()],
 				cwd: this.appNodePath,
 				env: {
 					...this.defaultEnv,
