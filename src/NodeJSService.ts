@@ -2,11 +2,6 @@ import path from 'path';
 import fs from 'fs-extra';
 import { IPC_EVENTS, ANALYTIC_EVENTS, headlessDirectoryName } from './constants';
 import * as LocalMain from '@getflywheel/local/main';
-import {
-	connectTerminalOutput,
-	deregisterNodeProcess,
-	clearTerminal,
-} from './helpers/terminalWindowManager';
 
 const { execFilePromise, getServiceContainer } = LocalMain;
 
@@ -154,6 +149,8 @@ WP_HEADLESS_SECRET=${secretKey}
 `;
 			await fs.writeFile(path.join(this.appNodePath, '.env.local'), environmentFile);
 
+			// Next.js needs to be restarted after writing the env file.
+			await siteProcessManager.restart(this._site);
 		} catch (e) {
 			// Report the error to the user, the Local log, and Sentry.
 			errorHandler.handleError({
@@ -167,8 +164,6 @@ WP_HEADLESS_SECRET=${secretKey}
 			throw new Error('error encounted during finalizeNewSite step');
 		}
 
-		// Next.js needs to be restarted after writing the env file.
-		await siteProcessManager.restartSiteService(this._site, this.serviceName);
 		LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, ANALYTIC_EVENTS.SITE_PROVISIONED);
 	}
 
