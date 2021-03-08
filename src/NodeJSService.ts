@@ -9,7 +9,7 @@ const serviceContainer = getServiceContainer();
 
 type GenericObject = { [key: string]: any };
 const resourcesPath = path.resolve(__dirname, '..');
-const npmPath = path.resolve(resourcesPath, 'npm-bundled', 'node_modules');
+const nodeModulesPath = path.resolve(resourcesPath, 'node_modules');
 
 export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	readonly serviceName: string = 'nodejs';
@@ -51,6 +51,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			LOCAL_ELECTRON_PATH: this.bin!.electron,
 			ELECTRON_RUN_AS_NODE: '1',
 			PATH: this.electronifiedPATH,
+			NPM_PATH: path.join(nodeModulesPath, 'npm', 'bin', 'npm-cli.js'),
 		};
 	}
 
@@ -63,7 +64,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		if (appNodeExists) {
 			// node_modules are excluded from exports so install them on import.
 			await execFilePromise(this.bin!.electron, [
-				path.resolve(npmPath, 'npm', 'bin', 'npm-cli.js'),
+				path.resolve(nodeModulesPath, 'npm', 'bin', 'npm-cli.js'),
 				'install',
 			], {
 				cwd: path.join(this._site.longPath, headlessDirectoryName),
@@ -71,7 +72,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			});
 		} else {
 			await execFilePromise(this.bin!.electron, [
-				path.resolve(npmPath, 'npx', 'index.js'),
+				path.resolve(nodeModulesPath, 'npx', 'index.js'),
 				'create-next-app',
 				'--example',
 				'https://github.com/wpengine/headless-framework/tree/canary',
@@ -127,8 +128,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		const { secret_key: secretKey } = JSON.parse(headlessSettings);
 
 		// Write the required settings for the headless framework to `.env.local`.
-		const environmentFile = `
-WORDPRESS_URL=${this._site.backendUrl}
+		const environmentFile = `WORDPRESS_URL=${this._site.backendUrl}
 # Plugin secret found in WordPress Settings->Headless
 WP_HEADLESS_SECRET=${secretKey}
 `;
