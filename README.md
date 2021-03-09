@@ -1,4 +1,4 @@
-# Local Headless Add-on
+# Atlas: Headless WP
 
 A [Local](https://localwp.com/) add on for developing headless WordPress websites.
 
