@@ -8,14 +8,15 @@ import {
 	clearTerminal,
 } from './helpers/terminalWindowManager';
 import type { Site } from '@getflywheel/local';
-import { IPC_EVENTS, headlessDirectoryName } from './constants';
+import { IPC_EVENTS, ANALYTIC_EVENTS, headlessDirectoryName } from './constants';
 
 export default function (): void {
-
 	LocalMain.registerLightningService(NodeJSService, 'nodejs', '1.0.0');
 
 	LocalMain.addIpcAsyncListener(IPC_EVENTS.OPEN_XTERM, (site: Site) => {
 		openTerminal(site);
+
+		LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, ANALYTIC_EVENTS.OPEN_XTERM);
 	});
 
 	LocalMain.HooksMain.addFilter('defaultSiteServices', (services, siteSettings) => {
