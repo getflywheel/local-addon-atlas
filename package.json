@@ -1,6 +1,6 @@
 {
   "name": "@getflywheel/local-addon-headless",
-  "productName": "Local Headless",
+  "productName": "Atlas: Headless WP",
   "version": "1.0.0",
   "author": "Local Team",
   "keywords": [
@@ -30,10 +30,7 @@
     "prepare": "yarn run build",
     "lint": "eslint .",
     "test": "yarn jest src/**/*.test.ts",
-    "test:watch": "yarn test --watch",
-    "postinstall": "cd ./npm-bundled && yarn install",
-    "addnpm": "scripts/addnpm.sh",
-    "postpack": "yarn run addnpm"
+    "test:watch": "yarn test --watch"
   },
   "devDependencies": {
     "@getflywheel/eslint-config-local": "1.0.4",
@@ -82,7 +79,7 @@
     "graphql": "^15.5.0",
     "lodash": "^4.17.20",
     "md5": "^2.3.0",
-    "npm": "^6.14.11",
+    "npm": "^7.6.1",
     "npx": "^10.2.2",
     "prop-types": "^15.6.2",
     "react": "^16.10.2",
@@ -106,11 +103,14 @@
     "react-router-navigation-prompt",
     "recursive-readdir",
     "redux",
-    "xterm"
+    "xterm",
+    "npm",
+    "npx"
   ],
   "files": [
     "lib/",
     "icon.svg",
+    "electron-node/",
     "style.css",
     "src/renderer/_browserWindows/xterm.html",
     "src/renderer/_browserWindows/local-logo-background.png"

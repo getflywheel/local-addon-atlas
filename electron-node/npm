@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+# Use npm included with the addon when scripts like npx shell out.
+_term() {
+  kill -TERM "$child" 2>/dev/null
+}
+
+_int() {
+  kill -INT "$child" 2>/dev/null
+}
+
+_exit() {
+  kill -TERM "$child" 2>/dev/null
+}
+
+trap _term TERM
+trap _exit EXIT
+trap _int INT
+
+"$NPM_PATH" "$@" &
+
+child=$!
+wait "$child"

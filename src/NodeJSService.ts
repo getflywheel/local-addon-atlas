@@ -1,7 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
 import * as LocalMain from '@getflywheel/local/main';
-import { exec } from 'child_process';
 import { headlessDirectoryName } from './constants';
 
 const { execFilePromise, getServiceContainer } = LocalMain;
@@ -10,7 +9,7 @@ const serviceContainer = getServiceContainer();
 
 type GenericObject = { [key: string]: any };
 const resourcesPath = path.resolve(__dirname, '..');
-const npmPath = path.resolve(resourcesPath, 'npm-bundled', 'node_modules');
+const nodeModulesPath = path.resolve(resourcesPath, 'node_modules');
 
 export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	readonly serviceName: string = 'nodejs';
@@ -43,13 +42,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 
 	get electronifiedPATH(): string {
 		const PATH = process.env.PATH!.split(path.delimiter);
-
-		/**
-		 * Add node_modules/.bin to path.
-		 */
-		PATH.unshift(path.resolve(npmPath, '.bin'));
 		PATH.unshift(path.join(resourcesPath, 'electron-node'));
-
 		return PATH.join(path.delimiter);
 	}
 
@@ -58,6 +51,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			LOCAL_ELECTRON_PATH: this.bin!.electron,
 			ELECTRON_RUN_AS_NODE: '1',
 			PATH: this.electronifiedPATH,
+			NPM_PATH: path.join(nodeModulesPath, 'npm', 'bin', 'npm-cli.js'),
 		};
 	}
 
@@ -68,25 +62,17 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		const appNodeExists = await fs.pathExists(path.resolve(this._site.longPath, headlessDirectoryName));
 
 		if (appNodeExists) {
-			await new Promise((resolve, reject) => {
-				// TODO: Update this to use electron binary included with the addon.
-				exec(
-					`${path.resolve(npmPath, '.bin', 'npm')} install`,
-					{
-						cwd: path.join(this._site.longPath, headlessDirectoryName),
-						env: this.defaultEnv,
-					},
-					(error, stdout) => {
-						if (error) {
-							reject(error);
-							return;
-						}
-						resolve((stdout as string).trim());
-					});
+			// node_modules are excluded from exports so install them on import.
+			await execFilePromise(this.bin!.electron, [
+				path.resolve(nodeModulesPath, 'npm', 'bin', 'npm-cli.js'),
+				'install',
+			], {
+				cwd: path.join(this._site.longPath, headlessDirectoryName),
+				env: this.defaultEnv,
 			});
 		} else {
 			await execFilePromise(this.bin!.electron, [
-				path.resolve(npmPath, 'npx', 'index.js'),
+				path.resolve(nodeModulesPath, 'npx', 'index.js'),
 				'create-next-app',
 				'--example',
 				'https://github.com/wpengine/headless-framework/tree/canary',
@@ -142,8 +128,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		const { secret_key: secretKey } = JSON.parse(headlessSettings);
 
 		// Write the required settings for the headless framework to `.env.local`.
-		const environmentFile = `
-WORDPRESS_URL=${this._site.backendUrl}
+		const environmentFile = `WORDPRESS_URL=${this._site.backendUrl}
 # Plugin secret found in WordPress Settings->Headless
 WP_HEADLESS_SECRET=${secretKey}
 `;
@@ -165,8 +150,8 @@ WP_HEADLESS_SECRET=${secretKey}
 		return [
 			{
 				name: 'nodejs',
-				binPath: path.resolve(npmPath, '.bin', 'npm'),
-				args: ['run', 'dev'],
+				binPath: path.resolve(this.appNodePath, 'node_modules', 'next', 'dist', 'bin', 'next'),
+				args: ['dev', '-p', this.port!.toString()],
 				cwd: this.appNodePath,
 				env: {
 					...this.defaultEnv,
