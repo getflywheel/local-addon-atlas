@@ -17,7 +17,7 @@ trap _term TERM
 trap _exit EXIT
 trap _int INT
 
-ELECTRON_RUN_AS_NODE=1 $LOCAL_ELECTRON_PATH "$@" &
+ELECTRON_RUN_AS_NODE=1 "$LOCAL_ELECTRON_PATH" "$@" &
 
 child=$!
 wait "$child"
