@@ -163,6 +163,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			]);
 
 			// Write the required settings for the headless framework to `.env.local`.
+			const environmentFile = `NEXT_PUBLIC_WORDPRESS_URL=${this._site.backendUrl}
 # Plugin secret found in WordPress Settings->Headless
 WP_HEADLESS_SECRET=${secretKey}
 `;
