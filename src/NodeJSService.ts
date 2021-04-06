@@ -121,7 +121,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			await wpCli.run(this._site, [
 				'plugin',
 				'install',
-				'https://github.com/wp-graphql/wp-graphql/archive/v1.1.5.zip',
+				'wp-graphql',
 				'--activate',
 			]);
 
@@ -162,7 +162,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			]);
 
 			// Write the required settings for the headless framework to `.env.local`.
-			const environmentFile = `WORDPRESS_URL=${this._site.backendUrl}
 # Plugin secret found in WordPress Settings->Headless
 WP_HEADLESS_SECRET=${secretKey}
 `;
