@@ -156,6 +156,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			await wpCli.run(this._site, [
 				'option',
 				'patch',
+				'insert',
 				'wpe_headless',
 				'frontend_uri',
 				this._site.frontendUrl,
