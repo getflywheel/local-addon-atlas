@@ -121,7 +121,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			await wpCli.run(this._site, [
 				'plugin',
 				'install',
-				'https://github.com/wp-graphql/wp-graphql/archive/v1.1.5.zip',
+				'wp-graphql',
 				'--activate',
 			]);
 
@@ -140,10 +140,30 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'wpe_headless',
 				'--format=json',
 			]);
-			const { secret_key: secretKey } = JSON.parse(headlessSettings);
+
+			const parsedHeadlessSettings: {
+				frontend_uri: string, // eslint-disable-line camelcase
+				secret_key: string, // eslint-disable-line camelcase
+				menu_locations: string, // eslint-disable-line camelcase
+				disable_theme: string, // eslint-disable-line camelcase
+				enable_rewrites: string, // eslint-disable-line camelcase
+				enable_redirects: string, // eslint-disable-line camelcase
+			} = JSON.parse(headlessSettings);
+			const { secret_key: secretKey } = parsedHeadlessSettings;
+
+			// Set the frontend_uri setting to the frontend service URL (this service).
+			// This is required for post previewing to work in WordPress.
+			await wpCli.run(this._site, [
+				'option',
+				'patch',
+				'insert',
+				'wpe_headless',
+				'frontend_uri',
+				this._site.frontendUrl,
+			]);
 
 			// Write the required settings for the headless framework to `.env.local`.
-			const environmentFile = `WORDPRESS_URL=${this._site.backendUrl}
+			const environmentFile = `NEXT_PUBLIC_WORDPRESS_URL=${this._site.backendUrl}
 # Plugin secret found in WordPress Settings->Headless
 WP_HEADLESS_SECRET=${secretKey}
 `;
