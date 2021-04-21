@@ -1,7 +1,7 @@
 {
   "name": "@getflywheel/local-addon-headless",
   "productName": "Atlas: Headless WP",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Local Team",
   "keywords": [
     "local-addon"
