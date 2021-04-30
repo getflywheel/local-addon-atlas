@@ -109,6 +109,7 @@ export const createNewTerminalWindow = (site: Site): BrowserWindow => {
 		title: `Local - Atlas - ${siteName}`,
 		webPreferences: {
 			nodeIntegration: true,
+			contextIsolation: false,
 		},
 	});
 
