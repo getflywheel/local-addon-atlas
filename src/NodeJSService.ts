@@ -74,7 +74,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				});
 			} else {
 				await execFilePromise(this.bin!.electron, [
-					path.resolve(nodeModulesPath, 'npx', 'index.js'),
+					path.resolve(nodeModulesPath, 'npm', 'bin', 'npx-cli.js'),
 					'create-next-app',
 					'--example',
 					'https://github.com/wpengine/headless-framework/tree/canary',
