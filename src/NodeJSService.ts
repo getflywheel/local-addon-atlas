@@ -79,7 +79,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					'--example',
 					'https://github.com/wpengine/headless-framework/tree/canary',
 					'--example-path',
-					'examples/getting-started',
+					'examples/next/getting-started',
 					'--use-npm',
 					headlessDirectoryName,
 				], {
