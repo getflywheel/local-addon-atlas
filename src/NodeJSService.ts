@@ -79,7 +79,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					'--example',
 					'https://github.com/wpengine/headless-framework/tree/canary',
 					'--example-path',
-					'examples/getting-started',
+					'examples/next/getting-started',
 					'--use-npm',
 					headlessDirectoryName,
 				], {
@@ -199,9 +199,9 @@ WP_HEADLESS_SECRET=${secretKey}
 		return [
 			{
 				name: 'nodejs',
-				binPath: path.resolve(this.appNodePath, 'node_modules', 'next', 'dist', 'bin', 'next'),
-				args: ['dev', '-p', this.port!.toString()],
-				cwd: this.appNodePath,
+				binPath: path.resolve(nodeModulesPath, 'npm', 'bin', 'npm-cli.js'),
+				args: ['run', 'dev'],
+				cwd: path.join(this._site.longPath, headlessDirectoryName),
 				env: {
 					...this.defaultEnv,
 					...this.devEnvVars,

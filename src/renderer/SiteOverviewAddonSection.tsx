@@ -31,6 +31,9 @@ const SiteOverview = (props: Props) => {
 
 	return (
 		<TableList>
+			<TableListRow label="Start Command" selectable>
+				<p><pre>npm run dev</pre></p>
+			</TableListRow>
 			<TableListRow label="Status" selectable>
 				<div style={{ flex: 1, display: 'flex', alignContent: 'center' }}>
 					<p style={{ textTransform: 'capitalize' }}>{siteStatus}</p>
