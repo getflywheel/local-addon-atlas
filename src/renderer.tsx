@@ -6,6 +6,7 @@ const stylesheetPath = path.resolve(__dirname, '../style.css');
 
 const title = `Front-end Node.js`;
 export const atlasDocsUrl = `https://developers.wpengine.com`;
+export const faustJsDocsUrl = `https://github.com/wpengine/faustjs`;
 
 const nodeJSSiteOverviewHook = (site: Site, siteStatus: string) => {
 	const hasNodeJSHeadlessSite = site?.services?.nodejs?.role;
