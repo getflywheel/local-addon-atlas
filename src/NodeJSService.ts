@@ -77,7 +77,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					path.resolve(nodeModulesPath, 'npm', 'bin', 'npx-cli.js'),
 					'create-next-app',
 					'--example',
-					'https://github.com/wpengine/headless-framework/tree/canary',
+					'https://github.com/wpengine/faustjs/tree/canary',
 					'--example-path',
 					'examples/next/getting-started',
 					'--use-npm',
@@ -175,13 +175,13 @@ WP_HEADLESS_SECRET=${secretKey}
 			// Report the error to the user, the Local log, and Sentry.
 			errorHandler.handleError({
 				error: e,
-				message: 'error encounted during finalizeNewSite step',
+				message: 'error encountered during finalizeNewSite step',
 				dialogTitle: 'Uh-oh! Local ran into an error.',
 				dialogMessage: e.toString(),
 			});
 
 			// Halt provisioning and cleanup.
-			throw new Error('error encounted during finalizeNewSite step');
+			throw new Error('error encountered during finalizeNewSite step');
 		}
 
 		LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, ANALYTIC_EVENTS.SITE_PROVISIONED);

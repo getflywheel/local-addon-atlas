@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Checkbox, Text } from '@getflywheel/local-components';
-import { atlasDocsUrl } from '../renderer';
+import { faustJsDocsUrl } from '../renderer';
 
 
 export const HeadlessEnvironmentSelect = () => {
@@ -21,7 +21,7 @@ export const HeadlessEnvironmentSelect = () => {
 					<div className="AtlasTextLink">
 						<Text>
 							(Site will be built with a Node.js front-end powered <br/>
-							by <a href={atlasDocsUrl} style={{ fontWeight: 'bold' }}>WP Engine's Headless WordPress framework</a>)
+							by <a href={faustJsDocsUrl} style={{ fontWeight: 'bold' }}>WP Engine's Headless WordPress framework, Faust.js</a>)
 						</Text>
 					</div>
 				</div>
