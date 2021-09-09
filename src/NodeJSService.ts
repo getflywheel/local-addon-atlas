@@ -144,7 +144,8 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'--format=json',
 			]);
 
-			const parsedHeadlessSettings: GenericObject = JSON.parse(headlessSettings);
+			// eslint-disable-next-line camelcase
+			const parsedHeadlessSettings: { secret_key: string } = JSON.parse(headlessSettings);
 			const { secret_key: secretKey } = parsedHeadlessSettings;
 
 			// Set the frontend_uri setting to the frontend service URL (this service).
