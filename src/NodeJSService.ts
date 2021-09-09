@@ -62,6 +62,8 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		const { errorHandler } = getServiceContainer().cradle;
 		const appNodeExists = await fs.pathExists(path.resolve(this._site.longPath, headlessDirectoryName));
 
+		LocalMain.sendIPCEvent('updateSiteMessage', this._site.id, 'Installing Faust.js');
+
 		try {
 			if (appNodeExists) {
 				// node_modules are excluded from exports so install them on import.
@@ -111,6 +113,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	}
 
 	async finalizeNewSite(): Promise<void> {
+		LocalMain.sendIPCEvent('updateSiteMessage', this._site.id, 'Installing headless WordPress plugins');
 		const { wpCli, siteDatabase, siteProcessManager, errorHandler } = serviceContainer.cradle;
 
 		try {
@@ -141,25 +144,17 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'--format=json',
 			]);
 
-			const parsedHeadlessSettings: {
-				frontend_uri: string, // eslint-disable-line camelcase
-				secret_key: string, // eslint-disable-line camelcase
-				menu_locations: string, // eslint-disable-line camelcase
-				disable_theme: string, // eslint-disable-line camelcase
-				enable_rewrites: string, // eslint-disable-line camelcase
-				enable_redirects: string, // eslint-disable-line camelcase
-			} = JSON.parse(headlessSettings);
+			const parsedHeadlessSettings: GenericObject = JSON.parse(headlessSettings);
 			const { secret_key: secretKey } = parsedHeadlessSettings;
 
 			// Set the frontend_uri setting to the frontend service URL (this service).
 			// This is required for post previewing to work in WordPress.
 			await wpCli.run(this._site, [
 				'option',
-				'patch',
-				'insert',
+				'update',
 				'wpe_headless',
-				'frontend_uri',
-				this._site.frontendUrl,
+				// eslint-disable-next-line camelcase
+				JSON.stringify({ ...parsedHeadlessSettings, frontend_uri: this._site.frontendUrl }),
 			]);
 
 			// Write the required settings for the headless framework to `.env.local`.
