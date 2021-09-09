@@ -155,6 +155,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'wpe_headless',
 				// eslint-disable-next-line camelcase
 				JSON.stringify({ ...parsedHeadlessSettings, frontend_uri: this._site.frontendUrl }),
+				'--format=json', // Tell WordPress to seralize the JSON.
 			]);
 
 			// Write the required settings for the headless framework to `.env.local`.
