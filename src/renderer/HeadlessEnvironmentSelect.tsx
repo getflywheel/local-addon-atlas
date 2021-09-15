@@ -14,8 +14,10 @@ type Props = {
 export const HeadlessEnvironmentSelect: React.FC<Props> = (props) => useObserver(() => {
 	const [checked, setChecked] = useState(false);
 
+	const { offline } = $offline;
+
 	useEffect(() => {
-		const disable = $offline.offline && checked;
+		const disable = offline && checked;
 
 		props.hooks.addFilter('NewSiteEnvironment_ContinueButton', function () {
 			if (disable) {
@@ -26,7 +28,7 @@ export const HeadlessEnvironmentSelect: React.FC<Props> = (props) => useObserver
 		});
 
 		props.rerenderParent();
-	}, [checked]);
+	}, [checked, offline]);
 
 	return (
 		<div>
