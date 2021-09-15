@@ -18,3 +18,9 @@
 	font-weight: bold;
 	margin-top: 20px;
 }
+
+.SiteEnvironmentContinueButton {
+	position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
