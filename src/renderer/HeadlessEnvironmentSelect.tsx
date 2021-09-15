@@ -4,7 +4,14 @@ import { faustJsDocsUrl } from '../renderer';
 import { useObserver } from 'mobx-react';
 import { $offline } from '@getflywheel/local/renderer';
 
-export const HeadlessEnvironmentSelect = (props) => useObserver(() => {
+type Props = {
+	hooks: {
+		addFilter(hook: string, ...args),
+	},
+	rerenderParent: () => void,
+}
+
+export const HeadlessEnvironmentSelect: React.FC<Props> = (props) => useObserver(() => {
 	const [checked, setChecked] = useState(false);
 
 	useEffect(() => {
