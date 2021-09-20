@@ -5,10 +5,7 @@ import { useObserver } from 'mobx-react';
 import { $offline } from '@getflywheel/local/renderer';
 
 type Props = {
-	hooks: {
-		addFilter(hook: string, ...args),
-	},
-	rerenderParent: () => void,
+	disableButton: (value: boolean) => void;
 }
 
 export const HeadlessEnvironmentSelect: React.FC<Props> = (props) => useObserver(() => {
@@ -16,19 +13,10 @@ export const HeadlessEnvironmentSelect: React.FC<Props> = (props) => useObserver
 
 	const { offline } = $offline;
 
-	useEffect(() => {
-		const disable = offline && checked;
-
-		props.hooks.addFilter('NewSiteEnvironment_ContinueButton', function () {
-			if (disable) {
-				return this.renderOfflineButtonWithTooltip();
-			}
-
-			return this.renderContinueButton();
-		});
-
-		props.rerenderParent();
-	}, [checked, offline]);
+	const onChange = (value: boolean) => {
+		setChecked(value);
+		props.disableButton(value && offline);
+	};
 
 	return (
 		<div>
@@ -39,7 +27,7 @@ export const HeadlessEnvironmentSelect: React.FC<Props> = (props) => useObserver
 						style={{ marginTop: 10 }}
 						checked={checked}
 						label="Enable Atlas Add-on on this site."
-						onChange={(checked) => setChecked(checked)}
+						onChange={(checked) => onChange(checked)}
 					/>
 					<div className="AtlasTextLink">
 						<Text>
