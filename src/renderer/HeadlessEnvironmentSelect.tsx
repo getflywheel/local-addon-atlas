@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Checkbox, Text } from '@getflywheel/local-components';
 import { faustJsDocsUrl } from '../renderer';
 import { useObserver } from 'mobx-react';
