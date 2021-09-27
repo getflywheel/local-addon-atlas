@@ -1,5 +1,12 @@
 .AtlasCheckboxSelect {
 	padding-top: 30px;
+}
+
+.Theme__Dark .AtlasCheckboxSelect {
+	border-top: 1px solid #5d5e5e;
+}
+
+.Theme__Light .AtlasCheckboxSelect {
 	border-top: 1px solid #e7e7e7;
 }
 
@@ -17,4 +24,10 @@
 .SiteOverviewAddonSectionTooltipLink {
 	font-weight: bold;
 	margin-top: 20px;
+}
+
+.SiteEnvironmentContinueButton {
+	position: absolute;
+    bottom: 30px;
+    right: 30px;
 }

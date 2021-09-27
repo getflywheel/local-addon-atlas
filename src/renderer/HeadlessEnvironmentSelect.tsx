@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
 import { Checkbox, Text } from '@getflywheel/local-components';
 import { faustJsDocsUrl } from '../renderer';
+import { useObserver } from 'mobx-react';
+import { $offline } from '@getflywheel/local/renderer';
 
+type Props = {
+	disableButton: (value: boolean) => void;
+}
 
-export const HeadlessEnvironmentSelect = () => {
+export const HeadlessEnvironmentSelect: React.FC<Props> = (props) => useObserver(() => {
+	const [checked, setChecked] = useState(false);
 
-	const [checked, setChecked] = useState();
+	const { offline } = $offline;
+
+	const onChange = (value: boolean) => {
+		setChecked(value);
+		props.disableButton(value && offline);
+	};
 
 	return (
 		<div>
@@ -16,7 +27,7 @@ export const HeadlessEnvironmentSelect = () => {
 						style={{ marginTop: 10 }}
 						checked={checked}
 						label="Enable Atlas Add-on on this site."
-						onChange={(checked) => setChecked(checked)}
+						onChange={(checked) => onChange(checked)}
 					/>
 					<div className="AtlasTextLink">
 						<Text>
@@ -28,4 +39,4 @@ export const HeadlessEnvironmentSelect = () => {
 			</div>
 		</div>
 	);
-};
+});

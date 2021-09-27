@@ -42,7 +42,7 @@ export default function (context) {
 	));
 
 	// Create the additional selection option to be displayed during site creation
-	hooks.addContent('NewSiteEnvironment_EnvironmentDetails', () => <HeadlessEnvironmentSelect />);
+	hooks.addContent('NewSiteEnvironment_EnvironmentDetails', ({ disableButton }) => <HeadlessEnvironmentSelect disableButton={disableButton} />);
 
 	hooks.addFilter('SiteInfoOverview_Addon_Section', (content, site: Site, siteStatus: string) => {
 
