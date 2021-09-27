@@ -116,6 +116,6 @@
     "src/renderer/_browserWindows/local-logo-background.png"
   ],
   "engines": {
-    "local-by-flywheel": "^6.1.2"
+    "local-by-flywheel": "^6.1.3"
   }
 }
