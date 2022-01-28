@@ -31,6 +31,16 @@ export default function (): void {
 		return services;
 	});
 
+	LocalMain.HooksMain.addFilter('importSiteManifest', (manifest: LocalMain.IImportSiteSettings, site: Site) => {
+		const modifiedManifest = { ...manifest };
+
+		if (site.getSiteServiceByRole(Local.SiteServiceRole.FRONTEND)) {
+			modifiedManifest.customOptions.useAtlasFramework = 'on';
+		}
+
+		return modifiedManifest;
+	});
+
 	LocalMain.HooksMain.addFilter('exportSiteFileFilter', (allowFile, file, pathInArchive) => {
 		// exclude node modules from being exported on headless sites
 		if (pathInArchive.indexOf(`/${headlessDirectoryName}/node_modules`) === 0) {
