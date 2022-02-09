@@ -74,6 +74,17 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					cwd: path.join(this._site.longPath, headlessDirectoryName),
 					env: this.defaultEnv,
 				});
+
+				const envFilePath = path.join(this.appNodePath, '.env.local');
+				if (fs.existsSync(envFilePath)) {
+					// we need to update the NEXT_PUBLIC_WORDPRESS_URL and set it to the new sites backendurl
+					const envFileContent = fs.readFileSync(envFilePath).toString();
+					const updatedEnvFileContent = envFileContent.replace(
+						/^NEXT_PUBLIC_WORDPRESS_URL=(.*)/,
+						`NEXT_PUBLIC_WORDPRESS_URL=${this._site.backendUrl}`,
+					);
+					fs.writeFileSync(envFilePath, updatedEnvFileContent);
+				}
 			} else {
 				await execFilePromise(this.bin!.electron, [
 					path.resolve(nodeModulesPath, 'npm', 'bin', 'npx-cli.js'),
