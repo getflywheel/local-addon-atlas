@@ -10,6 +10,8 @@ import {
 import type { Site } from '@getflywheel/local';
 import { IPC_EVENTS, ANALYTIC_EVENTS, headlessDirectoryName } from './constants';
 
+const serviceContainer = LocalMain.getServiceContainer();
+
 export default function (): void {
 	LocalMain.registerLightningService(NodeJSService, 'nodejs', '1.0.0');
 
@@ -48,6 +50,39 @@ export default function (): void {
 		}
 
 		return allowFile;
+	});
+
+	LocalMain.HooksMain.addAction('importSiteChangeDomain', async (site: Site) => {
+		const { wpCli, localLogger } = serviceContainer.cradle;
+
+		if (site.getSiteServiceByRole(Local.SiteServiceRole.FRONTEND)) {
+			try {
+				const faustWPsettings = await wpCli.run(site, [
+					'option',
+					'get',
+					'faustwp_settings',
+					'--format=json',
+				]);
+
+				const parsedFaustWPsettings = JSON.parse(faustWPsettings);
+
+				if (parsedFaustWPsettings.frontend_uri !== site.frontendUrl) {
+					// update the frontend_uri to match the new site frontendUrl
+					await wpCli.run(site, [
+						'option',
+						'update',
+						'faustwp_settings',
+						// eslint-disable-next-line camelcase
+						JSON.stringify({ ...parsedFaustWPsettings, frontend_uri: site.frontendUrl }),
+						'--format=json', // Tell WordPress to seralize the JSON.
+					]);
+				}
+			} catch (error) {
+				localLogger.error(`Atlas addon: importSiteChangeDomain hook: ${error.message}`);
+			}
+		}
+
+		return null;
 	});
 
 	LocalMain.HooksMain.addAction('siteStarted', (site: Site, processes: LocalMain.Process[]) => {
