@@ -1,5 +1,6 @@
 import path from 'path';
 import { HeadlessEnvironmentSelect } from './renderer/HeadlessEnvironmentSelect';
+import AtlasBlueprints from './renderer/AtlasBlueprints';
 import SiteOverviewAddonSection from './renderer/SiteOverviewAddonSection';
 import type { Site } from '@getflywheel/local';
 const stylesheetPath = path.resolve(__dirname, '../style.css');
@@ -51,6 +52,10 @@ export default function (context) {
 			<HeadlessEnvironmentSelect disableButton={disableButton} />
 		),
 	);
+
+	hooks.addContent('Blueprints_BlueprintsList:after', () => (
+		<AtlasBlueprints />
+	));
 
 	hooks.addFilter(
 		'SiteInfoOverview_Addon_Section',

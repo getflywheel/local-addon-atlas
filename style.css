@@ -28,6 +28,35 @@
 
 .SiteEnvironmentContinueButton {
 	position: absolute;
-    bottom: 30px;
-    right: 30px;
+	bottom: 30px;
+	right: 30px;
+}
+
+.AtlasBlueprint {
+}
+.AtlasBlueprint p {
+	max-width: 585px;
+}
+
+.AtlasBlueprintList {
+	display: flex;
+	width: 900px;
+	justify-content: space-between;
+}
+
+.AtlasBlueprint {
+	width: 285px;
+	background-color: #fff;
+}
+
+.AtlasBlueprint img {
+	width: 100%;
+	height: 133px;
+	display: block;
+
+	/* TODO: This is $gray15 in local-components.
+	   - How should we start using Local's color palette in Atlas?
+	   - Sass? CSS variables?
+     */
+	border-bottom: 1px solid #e7e7e7;
 }
