@@ -12,13 +12,16 @@ const nodeJSSiteOverviewHook = (site: Site, siteStatus: string) => {
 	const hasNodeJSHeadlessSite = site?.services?.nodejs?.role;
 	const nodeJSHeadlessLocalUrl = `localhost:${site?.services?.nodejs?.ports?.HTTP[0]}`;
 
-	return (hasNodeJSHeadlessSite
-		&& <SiteOverviewAddonSection
-			key={nodeJSHeadlessLocalUrl}
-			localUrl={nodeJSHeadlessLocalUrl}
-			siteStatus={siteStatus}
-			site={site}
-		/>);
+	return (
+		hasNodeJSHeadlessSite && (
+			<SiteOverviewAddonSection
+				key={nodeJSHeadlessLocalUrl}
+				localUrl={nodeJSHeadlessLocalUrl}
+				siteStatus={siteStatus}
+				site={site}
+			/>
+		)
+	);
 };
 
 const renderTooltip = () => (
@@ -42,16 +45,23 @@ export default function (context) {
 	));
 
 	// Create the additional selection option to be displayed during site creation
-	hooks.addContent('NewSiteEnvironment_EnvironmentDetails', ({ disableButton }) => <HeadlessEnvironmentSelect disableButton={disableButton} />);
+	hooks.addContent(
+		'NewSiteEnvironment_EnvironmentDetails',
+		({ disableButton }) => (
+			<HeadlessEnvironmentSelect disableButton={disableButton} />
+		),
+	);
 
-	hooks.addFilter('SiteInfoOverview_Addon_Section', (content, site: Site, siteStatus: string) => {
-
-		const nodeJSSection = {
-			title,
-			tooltip: renderTooltip(),
-			component: (nodeJSSiteOverviewHook(site, siteStatus)),
-		};
-		content.push(nodeJSSection);
-		return content;
-	});
+	hooks.addFilter(
+		'SiteInfoOverview_Addon_Section',
+		(content, site: Site, siteStatus: string) => {
+			const nodeJSSection = {
+				title,
+				tooltip: renderTooltip(),
+				component: nodeJSSiteOverviewHook(site, siteStatus),
+			};
+			content.push(nodeJSSection);
+			return content;
+		},
+	);
 }
