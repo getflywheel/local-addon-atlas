@@ -5,6 +5,7 @@ import {
 	Text,
 	TextButton,
 } from '@getflywheel/local-components';
+import AtlasBlueprintCard from './AtlasBlueprintCard';
 import path from 'path';
 
 const atlasBlueprints = [
@@ -67,36 +68,15 @@ const AtlasBlueprints: React.FC = () => (
 		</Text>
 		<Container className="AtlasBlueprintList">
 			{atlasBlueprints.map((bp) => (
-				<Container className="AtlasBlueprint">
-					<img
-						src={bp.thumbnail}
-						alt={`Preview of the ${bp.title}`}
-					/>
-					<Container margin="m">
-						{' '}
-						<Title>{bp.title}</Title>
-						<Text>{bp.byline}</Text>
-						<Container marginBottom="l">
-							<Text tag="p">{bp.excerpt}</Text>
-						</Container>
-						<Text tag="p">
-							<a href={bp.links.preview.href}>
-								{bp.links.preview.text}
-							</a>
-						</Text>
-						<Text tag="p">
-							<a href={bp.links.repo.href}>
-								{bp.links.repo.text}
-							</a>
-						</Text>
-						<Divider />
-						<Text tag="p">
-							<a href={bp.links.details.href}>
-								{bp.links.details.text}
-							</a>
-						</Text>
-					</Container>{' '}
-				</Container>
+				<AtlasBlueprintCard
+					thumbnailSrc={bp.thumbnail}
+					title={bp.title}
+					byline={bp.byline}
+					excerpt={bp.excerpt}
+					previewHref={bp.previewHref}
+					repoHref={bp.repoHref}
+					detailsHref={bp.detailsHref}
+				/>
 			))}
 		</Container>
 	</Container>

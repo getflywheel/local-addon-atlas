@@ -40,23 +40,26 @@
 
 .AtlasBlueprintList {
 	display: flex;
-	width: 900px;
 	justify-content: space-between;
+	flex-wrap: wrap;
 }
 
-.AtlasBlueprint {
-	width: 285px;
-	background-color: #fff;
+.AtlasBlueprintCard {
+	width: 32%;
+	margin-bottom: 2%;
+	flex-grow: initial;
+	flex-shrink: initial;
 }
 
-.AtlasBlueprint img {
+.AtlasBlueprintCard .AtlasBluprintCard_HeaderIconContainer {
+	padding: 0;
+}
+
+.AtlasBlueprintCard_Description {
+	flex: 1;
+}
+
+.AtlasBlueprintCard img {
 	width: 100%;
-	height: 133px;
-	display: block;
-
-	/* TODO: This is $gray15 in local-components.
-	   - How should we start using Local's color palette in Atlas?
-	   - Sass? CSS variables?
-     */
-	border-bottom: 1px solid #e7e7e7;
+	height: auto;
 }
