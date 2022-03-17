@@ -1,56 +1,51 @@
 import React from 'react';
 import {
 	Container,
-	Divider,
 	Title,
 	Text,
 	TextButton,
 } from '@getflywheel/local-components';
+import path from 'path';
 
 const atlasBlueprints = [
 	{
-		thumbnail: 'http://example.com',
+		thumbnail: path.resolve(
+			__dirname,
+			'../atlas-blueprints/basic-blueprint.png',
+		),
 		title: 'Basic Blueprint',
 		byline: 'Headless WordPress',
 		excerpt:
 			'A bare-bones headless site with enough scaffolding to get you started.',
-		links: {
-			preview: { text: 'Preview Site', href: 'http://example.com' },
-			repo: {
-				text: 'Open the code on Github',
-				href: 'http://example.com',
-			},
-			details: { text: 'Show more details', href: 'http://example.com' },
-		},
+		previewHref: 'http://example.com',
+		repoHref: 'http://example.com',
+		detailsHref: 'http://example.com',
 	},
 	{
-		thumbnail: 'http://example.com',
+		thumbnail: path.resolve(
+			__dirname,
+			'../atlas-blueprints/blog-blueprint.png',
+		),
+
 		title: 'Blog Blueprint',
 		byline: 'Headless WordPress',
 		excerpt: 'A standard blog built to run on headless WordPress.',
-		links: {
-			preview: { text: 'Preview Site', href: 'http://example.com' },
-			repo: {
-				text: 'Open the code on Github',
-				href: 'http://example.com',
-			},
-			details: { text: 'Show more details', href: 'http://example.com' },
-		},
+		previewHref: 'http://example.com',
+		repoHref: 'http://example.com',
+		detailsHref: 'http://example.com',
 	},
 	{
-		thumbnail: 'http://example.com',
+		thumbnail: path.resolve(
+			__dirname,
+			'../atlas-blueprints/portfolio-blueprint.png',
+		),
 		title: 'Portfolio Blueprint',
 		byline: 'Headless WordPress',
 		excerpt:
 			'Showcase your skills and blog about them with this Blueprint.',
-		links: {
-			preview: { text: 'Preview Site', href: 'https://example.com' },
-			repo: {
-				text: 'Open the code on Github',
-				href: 'https://example.com',
-			},
-			details: { text: 'Show more details', href: 'https://example.com' },
-		},
+		previewHref: 'https://example.com',
+		repoHref: 'https://example.com',
+		detailsHref: 'https://example.com',
 	},
 ];
 
