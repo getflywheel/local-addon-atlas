@@ -32,21 +32,19 @@
 	right: 30px;
 }
 
-.AtlasBlueprint {
-}
 .AtlasBlueprint p {
 	max-width: 585px;
 }
 
 .AtlasBlueprintList {
 	display: flex;
-	justify-content: space-between;
 	flex-wrap: wrap;
 }
 
 .AtlasBlueprintCard {
-	width: 32%;
+	width: 282px;
 	margin-bottom: 2%;
+	margin-right: 12px;
 	flex-grow: initial;
 	flex-shrink: initial;
 }
