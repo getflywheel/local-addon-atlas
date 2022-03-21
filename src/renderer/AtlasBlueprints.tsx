@@ -6,49 +6,7 @@ import {
 	TextButton,
 } from '@getflywheel/local-components';
 import AtlasBlueprintCard from './AtlasBlueprintCard';
-import path from 'path';
-
-const atlasBlueprints = [
-	{
-		thumbnail: path.resolve(
-			__dirname,
-			'../atlas-blueprints/basic-blueprint.png',
-		),
-		title: 'Basic Blueprint',
-		byline: 'Headless WordPress',
-		excerpt:
-			'A bare-bones headless site with enough scaffolding to get you started.',
-		previewHref: 'http://example.com',
-		repoHref: 'http://example.com',
-		detailsHref: 'http://example.com',
-	},
-	{
-		thumbnail: path.resolve(
-			__dirname,
-			'../atlas-blueprints/blog-blueprint.png',
-		),
-
-		title: 'Blog Blueprint',
-		byline: 'Headless WordPress',
-		excerpt: 'A standard blog built to run on headless WordPress.',
-		previewHref: 'http://example.com',
-		repoHref: 'http://example.com',
-		detailsHref: 'http://example.com',
-	},
-	{
-		thumbnail: path.resolve(
-			__dirname,
-			'../atlas-blueprints/portfolio-blueprint.png',
-		),
-		title: 'Portfolio Blueprint',
-		byline: 'Headless WordPress',
-		excerpt:
-			'Showcase your skills and blog about them with this Blueprint.',
-		previewHref: 'https://example.com',
-		repoHref: 'https://example.com',
-		detailsHref: 'https://example.com',
-	},
-];
+import atlasBlueprints from '../../atlas-blueprints/blueprintsContent';
 
 const AtlasBlueprints: React.FC = () => (
 	<Container margin="l" className="AtlasBlueprints">
@@ -57,13 +15,15 @@ const AtlasBlueprints: React.FC = () => (
 		</Title>
 		<Text tag="p">
 			Blueprints come with starter code, plugins, content models, and page
-			structure to get your Atlas app off the ground faster.{' '}
+			structure to get your Atlas app off the ground faster.
 			<TextButton
+				tag="a"
+				tagProps={{ href: 'https://localwp.com/help-docs' }}
 				privateOptions={{
 					textDecoration: 'underline',
 				}}
 			>
-				Learn more
+				Learn more about headless WordPress development
 			</TextButton>
 		</Text>
 		<Container className="AtlasBlueprintList">
