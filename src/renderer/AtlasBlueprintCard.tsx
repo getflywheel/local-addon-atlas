@@ -1,7 +1,17 @@
 import React from 'react';
 import { Card, Divider, Text } from '@getflywheel/local-components';
 
-const AtlasBlueprintCard: React.FC = ({
+type AtlasBlueprintCardProps = {
+	thumbnailSrc: string;
+	title: string;
+	byline: string;
+	excerpt: string;
+	previewHref: string;
+	repoHref: string;
+	detailsHref: string;
+};
+
+const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 	thumbnailSrc,
 	title,
 	byline,
