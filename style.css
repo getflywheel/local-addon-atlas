@@ -28,6 +28,42 @@
 
 .SiteEnvironmentContinueButton {
 	position: absolute;
-    bottom: 30px;
-    right: 30px;
+	bottom: 30px;
+	right: 30px;
+}
+
+.AtlasBlueprint p {
+	max-width: 585px;
+}
+
+.AtlasBlueprintList {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.AtlasBlueprintCard {
+	width: 282px;
+	margin-bottom: 2%;
+	margin-right: 12px;
+	flex-grow: initial;
+	flex-shrink: initial;
+}
+
+.AtlasBlueprintCard_Content .ButtonBase {
+	padding: 14px 0;
+	text-transform: initial;
+	font-weight: 500;
+}
+
+.AtlasBlueprintCard .AtlasBlueprintCard_HeaderIconContainer {
+	padding: 0;
+}
+
+.AtlasBlueprintCard_Description {
+	flex: 1;
+}
+
+.AtlasBlueprintCard img {
+	width: 100%;
+	height: auto;
 }
