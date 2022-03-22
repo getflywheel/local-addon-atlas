@@ -23,9 +23,9 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 	<>
 		<Card
 			className="AtlasBlueprintCard"
-			headerIconContainerClassName="AtlasBluprintCard_HeaderIconContainer"
+			headerIconContainerClassName="AtlasBlueprintCard_HeaderIconContainer"
 			headerIconPath={thumbnailSrc}
-			contentClassName="AtlasBluprintCard_Content"
+			contentClassName="AtlasBlueprintCard_Content"
 			contentDescriptionClassName="AtlasBlueprintCard_Description"
 			contentTitle={title}
 			contentSub={byline}
