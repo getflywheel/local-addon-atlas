@@ -108,6 +108,7 @@
     "npm"
   ],
   "files": [
+    "atlas-blueprints",
     "lib/",
     "icon.svg",
     "electron-node/",
