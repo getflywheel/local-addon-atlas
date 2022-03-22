@@ -49,6 +49,12 @@
 	flex-shrink: initial;
 }
 
+.AtlasBlueprintCard_Content .ButtonBase {
+	padding: 14px 0;
+	text-transform: initial;
+	font-weight: 500;
+}
+
 .AtlasBlueprintCard .AtlasBlueprintCard_HeaderIconContainer {
 	padding: 0;
 }
