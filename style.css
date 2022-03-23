@@ -32,8 +32,15 @@
 	right: 30px;
 }
 
-.AtlasBlueprint p {
-	max-width: 585px;
+.AtlasBlueprintsDescription {
+	max-width: 760px;
+}
+
+.AtlasBlueprintsDescription a {
+	text-transform: initial;
+	font-weight: 500;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
 .AtlasBlueprintList {
@@ -42,9 +49,9 @@
 }
 
 .AtlasBlueprintCard {
-	width: 282px;
-	margin-bottom: 2%;
-	margin-right: 12px;
+	width: 278px;
+	margin-bottom: 10px;
+	margin-right: 10px;
 	flex-grow: initial;
 	flex-shrink: initial;
 }
@@ -55,8 +62,34 @@
 	font-weight: 500;
 }
 
+.AtlasBlueprintCard_Links {
+	margin-top: 20px;
+}
+
+.AtlasBlueprintCard_Links a {
+	display: block;
+	text-align: left;
+}
+
+.AtlasBlueprintCard_Links div {
+	margin: 20px 0;
+}
+
+.AtlasBlueprintCard_Content .AtlasBlueprintCard_Links a {
+	padding: 0px;
+	margin: 5px 0;
+}
+
 .AtlasBlueprintCard .AtlasBlueprintCard_HeaderIconContainer {
 	padding: 0;
+}
+
+.AtlasBlueprintCard .AtlasBlueprintCard_HeaderIconContainer:after {
+	content: "";
+	width: 100%;
+	height: 100%;
+	box-shadow: inset 0 -7px 10px -10px rgb(38 39 39 / 25%);
+	position: absolute;
 }
 
 .AtlasBlueprintCard_Description {
