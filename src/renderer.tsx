@@ -54,7 +54,7 @@ export default function (context) {
 	);
 
 	hooks.addContent('Blueprints_BlueprintsList:after', () => (
-		<AtlasBlueprints />
+		<AtlasBlueprints key="atlas-blueprints" />
 	));
 
 	hooks.addFilter(

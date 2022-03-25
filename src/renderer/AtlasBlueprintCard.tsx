@@ -24,37 +24,35 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 	previewHref,
 	repoHref,
 }) => (
-	<>
-		<Card
-			className="AtlasBlueprintCard"
-			headerIconContainerClassName="AtlasBlueprintCard_HeaderIconContainer"
-			headerIconPath={thumbnailSrc}
-			contentClassName="AtlasBlueprintCard_Content"
-			contentDescriptionClassName="AtlasBlueprintCard_Description"
-			contentTitle={title}
-			contentSub={byline}
-			contentDescription={excerpt}
-			content={
-				<Container className="AtlasBlueprintCard_Links">
-					<TextButton tag="a" tagProps={{ href: previewHref }}>
+	<Card
+		className="AtlasBlueprintCard"
+		headerIconContainerClassName="AtlasBlueprintCard_HeaderIconContainer"
+		headerIconPath={thumbnailSrc}
+		contentClassName="AtlasBlueprintCard_Content"
+		contentDescriptionClassName="AtlasBlueprintCard_Description"
+		contentTitle={title}
+		contentSub={byline}
+		contentDescription={excerpt}
+		content={
+			<Container className="AtlasBlueprintCard_Links">
+				<TextButton tag="a" tagProps={{ href: previewHref }}>
 						Preview Site
-					</TextButton>
-					<TextButton tag="a" tagProps={{ href: repoHref }}>
+				</TextButton>
+				<TextButton tag="a" tagProps={{ href: repoHref }}>
 						Open the code on GitHub
-					</TextButton>
-					<Divider />
-					<TextButton
-						tag="a"
-						onClick={() => {
-							alert('Atlas Blueprint Details');
-						}}
-					>
+				</TextButton>
+				<Divider />
+				<TextButton
+					tag="a"
+					onClick={() => {
+						alert('Atlas Blueprint Details');
+					}}
+				>
 						Show more details
-					</TextButton>
-				</Container>
-			}
-		/>
-	</>
+				</TextButton>
+			</Container>
+		}
+	/>
 );
 
 export default AtlasBlueprintCard;
