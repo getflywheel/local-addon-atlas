@@ -1,5 +1,10 @@
 import React from 'react';
-import { Card, Divider, Text, TextButton } from '@getflywheel/local-components';
+import {
+	Card,
+	Container,
+	Divider,
+	TextButton,
+} from '@getflywheel/local-components';
 
 type AtlasBlueprintCardProps = {
 	thumbnailSrc: string;
@@ -30,29 +35,23 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 			contentSub={byline}
 			contentDescription={excerpt}
 			content={
-				<>
-					<Text tag="p">
-						<TextButton tag="a" tagProps={{ href: previewHref }}>
-							Preview Site
-						</TextButton>
-					</Text>
-					<Text tag="p">
-						<TextButton tag="a" tagProps={{ href: repoHref }}>
-							Open the code on Github
-						</TextButton>
-					</Text>
+				<Container className="AtlasBlueprintCard_Links">
+					<TextButton tag="a" tagProps={{ href: previewHref }}>
+						Preview Site
+					</TextButton>
+					<TextButton tag="a" tagProps={{ href: repoHref }}>
+						Open the code on GitHub
+					</TextButton>
 					<Divider />
-					<Text tag="p">
-						<TextButton
-							tag="a"
-							onClick={() => {
-								alert('Atlas Blueprint Details');
-							}}
-						>
-							Show more details
-						</TextButton>
-					</Text>
-				</>
+					<TextButton
+						tag="a"
+						onClick={() => {
+							alert('Atlas Blueprint Details');
+						}}
+					>
+						Show more details
+					</TextButton>
+				</Container>
 			}
 		/>
 	</>
