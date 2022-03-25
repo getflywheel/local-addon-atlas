@@ -36,6 +36,7 @@ const AtlasBlueprints: React.FC = () => (
 		<Container className="AtlasBlueprintList">
 			{atlasBlueprints.map((bp) => (
 				<AtlasBlueprintCard
+					key={bp.title}
 					thumbnailSrc={bp.thumbnail}
 					title={bp.title}
 					byline={bp.byline}
