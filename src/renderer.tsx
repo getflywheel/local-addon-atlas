@@ -1,6 +1,7 @@
 import path from 'path';
 import { HeadlessEnvironmentSelect } from './renderer/HeadlessEnvironmentSelect';
 import AtlasBlueprints from './renderer/AtlasBlueprints';
+import AtlasFromBlueprints from './renderer/AtlasFromBlueprints';
 import SiteOverviewAddonSection from './renderer/SiteOverviewAddonSection';
 import type { Site } from '@getflywheel/local';
 const stylesheetPath = path.resolve(__dirname, '../style.css');
@@ -56,6 +57,13 @@ export default function (context) {
 	hooks.addContent('Blueprints_BlueprintsList:after', () => (
 		<AtlasBlueprints key="atlas-blueprints" />
 	));
+
+	hooks.addContent(
+		'Blueprints_FromBlueprints:after',
+		({ setBlueprintOption }) => (
+			<AtlasFromBlueprints key="atlas-from-blueprints" setBlueprintOption={setBlueprintOption} />
+		),
+	);
 
 	hooks.addFilter(
 		'SiteInfoOverview_Addon_Section',
