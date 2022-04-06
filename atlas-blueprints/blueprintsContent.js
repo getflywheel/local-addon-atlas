@@ -12,7 +12,7 @@ const atlasBlueprints = [
 			'A bare-bones headless site with enough scaffolding to get you started.',
 		previewHref:
 			'https://hrly1qc4xu3d1wdkjaeo89ig8.js.wpenginepowered.com/',
-		repoHref: 'https://github.com/wpengine/atlas-blueprint-portfolio',
+		repoHref: 'https://github.com/wpengine/atlas-blueprint-basic',
 	},
 	{
 		thumbnail: path.resolve(
@@ -25,7 +25,7 @@ const atlasBlueprints = [
 		excerpt: 'A standard blog built to run on headless WordPress.',
 		previewHref:
 			'https://hrly1qc4xu3d1wdkjaeo89ig8.js.wpenginepowered.com/',
-		repoHref: 'https://github.com/wpengine/atlas-blueprint-portfolio',
+		repoHref: 'https://github.com/wpengine/atlas-blueprint-blog',
 	},
 	{
 		thumbnail: path.resolve(

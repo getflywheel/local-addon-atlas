@@ -10,13 +10,14 @@ import AtlasBlueprintCard from './AtlasBlueprintCard';
 import atlasBlueprints from '../../atlas-blueprints/blueprintsContent';
 
 interface IProps {
-	setBlueprintOption: (option: string) => void;
+	setBlueprintOption: (option) => void;
 }
 
 const AtlasFromBlueprints: React.FC<IProps> = (props) => {
 	const result = atlasBlueprints.reduce((prev, current) => ({
 		...prev,
 		[current.title]: {
+			key: current.repoHref,
 			content:
 				<AtlasBlueprintCard
 					key={current.title}
@@ -36,7 +37,7 @@ const AtlasFromBlueprints: React.FC<IProps> = (props) => {
 	}), {});
 
 	const onChange = (option: string) => {
-		props.setBlueprintOption(option);
+		props.setBlueprintOption({ 'bpName': option, 'atlasUrl': result[option].key });
 	};
 
 	return (

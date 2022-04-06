@@ -36,10 +36,10 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 		content={
 			<Container className="AtlasBlueprintCard_Links">
 				<TextButton tag="a" tagProps={{ href: previewHref }}>
-						Preview Site
+					Preview Site
 				</TextButton>
 				<TextButton tag="a" tagProps={{ href: repoHref }}>
-						Open the code on GitHub
+					Open the code on GitHub
 				</TextButton>
 				<Divider />
 				<TextButton

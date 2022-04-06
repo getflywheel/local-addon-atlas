@@ -90,9 +90,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					path.resolve(nodeModulesPath, 'npm', 'bin', 'npx-cli.js'),
 					'create-next-app',
 					'--example',
-					'https://github.com/wpengine/faustjs/tree/main',
-					'--example-path',
-					'examples/next/getting-started',
+					`${this._site?.customOptions?.atlasUrl}`,
 					'--use-npm',
 					headlessDirectoryName,
 				], {
