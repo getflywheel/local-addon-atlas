@@ -3,10 +3,11 @@ import {
 	Card,
 	Container,
 	Divider,
+	IReactComponentProps,
 	TextButton,
 } from '@getflywheel/local-components';
 
-type AtlasBlueprintCardProps = {
+interface AtlasBlueprintCardProps extends IReactComponentProps {
 	thumbnailSrc: string;
 	title: string;
 	byline: string;
@@ -14,7 +15,7 @@ type AtlasBlueprintCardProps = {
 	previewHref: string;
 	repoHref: string;
 	detailsHref: string;
-};
+}
 
 const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 	thumbnailSrc,
@@ -23,6 +24,8 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 	excerpt,
 	previewHref,
 	repoHref,
+	detailsHref,
+	...otherProps
 }) => (
 	<Card
 		className="AtlasBlueprintCard"
@@ -33,6 +36,7 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 		contentTitle={title}
 		contentSub={byline}
 		contentDescription={excerpt}
+		{...otherProps}
 		content={
 			<Container className="AtlasBlueprintCard_Links">
 				<TextButton tag="a" tagProps={{ href: previewHref }} onClick={(e) => e.stopPropagation()}>
@@ -46,7 +50,7 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 					tag="a"
 					onClick={(e) => {
 						e.stopPropagation();
-						alert('Atlas Blueprint Details');
+						alert(`Atlas Blueprint Details: ${detailsHref}`);
 					}}
 				>
 						Show more details

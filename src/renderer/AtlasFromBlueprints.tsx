@@ -28,10 +28,12 @@ const AtlasFromBlueprints: React.FC<IProps> = (props) => {
 					previewHref={current.previewHref}
 					repoHref={current.repoHref}
 					detailsHref={current.detailsHref}
+					style={{ height: '100%', margin: '0' }}
 				/>,
 			style: {
+				height: '100%',
+				marginRight: '15px',
 				textAlign: 'unset',
-				boxShadow: 'none',
 			},
 		},
 	}), {});
