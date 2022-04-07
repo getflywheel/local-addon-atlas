@@ -5,6 +5,7 @@ import {
 	Divider,
 	IReactComponentProps,
 	TextButton,
+	TextButtonExternal,
 } from '@getflywheel/local-components';
 
 interface AtlasBlueprintCardProps extends IReactComponentProps {
@@ -39,15 +40,14 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 		{...otherProps}
 		content={
 			<Container className="AtlasBlueprintCard_Links">
-				<TextButton tag="a" tagProps={{ href: previewHref }} onClick={(e) => e.stopPropagation()}>
+				<TextButtonExternal href={previewHref} onClick={(e) => e.stopPropagation()}>
 					Preview Site
-				</TextButton>
-				<TextButton tag="a" tagProps={{ href: repoHref }} onClick={(e) => e.stopPropagation()}>
+				</TextButtonExternal>
+				<TextButtonExternal href={repoHref} onClick={(e) => e.stopPropagation()}>
 					Open the code on GitHub
-				</TextButton>
+				</TextButtonExternal>
 				<Divider />
 				<TextButton
-					tag="a"
 					onClick={(e) => {
 						e.stopPropagation();
 						alert(`Atlas Blueprint Details: ${detailsHref}`);
