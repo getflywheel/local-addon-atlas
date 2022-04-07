@@ -38,6 +38,22 @@ const renderTooltip = () => (
 export default function (context) {
 	const { React, hooks } = context;
 
+	hooks.addAction(
+		'Blueprints_FromBlueprintsContinue',
+		async ({ props, bpName, atlasUrl }) => {
+			const isAtlas = (name) => ['Basic Blueprint', 'Blog Blueprint', 'Portfolio Blueprint'].includes(name);
+
+			await props.updateSiteSettings({
+				...props.siteSettings,
+				customOptions: {
+					bpName,
+					atlasUrl,
+					useAtlasFramework: isAtlas(bpName) ? 'on' : 'off',
+				},
+			});
+		},
+	);
+
 	hooks.addContent('stylesheets', () => (
 		<link
 			rel="stylesheet"
