@@ -35,16 +35,17 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 		contentDescription={excerpt}
 		content={
 			<Container className="AtlasBlueprintCard_Links">
-				<TextButton tag="a" tagProps={{ href: previewHref }}>
+				<TextButton tag="a" tagProps={{ href: previewHref }} onClick={(e) => e.stopPropagation()}>
 					Preview Site
 				</TextButton>
-				<TextButton tag="a" tagProps={{ href: repoHref }}>
+				<TextButton tag="a" tagProps={{ href: repoHref }} onClick={(e) => e.stopPropagation()}>
 					Open the code on GitHub
 				</TextButton>
 				<Divider />
 				<TextButton
 					tag="a"
-					onClick={() => {
+					onClick={(e) => {
+						e.stopPropagation();
 						alert('Atlas Blueprint Details');
 					}}
 				>
