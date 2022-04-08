@@ -100,3 +100,14 @@
 	width: 100%;
 	height: auto;
 }
+
+.AtlasAddWordPress_Inputs {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.AtlasAddWordPress_Inputs > div > label {
+	display: block;
+	margin-bottom: 10px;
+}
