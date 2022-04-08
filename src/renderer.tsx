@@ -4,6 +4,7 @@ import AtlasBlueprints from './renderer/AtlasBlueprints';
 import AtlasFromBlueprints from './renderer/AtlasFromBlueprints';
 import SiteOverviewAddonSection from './renderer/SiteOverviewAddonSection';
 import type { Site } from '@getflywheel/local';
+import { sendIPCEvent } from '@getflywheel/local/renderer';
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 
 const title = `Front-end Node.js`;
@@ -37,6 +38,37 @@ const renderTooltip = () => (
 
 export default function (context) {
 	const { React, hooks } = context;
+
+	hooks.addAction('FromBlueprintSiteDetails:OnContinue', (props) => {
+		if (props.siteSettings.customOptions.useAtlasFramework === 'on') {
+			sendIPCEvent('goToRoute', '/main/create-site/from-blueprint/choose-environment');
+		}
+	});
+
+	/**
+	 * Add AtlasBlueprints as an option when creating a new site
+	 */
+	hooks.addFilter('CreateSite:Routes', (routes) => {
+		const atlasBlueprintRoutes = [
+			{
+				key: 'add-atlas-blueprint-choose-environment',
+				path: '/main/create-site/from-blueprint/choose-environment',
+				stepName: 'Choose environment',
+				component: () => (
+					<div>choose-environment</div>
+				),
+			},
+			{
+				key: 'add-atlas-blueprint-add-wordpress',
+				path: '/main/create-site/from-blueprint/add-wordpress',
+				stepName: 'Add WordPress',
+				component: () => (
+					<div>add-wordpress</div>
+				),
+			},
+		];
+		return [...routes, ...atlasBlueprintRoutes];
+	});
 
 	hooks.addAction(
 		'Blueprints_FromBlueprintsContinue',
