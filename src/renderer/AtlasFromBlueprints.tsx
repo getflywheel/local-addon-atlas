@@ -36,6 +36,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 				height: '100%',
 				marginRight: '15px',
 				textAlign: 'unset',
+				borderRadius: '4px',
 			},
 		},
 	}), {});
