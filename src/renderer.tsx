@@ -1,4 +1,5 @@
 import path from 'path';
+import * as Local from '@getflywheel/local';
 import { HeadlessEnvironmentSelect } from './renderer/HeadlessEnvironmentSelect';
 import AtlasBlueprints from './renderer/AtlasBlueprints';
 import AtlasFromBlueprints from './renderer/AtlasFromBlueprints';
@@ -6,9 +7,10 @@ import SiteOverviewAddonSection from './renderer/SiteOverviewAddonSection';
 import type { Site } from '@getflywheel/local';
 import { sendIPCEvent } from '@getflywheel/local/renderer';
 import { AtlasAddWordPress } from './renderer/AtlasAddWordPress';
-const stylesheetPath = path.resolve(__dirname, '../style.css');
 
+const stylesheetPath = path.resolve(__dirname, '../style.css');
 const title = `Front-end Node.js`;
+
 export const atlasDocsUrl = `https://developers.wpengine.com`;
 export const faustJsDocsUrl = `https://github.com/wpengine/faustjs`;
 
@@ -40,8 +42,8 @@ const renderTooltip = () => (
 export default function (context) {
 	const { React, hooks } = context;
 
-	hooks.addAction('FromBlueprintSiteDetails:OnContinue', (props) => {
-		if (props.siteSettings.customOptions.useAtlasFramework === 'on') {
+	hooks.addAction('FromBlueprintSiteDetails:OnContinue', (siteSettings: Local.NewSiteInfo) => {
+		if (siteSettings.customOptions.useAtlasFramework === 'on') {
 			sendIPCEvent('goToRoute', '/main/create-site/from-blueprint/add-wordpress');
 		}
 	});
@@ -61,19 +63,37 @@ export default function (context) {
 		return [...routes, ...atlasBlueprintRoutes];
 	});
 
-	hooks.addAction(
+	hooks.addFilter(
 		'Blueprints_FromBlueprintsContinue',
-		async ({ props, bpName, atlasUrl }) => {
-			const isAtlas = (name) => ['Basic Blueprint', 'Blog Blueprint', 'Portfolio Blueprint'].includes(name);
+		(siteSettings: Local.NewSiteInfo, bpName: string) => {
+			const atlasUrlBase = 'https://github.com/wpengine/';
+			const isAtlas = ['Basic Blueprint', 'Blog Blueprint', 'Portfolio Blueprint'].includes(bpName);
 
-			await props.updateSiteSettings({
-				...props.siteSettings,
+			let atlasUrl = '';
+
+			switch (bpName) {
+				case 'Basic Blueprint':
+					atlasUrl = `${atlasUrlBase}atlas-blueprint-basic`;
+					break;
+				case 'Blog Blueprint':
+					atlasUrl = `${atlasUrlBase}atlas-blueprint-blog`;
+					break;
+				case 'Portfolio Blueprint':
+					atlasUrl = `${atlasUrlBase}atlas-blueprint-portfolio`;
+					break;
+				default:
+					atlasUrl = '';
+					break;
+			}
+
+			return {
+				...siteSettings,
 				customOptions: {
 					bpName,
 					atlasUrl,
-					useAtlasFramework: isAtlas(bpName) ? 'on' : 'off',
+					useAtlasFramework: isAtlas ? 'on' : 'off',
 				},
-			});
+			};
 		},
 	);
 
@@ -99,8 +119,8 @@ export default function (context) {
 
 	hooks.addContent(
 		'Blueprints_FromBlueprints:after',
-		({ setBlueprintOption }) => (
-			<AtlasFromBlueprints key="atlas-from-blueprints" setBlueprintOption={setBlueprintOption} />
+		(setBpName, setDisabled) => (
+			<AtlasFromBlueprints key="atlas-from-blueprints" setBpName={setBpName} setDisabled={setDisabled} />
 		),
 	);
 

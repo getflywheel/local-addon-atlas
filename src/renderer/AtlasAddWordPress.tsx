@@ -13,6 +13,7 @@ import { sendIPCEvent } from '@getflywheel/local/renderer';
 
 interface IProps {
 	siteSettings: NewSiteInfo
+	localHistory;
 }
 
 export const AtlasAddWordPress = (props: IProps): JSX.Element => {
@@ -66,8 +67,6 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 							onChange={(e) => setEmail(e.target.value)}
 						/>
 					</div>
-
-
 				</div>
 
 				<AdvancedToggle className="TID_AddSiteWordPress_AdvancedToggle_AdvancedOptions">
@@ -96,7 +95,7 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 			</PrimaryButton>
 			<TextButton
 				className="GoBack"
-				onClick={() => sendIPCEvent('goToRoute', '/main/create-site/from-blueprint/site-details')}
+				onClick={() => props.localHistory.goBack()}
 			>
 				Go back
 			</TextButton>

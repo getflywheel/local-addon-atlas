@@ -10,11 +10,12 @@ import AtlasBlueprintCard from './AtlasBlueprintCard';
 import atlasBlueprints from '../../atlas-blueprints/blueprintsContent';
 
 interface IProps {
-	setBlueprintOption: (option) => void;
+	setBpName: (bpName: string) => void;
+	setDisabled: (val: boolean) => void;
 }
 
-const AtlasFromBlueprints: React.FC<IProps> = (props) => {
-	const result = atlasBlueprints.reduce((prev, current) => ({
+const AtlasFromBlueprints = (props: IProps): JSX.Element => {
+	const atlasBlueprintOptions = atlasBlueprints.reduce((prev, current) => ({
 		...prev,
 		[current.title]: {
 			key: current.repoHref,
@@ -38,8 +39,9 @@ const AtlasFromBlueprints: React.FC<IProps> = (props) => {
 		},
 	}), {});
 
-	const onChange = (option: string) => {
-		props.setBlueprintOption({ 'bpName': option, 'atlasUrl': result[option].key });
+	const onChange = async (option: string) => {
+		props.setBpName(option);
+		props.setDisabled(false);
 	};
 
 	return (
@@ -66,7 +68,7 @@ const AtlasFromBlueprints: React.FC<IProps> = (props) => {
 				<RadioBlock
 					onChange={(option) => onChange(option)}
 					heightSize='none'
-					options={result}
+					options={atlasBlueprintOptions}
 				/>
 			</Container>
 		</Container>
