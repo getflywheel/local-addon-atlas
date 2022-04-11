@@ -34,10 +34,10 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 					style={{ height: '100%', margin: '0' }}
 				/>,
 			style: {
-				height: '100%',
-				marginRight: '15px',
+				margin: '0 15px 15px 0',
 				textAlign: 'unset',
 				borderRadius: '4px',
+				flexGrow: 0,
 			},
 		},
 	}), {});
@@ -48,7 +48,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 	};
 
 	return (
-		<Container margin="l" className="AtlasBlueprints">
+		<Container margin="l" marginBottom="none" className="FromAtlasBlueprints">
 			<Divider marginSizeBottom='l' />
 			<Title size="l" tag="h2">
 				Atlas Blueprints
@@ -70,6 +70,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 			</Container>
 			<Container className="AtlasBlueprintList">
 				<RadioBlock
+					style={{ justifyContent: 'flex-start' }}
 					centerContent={false}
 					default={props.bpName}
 					onChange={(option) => onChange(option)}
