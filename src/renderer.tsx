@@ -66,11 +66,10 @@ export default function (context) {
 	hooks.addFilter(
 		'Blueprints_FromBlueprintsContinue',
 		(siteSettings: Local.NewSiteInfo) => {
-			const atlasUrlBase = 'https://github.com/wpengine/';
 			const bpUrls = {
-				'Basic Blueprint': `${atlasUrlBase}atlas-blueprint-basic`,
-				'Blog Blueprint': `${atlasUrlBase}atlas-blueprint-basic`,
-				'Portfolio Blueprint': `${atlasUrlBase}atlas-blueprint-basic`,
+				'Basic Blueprint': `https://github.com/wpengine/atlas-blueprint-basic`,
+				'Blog Blueprint': `https://github.com/wpengine/atlas-blueprint-basic`,
+				'Portfolio Blueprint': `https://github.com/wpengine/atlas-blueprint-basic`,
 			};
 			const isAtlas = Object.keys(bpUrls).includes(siteSettings.blueprint);
 
