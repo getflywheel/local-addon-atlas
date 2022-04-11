@@ -5,6 +5,7 @@ import {
 	Text,
 	RadioBlock,
 	TextButtonExternal,
+	Divider,
 } from '@getflywheel/local-components';
 import AtlasBlueprintCard from './AtlasBlueprintCard';
 import atlasBlueprints from '../../atlas-blueprints/blueprintsContent';
@@ -48,6 +49,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 
 	return (
 		<Container margin="l" className="AtlasBlueprints">
+			<Divider />
 			<Title size="l" tag="h2">
 				Atlas Blueprints
 			</Title>
