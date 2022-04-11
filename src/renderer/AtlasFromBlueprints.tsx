@@ -10,6 +10,7 @@ import AtlasBlueprintCard from './AtlasBlueprintCard';
 import atlasBlueprints from '../../atlas-blueprints/blueprintsContent';
 
 interface IProps {
+	bpName: string;
 	setBpName: (bpName: string) => void;
 	setDisabled: (val: boolean) => void;
 }
@@ -66,6 +67,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 			</Container>
 			<Container className="AtlasBlueprintList">
 				<RadioBlock
+					default={props.bpName}
 					onChange={(option) => onChange(option)}
 					heightSize='none'
 					options={atlasBlueprintOptions}
