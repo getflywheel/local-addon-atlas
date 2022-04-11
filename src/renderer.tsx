@@ -86,13 +86,19 @@ export default function (context) {
 					break;
 			}
 
-			return {
-				...siteSettings,
-				customOptions: {
+			let customOptions = {};
+
+			if (isAtlas) {
+				customOptions = {
 					bpName,
 					atlasUrl,
-					useAtlasFramework: isAtlas ? 'on' : 'off',
-				},
+					useAtlasFramework: 'on',
+				};
+			}
+
+			return {
+				...siteSettings,
+				customOptions,
 			};
 		},
 	);
