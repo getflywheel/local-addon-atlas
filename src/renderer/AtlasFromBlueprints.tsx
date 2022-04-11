@@ -49,7 +49,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 
 	return (
 		<Container margin="l" className="AtlasBlueprints">
-			<Divider />
+			<Divider marginSizeBottom='l' />
 			<Title size="l" tag="h2">
 				Atlas Blueprints
 			</Title>
