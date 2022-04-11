@@ -68,6 +68,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 			</Container>
 			<Container className="AtlasBlueprintList">
 				<RadioBlock
+					centerContent={false}
 					default={props.bpName}
 					onChange={(option) => onChange(option)}
 					heightSize='none'
