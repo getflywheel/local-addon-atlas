@@ -86,11 +86,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					fs.writeFileSync(envFilePath, updatedEnvFileContent);
 				}
 			} else {
-				/*
-					'https://github.com/wpengine/faustjs/tree/main',
-					'--example-path',
-					'examples/next/getting-started',
-				*/
 				await execFilePromise(this.bin!.electron, [
 					path.resolve(nodeModulesPath, 'npm', 'bin', 'npx-cli.js'),
 					'create-next-app',
@@ -177,15 +172,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'faustwp_settings',
 				'--format=json',
 			]);
-
-			// wp acm blueprint import https://github.com/austinwendt-wp/lukeprint/raw/main/acm-blueprint.zip
-			// await wpCli.run(this._site, [
-			// 	'acm',
-			// 	'blueprint',
-			// 	'import',
-			// 	// TODO: grab relative url from the default site settings
-			// 	'https://github.com/austinwendt-wp/lukeprint/raw/main/acm-blueprint.zip',
-			// ]);
 
 			// eslint-disable-next-line camelcase
 			const parsedFaustWPsettings: { secret_key: string } = JSON.parse(faustWPsettings);
