@@ -43,7 +43,7 @@ export default function (context) {
 	const { React, hooks } = context;
 
 	hooks.addAction('FromBlueprintSiteDetails:OnContinue', (siteSettings: Local.NewSiteInfo) => {
-		if (siteSettings.customOptions.useAtlasFramework === 'on') {
+		if (siteSettings?.customOptions?.useAtlasFramework === 'on') {
 			sendIPCEvent('goToRoute', '/main/create-site/from-blueprint/add-wordpress');
 		}
 	});
