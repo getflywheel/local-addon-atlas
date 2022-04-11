@@ -67,40 +67,24 @@ export default function (context) {
 		'Blueprints_FromBlueprintsContinue',
 		(siteSettings: Local.NewSiteInfo) => {
 			const atlasUrlBase = 'https://github.com/wpengine/';
-			const isAtlas = ['Basic Blueprint', 'Blog Blueprint', 'Portfolio Blueprint']
-				.includes(siteSettings.blueprint);
-
-			let atlasUrl = '';
-
-			switch (siteSettings.blueprint) {
-				case 'Basic Blueprint':
-					atlasUrl = `${atlasUrlBase}atlas-blueprint-basic`;
-					break;
-				case 'Blog Blueprint':
-					atlasUrl = `${atlasUrlBase}atlas-blueprint-blog`;
-					break;
-				case 'Portfolio Blueprint':
-					atlasUrl = `${atlasUrlBase}atlas-blueprint-portfolio`;
-					break;
-				default:
-					atlasUrl = '';
-					break;
-			}
-
-			let customOptions = {};
+			const bpUrls = {
+				'Basic Blueprint': `${atlasUrlBase}atlas-blueprint-basic`,
+				'Blog Blueprint': `${atlasUrlBase}atlas-blueprint-basic`,
+				'Portfolio Blueprint': `${atlasUrlBase}atlas-blueprint-basic`,
+			};
+			const isAtlas = Object.keys(bpUrls).includes(siteSettings.blueprint);
 
 			if (isAtlas) {
-				customOptions = {
+				const customOptions = {
 					bpName: siteSettings.blueprint,
-					atlasUrl,
+					atlasUrl: bpUrls[siteSettings.blueprint],
 					useAtlasFramework: 'on',
 				};
+
+				return { ...siteSettings, customOptions };
 			}
 
-			return {
-				...siteSettings,
-				customOptions,
-			};
+			return { ...siteSettings };
 		},
 	);
 
