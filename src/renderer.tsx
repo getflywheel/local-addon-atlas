@@ -126,8 +126,8 @@ export default function (context) {
 
 	hooks.addContent(
 		'Blueprints_FromBlueprints:after',
-		(setBpName, setDisabled) => (
-			<AtlasFromBlueprints key="atlas-from-blueprints" setBpName={setBpName} setDisabled={setDisabled} />
+		(bpName, setBpName, setDisabled) => (
+			<AtlasFromBlueprints key="atlas-from-blueprints" bpName={bpName} setBpName={setBpName} setDisabled={setDisabled} />
 		),
 	);
 
