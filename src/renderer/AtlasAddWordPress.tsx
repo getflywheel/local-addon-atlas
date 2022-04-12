@@ -9,12 +9,11 @@ import {
 	BasicInput,
 } from '@getflywheel/local-components';
 import { MultiSite, NewSiteInfo } from '@getflywheel/local';
-import { sendIPCEvent } from '@getflywheel/local/renderer';
+import { sendIPCEvent, RouteComponentProps } from '@getflywheel/local/renderer';
 import { regexPatterns } from '../constants';
 
-interface IProps {
+interface IProps extends RouteComponentProps {
 	siteSettings: NewSiteInfo
-	localHistory;
 }
 
 export const AtlasAddWordPress = (props: IProps): JSX.Element => {
@@ -107,7 +106,7 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 			</PrimaryButton>
 			<TextButton
 				className="GoBack"
-				onClick={() => props.localHistory.goBack()}
+				onClick={() => props.history.goBack()}
 			>
 				Go back
 			</TextButton>
