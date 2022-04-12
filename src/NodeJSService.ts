@@ -1,4 +1,5 @@
 import path from 'path';
+import os from 'os';
 import fs from 'fs-extra';
 import { IPC_EVENTS, ANALYTIC_EVENTS, headlessDirectoryName } from './constants';
 import * as LocalMain from '@getflywheel/local/main';
@@ -99,6 +100,12 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					cwd: this._site.longPath,
 					env: this.defaultEnv,
 				});
+			}
+
+			if (os.platform() === 'win32') {
+				const babelrc = `{"presets":["next/babel"]}`;
+
+				await fs.writeFile(path.join(this.appNodePath, '.babelrc'), babelrc);
 			}
 
 			/**
