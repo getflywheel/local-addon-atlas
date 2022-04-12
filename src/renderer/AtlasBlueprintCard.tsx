@@ -40,14 +40,26 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 		{...otherProps}
 		content={
 			<Container className="AtlasBlueprintCard_Links">
-				<TextButtonExternal href={previewHref} onClick={(e) => e.stopPropagation()}>
-					Preview Site
+				<TextButtonExternal
+					inline
+					href={previewHref}
+					onClick={(e) => e.stopPropagation()}
+					privateOptions={{ fontWeight: 'medium' }}
+					style={{ marginBottom: '10px' }}
+				>
+					Preview SITE!
 				</TextButtonExternal>
-				<TextButtonExternal href={repoHref} onClick={(e) => e.stopPropagation()}>
+				<TextButtonExternal
+					inline
+					href={repoHref}
+					onClick={(e) => e.stopPropagation()}
+					privateOptions={{ fontWeight: 'medium' }}
+				>
 					Open the code on GitHub
 				</TextButtonExternal>
 				<Divider />
 				<TextButton
+					privateOptions={{ fontWeight: 'medium', padding: 'none' }}
 					onClick={(e) => {
 						e.stopPropagation();
 						alert(`Atlas Blueprint Details: ${detailsHref}`);
