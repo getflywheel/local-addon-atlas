@@ -73,8 +73,8 @@ export default function (context) {
 		(siteSettings: Local.NewSiteInfo) => {
 			const bpUrls = {
 				'Basic Blueprint': `https://github.com/wpengine/atlas-blueprint-basic`,
-				'Blog Blueprint': `https://github.com/wpengine/atlas-blueprint-basic`,
-				'Portfolio Blueprint': `https://github.com/wpengine/atlas-blueprint-basic`,
+				'Blog Blueprint': `https://github.com/wpengine/atlas-blueprint-blog`,
+				'Portfolio Blueprint': `https://github.com/wpengine/atlas-blueprint-portfolio`,
 			};
 			const isAtlas = Object.keys(bpUrls).includes(siteSettings.blueprint);
 
