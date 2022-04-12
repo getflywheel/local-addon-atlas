@@ -7,6 +7,7 @@ import SiteOverviewAddonSection from './renderer/SiteOverviewAddonSection';
 import type { Site } from '@getflywheel/local';
 import { sendIPCEvent } from '@getflywheel/local/renderer';
 import { AtlasAddWordPress } from './renderer/AtlasAddWordPress';
+import { TextButtonExternal } from '@getflywheel/local-components';
 
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 const title = `Front-end Node.js`;
@@ -33,9 +34,13 @@ const nodeJSSiteOverviewHook = (site: Site, siteStatus: string) => {
 const renderTooltip = () => (
 	<div className="SiteOverviewAddonSectionTooltip">
 		Learn more about WP Engine Headless framework.
-		<div className="SiteOverviewAddonSectionTooltipLink">
-			<a href={atlasDocsUrl}>GO TO DOCS</a>
-		</div>
+		<TextButtonExternal
+			href={atlasDocsUrl}
+			inline={false}
+			style={{ paddingTop: '7px' }}
+		>
+			Go to docs
+		</TextButtonExternal>
 	</div>
 );
 

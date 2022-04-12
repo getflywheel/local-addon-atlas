@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableList, TableListRow, TextButton } from '@getflywheel/local-components';
+import { TableList, TableListRow, TextButton, TextButtonExternal } from '@getflywheel/local-components';
 import * as LocalRenderer from '@getflywheel/local/renderer';
 import { IPC_EVENTS } from './../constants';
 import type { Site } from '@getflywheel/local';
@@ -18,7 +18,7 @@ const showTerminalOutput = (site: Site) => LocalRenderer.ipcAsync(
 const renderLocalUrlHyperlink = (isSiteRunning: boolean, localUrl: string) => {
 	if (isSiteRunning) {
 		return (
-			<a href={`http://${localUrl}`}>{localUrl}</a>
+			<TextButtonExternal privateOptions={{ fontWeight: 'medium' }} href={`http://${localUrl}`}>{localUrl}</TextButtonExternal>
 		);
 	}
 
