@@ -21,11 +21,12 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 	const [adminPassword, setPassword] = useState('');
 	const [adminEmail, setEmail] = useState('dev-email@flywheel.local');
 	const [multisite, setMultisite] = useState<MultiSite | 'no'>('no');
+	const [isValid, setIsValid] = useState({ user: true, pass: true, email: !!adminEmail.match(regexPatterns.email) });
 
-	const isValid = adminUsername && adminPassword && adminEmail.match(regexPatterns.email);
+	const validInputs = adminUsername && adminPassword && adminEmail.match(regexPatterns.email);
 
 	const createSiteFromBlueprint = () => {
-		if (isValid) {
+		if (validInputs) {
 			sendIPCEvent('addSite', {
 				newSiteInfo: props.siteSettings,
 				wpCredentials: {
@@ -47,34 +48,43 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 					<div>
 						<label htmlFor="adminUsername">WordPress username</label>
 						<BasicInput
-							invalid={!adminUsername}
+							invalid={!isValid.user}
 							invalidMessage={'WordPress admin username is invalid.'}
 							id="adminUsername"
 							value={adminUsername}
-							onChange={(e) => setUsername(e.target.value)}
+							onChange={(e) => {
+								setUsername(e.target.value);
+								setIsValid({ ...isValid, user: !!e.target.value });
+							}}
 						/>
 					</div>
 
 					<div>
 						<label htmlFor='adminPassword'>WordPress password</label>
 						<InputPasswordToggle
-							invalid={!adminPassword}
+							invalid={!isValid.pass}
 							invalidMessage={'WordPress admin password is invalid.'}
 							className="TID_AddSiteWordPress_PasswordToggle_AdminPassword"
 							id="adminPassword"
 							value={adminPassword}
-							onChange={(e) => setPassword(e.target.value)}
+							onChange={(e) => {
+								setPassword(e.target.value);
+								setIsValid({ ...isValid, pass: !!e.target.value });
+							}}
 						/>
 					</div>
 
 					<div>
 						<label htmlFor="adminEmail">WordPress email</label>
 						<BasicInput
-							invalid={!adminEmail.match(regexPatterns.email)}
+							invalid={!isValid.email}
 							invalidMessage={'WordPress admin email is invalid.'}
 							id="adminEmail"
 							value={adminEmail}
-							onChange={(e) => setEmail(e.target.value)}
+							onChange={(e) => {
+								setEmail(e.target.value);
+								setIsValid({ ...isValid, email: !!e.target.value.match(regexPatterns.email) });
+							}}
 						/>
 					</div>
 				</div>
@@ -98,7 +108,7 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 			</div>
 
 			<PrimaryButton
-				disabled={!isValid}
+				disabled={!validInputs}
 				className="TID_AddSiteWordPress_Button_Continue Continue"
 				onClick={createSiteFromBlueprint}
 			>
