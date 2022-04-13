@@ -23,7 +23,7 @@ const AtlasBlueprints: React.FC = () => (
 				page structure to get your Atlas app off the ground faster.
 			</Text>
 			<TextButtonExternal
-				href={'https://localwp.com/help-docs'}
+				href={'https://developers.wpengine.com/roadmap'}
 			>
 				Learn more about headless WordPress development
 			</TextButtonExternal>

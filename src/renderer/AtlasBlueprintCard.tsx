@@ -47,7 +47,7 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 					privateOptions={{ fontWeight: 'medium' }}
 					style={{ marginBottom: '10px' }}
 				>
-					Preview SITE!
+					Preview site
 				</TextButtonExternal>
 				<TextButtonExternal
 					inline
@@ -57,7 +57,7 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 				>
 					Open the code on GitHub
 				</TextButtonExternal>
-				<Divider />
+				{/* <Divider />
 				<TextButton
 					privateOptions={{ fontWeight: 'medium', padding: 'none' }}
 					onClick={(e) => {
@@ -66,7 +66,7 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 					}}
 				>
 						Show more details
-				</TextButton>
+				</TextButton> */}
 			</Container>
 		}
 	/>
