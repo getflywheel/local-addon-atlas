@@ -14,12 +14,13 @@ import { regexPatterns } from '../constants';
 
 interface IProps extends RouteComponentProps {
 	siteSettings: NewSiteInfo
+	defaults
 }
 
 export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 	const [adminUsername, setUsername] = useState('');
 	const [adminPassword, setPassword] = useState('');
-	const [adminEmail, setEmail] = useState('dev-email@flywheel.local');
+	const [adminEmail, setEmail] = useState(props.defaults.adminEmail);
 	const [multisite, setMultisite] = useState<MultiSite | 'no'>('no');
 	const [isValid, setIsValid] = useState({ user: true, pass: true, email: !!adminEmail.match(regexPatterns.email) });
 
@@ -35,6 +36,7 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 					adminEmail,
 				},
 				goToSite: true,
+				installWP: true,
 			});
 		}
 	};

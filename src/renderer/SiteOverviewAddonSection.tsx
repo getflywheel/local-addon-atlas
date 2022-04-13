@@ -25,14 +25,14 @@ const renderLocalUrlHyperlink = (isSiteRunning: boolean, localUrl: string) => {
 	return (<p>{localUrl}</p>);
 };
 
-const SiteOverview = (props: Props) => {
+const SiteOverview = (props: Props): JSX.Element => {
 	const { localUrl, siteStatus, site } = props;
 	const isSiteRunning = siteStatus === 'running';
 
 	return (
 		<TableList>
 			<TableListRow label="Start Command" selectable>
-				<p><pre>npm run dev</pre></p>
+				<p>npm run dev</p>
 			</TableListRow>
 			<TableListRow label="Status" selectable>
 				<div style={{ flex: 1, display: 'flex', alignContent: 'center' }}>
