@@ -11,21 +11,8 @@ const atlasBlueprints = [
 		excerpt:
 			'A bare-bones headless site with enough scaffolding to get you started.',
 		previewHref:
-			'https://hrly1qc4xu3d1wdkjaeo89ig8.js.wpenginepowered.com/',
-		repoHref: 'https://github.com/wpengine/atlas-blueprint-basic',
-	},
-	{
-		thumbnail: path.resolve(
-			__dirname,
-			'../atlas-blueprints/blog-blueprint.png',
-		),
-
-		title: 'Blog Blueprint',
-		byline: 'Headless WordPress',
-		excerpt: 'A standard blog built to run on headless WordPress.',
-		previewHref:
-			'https://hrly1qc4xu3d1wdkjaeo89ig8.js.wpenginepowered.com/',
-		repoHref: 'https://github.com/wpengine/atlas-blueprint-blog',
+			'https://wpeng.in/atlas-blueprint-basic',
+		repoHref: 'https://github.com/wpengine/atlas-blueprint-portfolio',
 	},
 	{
 		thumbnail: path.resolve(
@@ -35,9 +22,22 @@ const atlasBlueprints = [
 		title: 'Portfolio Blueprint',
 		byline: 'Headless WordPress',
 		excerpt:
-			'Showcase your skills and blog about them with this Blueprint.',
+			'Show off your craft and share your thoughts with this Blueprint. Includes pages to list your projects, and also a blog.',
 		previewHref:
-			'https://hrly1qc4xu3d1wdkjaeo89ig8.js.wpenginepowered.com/',
+			'https://wpeng.in/atlas-blueprint-portfolio',
+		repoHref: 'https://github.com/wpengine/atlas-blueprint-portfolio',
+	},
+	{
+		thumbnail: path.resolve(
+			__dirname,
+			'../atlas-blueprints/blog-blueprint.png',
+		),
+
+		title: 'Blog Blueprint',
+		byline: 'Headless WordPress',
+		excerpt: 'Spin up this Blueprint if you want a classic WordPress-style blog. Share your thoughts with individual blog posts and navigation pages.',
+		previewHref:
+			'https://wpeng.in/atlas-blueprint-blog',
 		repoHref: 'https://github.com/wpengine/atlas-blueprint-portfolio',
 	},
 ];
