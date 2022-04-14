@@ -118,7 +118,7 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 			</PrimaryButton>
 			<TextButton
 				className="GoBack"
-				onClick={() => props.history.goBack()}
+				onClick={props.history.goBack}
 			>
 				Go back
 			</TextButton>

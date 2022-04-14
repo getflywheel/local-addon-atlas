@@ -2,9 +2,9 @@ import React from 'react';
 import {
 	Card,
 	Container,
-	Divider,
+	// Divider,
 	IReactComponentProps,
-	TextButton,
+	// TextButton,
 	TextButtonExternal,
 } from '@getflywheel/local-components';
 
@@ -25,7 +25,7 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 	excerpt,
 	previewHref,
 	repoHref,
-	detailsHref,
+	// detailsHref,
 	...otherProps
 }) => (
 	<Card
