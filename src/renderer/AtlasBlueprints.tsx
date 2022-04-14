@@ -3,7 +3,7 @@ import {
 	Container,
 	Title,
 	Text,
-	TextButton,
+	TextButtonExternal,
 } from '@getflywheel/local-components';
 import AtlasBlueprintCard from './AtlasBlueprintCard';
 import atlasBlueprints from '../../atlas-blueprints/blueprintsContent';
@@ -18,20 +18,15 @@ const AtlasBlueprints: React.FC = () => (
 			marginBottom="l"
 			className="AtlasBlueprintsDescription"
 		>
-			<Text tag="p">
+			<Text container={{ marginBottom: '10' }}>
 				Blueprints come with starter code, plugins, content models, and
 				page structure to get your Atlas app off the ground faster.
-				<br />
-				<TextButton
-					tag="a"
-					tagProps={{ href: 'https://localwp.com/help-docs' }}
-					privateOptions={{
-						textDecoration: 'underline',
-					}}
-				>
-					Learn more about headless WordPress development
-				</TextButton>
 			</Text>
+			<TextButtonExternal
+				href={'https://developers.wpengine.com/roadmap'}
+			>
+				Learn more about headless WordPress development
+			</TextButtonExternal>
 		</Container>
 		<Container className="AtlasBlueprintList">
 			{atlasBlueprints.map((bp) => (

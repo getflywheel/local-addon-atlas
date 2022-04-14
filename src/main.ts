@@ -33,6 +33,15 @@ export default function (): void {
 		return services;
 	});
 
+	LocalMain.HooksMain.addFilter(
+		'modifyAddSiteObjectBeforeCreation',
+		(site: Site, newSiteInfo) => {
+			if (newSiteInfo?.customOptions?.useAtlasFramework === 'on') {
+				site.customOptions = { ...newSiteInfo.customOptions };
+			}
+		},
+	);
+
 	LocalMain.HooksMain.addFilter('importSiteManifest', (manifest: LocalMain.IImportSiteSettings, site: Site) => {
 		const modifiedManifest = { ...manifest };
 

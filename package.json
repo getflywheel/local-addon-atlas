@@ -71,7 +71,7 @@
     "react-router-dom": "^4.3.1"
   },
   "dependencies": {
-    "@getflywheel/local-components": "^15.7.1",
+    "@getflywheel/local-components": "^17.4.1",
     "classnames": "^2.2.6",
     "dateformat": "^3.0.3",
     "fs-extra": "^9.0.1",
@@ -79,7 +79,7 @@
     "graphql": "^15.5.0",
     "lodash": "^4.17.20",
     "md5": "^2.3.0",
-	"mobx": "^5.14.0",
+    "mobx": "^5.14.0",
     "mobx-react": "^6.1.4",
     "npm": "^7.6.1",
     "prop-types": "^15.6.2",

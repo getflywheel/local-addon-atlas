@@ -21,11 +21,6 @@
 	margin: 10px 10px;
 }
 
-.SiteOverviewAddonSectionTooltipLink {
-	font-weight: bold;
-	margin-top: 20px;
-}
-
 .SiteEnvironmentContinueButton {
 	position: absolute;
 	bottom: 30px;
@@ -56,28 +51,12 @@
 	flex-shrink: initial;
 }
 
-.AtlasBlueprintCard_Content .ButtonBase {
-	padding: 14px 0;
-	text-transform: initial;
-	font-weight: 500;
-}
-
 .AtlasBlueprintCard_Links {
 	margin-top: 20px;
 }
 
-.AtlasBlueprintCard_Links a {
-	display: block;
-	text-align: left;
-}
-
 .AtlasBlueprintCard_Links div {
 	margin: 20px 0;
-}
-
-.AtlasBlueprintCard_Content .AtlasBlueprintCard_Links a {
-	padding: 0px;
-	margin: 5px 0;
 }
 
 .AtlasBlueprintCard .AtlasBlueprintCard_HeaderIconContainer {
@@ -99,4 +78,23 @@
 .AtlasBlueprintCard img {
 	width: 100%;
 	height: auto;
+}
+
+.AtlasAddWordPress_Inputs {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.AtlasAddWordPress_Inputs_FormField {
+	margin: 0 5px;
+}
+
+.AtlasAddWordPress_Inputs > div > label {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.FromAtlasBlueprints {
+	max-width: 890px;
 }

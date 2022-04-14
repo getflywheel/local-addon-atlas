@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Checkbox, Text } from '@getflywheel/local-components';
+import { Checkbox, Text, TextButtonExternal } from '@getflywheel/local-components';
 import { faustJsDocsUrl } from '../renderer';
 import { useObserver } from 'mobx-react';
 import { $offline } from '@getflywheel/local/renderer';
@@ -32,7 +32,7 @@ export const HeadlessEnvironmentSelect: React.FC<Props> = (props) => useObserver
 					<div className="AtlasTextLink">
 						<Text>
 							(Site will be built with a Node.js front-end powered <br/>
-							by <a href={faustJsDocsUrl} style={{ fontWeight: 'bold' }}>WP Engine's Headless WordPress framework, Faust.js</a>)
+							by <TextButtonExternal href={faustJsDocsUrl}>WP Engine's Headless WordPress framework, Faust.js</TextButtonExternal>)
 						</Text>
 					</div>
 				</div>

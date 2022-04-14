@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableList, TableListRow, TextButton } from '@getflywheel/local-components';
+import { TableList, TableListRow, TextButton, TextButtonExternal } from '@getflywheel/local-components';
 import * as LocalRenderer from '@getflywheel/local/renderer';
 import { IPC_EVENTS } from './../constants';
 import type { Site } from '@getflywheel/local';
@@ -18,21 +18,21 @@ const showTerminalOutput = (site: Site) => LocalRenderer.ipcAsync(
 const renderLocalUrlHyperlink = (isSiteRunning: boolean, localUrl: string) => {
 	if (isSiteRunning) {
 		return (
-			<a href={`http://${localUrl}`}>{localUrl}</a>
+			<TextButtonExternal privateOptions={{ fontWeight: 'medium' }} href={`http://${localUrl}`}>{localUrl}</TextButtonExternal>
 		);
 	}
 
 	return (<p>{localUrl}</p>);
 };
 
-const SiteOverview = (props: Props) => {
+const SiteOverview = (props: Props): JSX.Element => {
 	const { localUrl, siteStatus, site } = props;
 	const isSiteRunning = siteStatus === 'running';
 
 	return (
 		<TableList>
 			<TableListRow label="Start Command" selectable>
-				<p><pre>npm run dev</pre></p>
+				<p>npm run dev</p>
 			</TableListRow>
 			<TableListRow label="Status" selectable>
 				<div style={{ flex: 1, display: 'flex', alignContent: 'center' }}>

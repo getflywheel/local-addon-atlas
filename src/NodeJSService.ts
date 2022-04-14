@@ -3,12 +3,13 @@ import os from 'os';
 import fs from 'fs-extra';
 import { IPC_EVENTS, ANALYTIC_EVENTS, headlessDirectoryName } from './constants';
 import * as LocalMain from '@getflywheel/local/main';
+import { GenericObject, IProcessOpts } from '@getflywheel/local';
+
 
 const { execFilePromise, getServiceContainer } = LocalMain;
 
 const serviceContainer = getServiceContainer();
 
-type GenericObject = { [key: string]: any };
 const resourcesPath = path.resolve(__dirname, '..');
 const nodeModulesPath = path.resolve(resourcesPath, 'node_modules');
 
@@ -17,17 +18,17 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 
 	readonly binVersion: string = '1.0.0';
 
-	get requiredPorts() {
+	get requiredPorts () {
 		return {
 			HTTP: 1,
 		};
 	}
 
-	get appNodePath(): string {
+	get appNodePath (): string {
 		return path.join(this._site.longPath, headlessDirectoryName);
 	}
 
-	get bins() {
+	get bins () {
 		return {
 			[LocalMain.LightningServicePlatform.Darwin]: {
 				electron: process.execPath,
@@ -41,13 +42,13 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		};
 	}
 
-	get electronifiedPATH(): string {
+	get electronifiedPATH (): string {
 		const PATH = process.env.PATH!.split(path.delimiter);
 		PATH.unshift(path.join(resourcesPath, 'electron-node'));
 		return PATH.join(path.delimiter);
 	}
 
-	get defaultEnv(): GenericObject {
+	get defaultEnv (): GenericObject {
 		return {
 			LOCAL_ELECTRON_PATH: this.bin!.electron,
 			ELECTRON_RUN_AS_NODE: '1',
@@ -59,7 +60,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	/**
 	 * @todo show stdout/stderr to user
 	 */
-	async preprovision(): Promise<void> {
+	async preprovision (): Promise<void> {
 		const { errorHandler } = getServiceContainer().cradle;
 		const appNodeExists = await fs.pathExists(path.resolve(this._site.longPath, headlessDirectoryName));
 
@@ -87,13 +88,13 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					fs.writeFileSync(envFilePath, updatedEnvFileContent);
 				}
 			} else {
+				const atlasUrl = this._site?.customOptions?.atlasUrl ?? 'https://github.com/wpengine/faustjs/tree/main/examples/next/getting-started';
+
 				await execFilePromise(this.bin!.electron, [
 					path.resolve(nodeModulesPath, 'npm', 'bin', 'npx-cli.js'),
 					'create-next-app',
 					'--example',
-					'https://github.com/wpengine/faustjs/tree/main',
-					'--example-path',
-					'examples/next/getting-started',
+					`${atlasUrl}`,
 					'--use-npm',
 					headlessDirectoryName,
 				], {
@@ -130,7 +131,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		}
 	}
 
-	async finalizeNewSite(): Promise<void> {
+	async finalizeNewSite (): Promise<void> {
 		LocalMain.sendIPCEvent('updateSiteMessage', this._site.id, 'Installing headless WordPress plugins');
 		const { wpCli, siteDatabase, siteProcessManager, errorHandler } = serviceContainer.cradle;
 
@@ -151,6 +152,22 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'plugin',
 				'install',
 				'faustwp',
+				'--activate',
+			]);
+
+			// Add the atlas-content-modeler plugin.
+			await wpCli.run(this._site, [
+				'plugin',
+				'install',
+				'atlas-content-modeler',
+				'--activate',
+			]);
+
+			// Add the atlas-search plugin.
+			await wpCli.run(this._site, [
+				'plugin',
+				'install',
+				'atlas-search',
 				'--activate',
 			]);
 
@@ -202,7 +219,7 @@ FAUSTWP_SECRET_KEY=${secretKey}
 		LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, ANALYTIC_EVENTS.SITE_PROVISIONED);
 	}
 
-	get devEnvVars(): GenericObject {
+	get devEnvVars (): GenericObject {
 		return {
 			PORT: this.port!.toString(),
 			WORDPRESS_URL: this._site.backendUrl,
@@ -210,7 +227,7 @@ FAUSTWP_SECRET_KEY=${secretKey}
 		};
 	}
 
-	start() {
+	start (): IProcessOpts[] {
 		return [
 			{
 				name: 'nodejs',
