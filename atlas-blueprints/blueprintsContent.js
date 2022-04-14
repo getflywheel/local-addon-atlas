@@ -1,7 +1,9 @@
 import path from 'path';
 
+
 const atlasBlueprints = [
 	{
+		id: 'basic-blueprint-atlas-1',
 		thumbnail: path.resolve(
 			__dirname,
 			'../atlas-blueprints/basic-blueprint.png',
@@ -15,6 +17,7 @@ const atlasBlueprints = [
 		repoHref: 'https://github.com/wpengine/atlas-blueprint-portfolio',
 	},
 	{
+		id: 'portfolio-blueprint-atlas-1',
 		thumbnail: path.resolve(
 			__dirname,
 			'../atlas-blueprints/portfolio-blueprint.png',
@@ -28,6 +31,7 @@ const atlasBlueprints = [
 		repoHref: 'https://github.com/wpengine/atlas-blueprint-portfolio',
 	},
 	{
+		id: 'blog-blueprint-atlas-1',
 		thumbnail: path.resolve(
 			__dirname,
 			'../atlas-blueprints/blog-blueprint.png',

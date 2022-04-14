@@ -19,7 +19,7 @@ interface IProps {
 const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 	const atlasBlueprintOptions = atlasBlueprints.reduce((prev, current) => ({
 		...prev,
-		[current.title]: {
+		[current.id]: {
 			key: current.repoHref,
 			content:
 				<AtlasBlueprintCard
@@ -73,7 +73,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 					style={{ justifyContent: 'flex-start' }}
 					centerContent={false}
 					default={props.bpName}
-					onChange={(option) => onChange(option)}
+					onChange={onChange}
 					heightSize='none'
 					options={atlasBlueprintOptions}
 				/>
