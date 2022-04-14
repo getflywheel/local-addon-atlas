@@ -86,6 +86,10 @@
 	width: 100%;
 }
 
+.AtlasAddWordPress_Inputs_FormField {
+	margin: 0 5px;
+}
+
 .AtlasAddWordPress_Inputs > div > label {
 	display: block;
 	margin-bottom: 10px;

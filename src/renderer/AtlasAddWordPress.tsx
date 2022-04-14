@@ -47,7 +47,7 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 
 			<div className="Inner">
 				<div className="AtlasAddWordPress_Inputs">
-					<div>
+					<div className="AtlasAddWordPress_Inputs_FormField">
 						<label htmlFor="adminUsername">WordPress username</label>
 						<BasicInput
 							invalid={!isValid.user}
@@ -61,7 +61,7 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 						/>
 					</div>
 
-					<div>
+					<div className="AtlasAddWordPress_Inputs_FormField">
 						<label htmlFor='adminPassword'>WordPress password</label>
 						<InputPasswordToggle
 							invalid={!isValid.pass}
@@ -76,7 +76,7 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 						/>
 					</div>
 
-					<div>
+					<div className="AtlasAddWordPress_Inputs_FormField">
 						<label htmlFor="adminEmail">WordPress email</label>
 						<BasicInput
 							invalid={!isValid.email}
