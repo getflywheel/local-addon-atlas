@@ -16,17 +16,17 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 
 	readonly binVersion: string = '1.0.0';
 
-	get requiredPorts () {
+	get requiredPorts() {
 		return {
 			HTTP: 1,
 		};
 	}
 
-	get appNodePath (): string {
+	get appNodePath(): string {
 		return path.join(this._site.longPath, headlessDirectoryName);
 	}
 
-	get bins () {
+	get bins() {
 		return {
 			[LocalMain.LightningServicePlatform.Darwin]: {
 				electron: process.execPath,
@@ -40,13 +40,13 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		};
 	}
 
-	get electronifiedPATH (): string {
+	get electronifiedPATH(): string {
 		const PATH = process.env.PATH!.split(path.delimiter);
 		PATH.unshift(path.join(resourcesPath, 'electron-node'));
 		return PATH.join(path.delimiter);
 	}
 
-	get defaultEnv (): GenericObject {
+	get defaultEnv(): GenericObject {
 		return {
 			LOCAL_ELECTRON_PATH: this.bin!.electron,
 			ELECTRON_RUN_AS_NODE: '1',
@@ -58,7 +58,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	/**
 	 * @todo show stdout/stderr to user
 	 */
-	async preprovision (): Promise<void> {
+	async preprovision(): Promise<void> {
 		const { errorHandler } = getServiceContainer().cradle;
 		const appNodeExists = await fs.pathExists(path.resolve(this._site.longPath, headlessDirectoryName));
 
