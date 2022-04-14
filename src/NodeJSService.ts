@@ -160,7 +160,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			const rawZipUrl = '/raw/main/acm-blueprint.zip';
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			const cmd = `wp acm blueprint import "${this._site.customOptions.atlasUrl}${rawZipUrl}"; exit;`;
+			const cmd = `wp acm blueprint import ${this._site.customOptions.atlasUrl}${rawZipUrl} && exit;`;
 
 			LocalMain.sendIPCEvent('siteShellEntry:launch', this._site, cmd);
 
