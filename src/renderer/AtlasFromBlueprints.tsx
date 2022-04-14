@@ -11,8 +11,8 @@ import AtlasBlueprintCard from './AtlasBlueprintCard';
 import atlasBlueprints from '../../atlas-blueprints/blueprintsContent';
 
 interface IProps {
-	bpName: string;
-	setBpName: (bpName: string) => void;
+	bpId: string;
+	setBpId: (bpId: string) => void;
 	setDisabled: (val: boolean) => void;
 }
 
@@ -43,7 +43,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 	}), {});
 
 	const onChange = async (option: string) => {
-		props.setBpName(option);
+		props.setBpId(option);
 		props.setDisabled(false);
 	};
 
@@ -72,7 +72,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 				<RadioBlock
 					style={{ justifyContent: 'flex-start' }}
 					centerContent={false}
-					default={props.bpName}
+					default={props.bpId}
 					onChange={(option) => onChange(option)}
 					heightSize='none'
 					options={atlasBlueprintOptions}

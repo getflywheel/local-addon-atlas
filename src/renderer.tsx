@@ -76,7 +76,7 @@ export default function (context) {
 
 			if (atlasBlueprint) {
 				const customOptions = {
-					bpName: siteSettings.blueprint,
+					bpId: siteSettings.blueprint,
 					atlasUrl: atlasBlueprint.repoHref,
 					useAtlasFramework: 'on',
 				};
@@ -110,8 +110,8 @@ export default function (context) {
 
 	hooks.addContent(
 		'Blueprints_FromBlueprints:after',
-		(bpName, setBpName, setDisabled) => (
-			<AtlasFromBlueprints key="atlas-from-blueprints" bpName={bpName} setBpName={setBpName} setDisabled={setDisabled} />
+		(bpId, setBpId, setDisabled) => (
+			<AtlasFromBlueprints key="atlas-from-blueprints" bpId={bpId} setBpId={setBpId} setDisabled={setDisabled} />
 		),
 	);
 
