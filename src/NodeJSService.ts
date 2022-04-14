@@ -157,14 +157,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'--activate',
 			]);
 
-			// Add the FaustWP plugin.
-			await wpCli.run(this._site, [
-				'plugin',
-				'install',
-				'faustwp',
-				'--activate',
-			]);
-
 			const rawZipUrl = '/raw/main/acm-blueprint.zip';
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
@@ -177,6 +169,14 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'plugin',
 				'install',
 				'atlas-search',
+				'--activate',
+			]);
+
+			// Add the FaustWP plugin.
+			await wpCli.run(this._site, [
+				'plugin',
+				'install',
+				'faustwp',
 				'--activate',
 			]);
 
