@@ -8,13 +8,13 @@ import {
 	InputPasswordToggle,
 	BasicInput,
 } from '@getflywheel/local-components';
-import { MultiSite, NewSiteInfo } from '@getflywheel/local';
+import { MultiSite, NewSiteInfo, NewSiteDefaults } from '@getflywheel/local';
 import { sendIPCEvent, RouteComponentProps } from '@getflywheel/local/renderer';
 import { regexPatterns } from '../constants';
 
 interface IProps extends RouteComponentProps {
-	siteSettings: NewSiteInfo
-	defaults
+	siteSettings: NewSiteInfo;
+	defaults: NewSiteDefaults;
 }
 
 export const AtlasAddWordPress = (props: IProps): JSX.Element => {

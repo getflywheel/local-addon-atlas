@@ -2,12 +2,13 @@ import path from 'path';
 import fs from 'fs-extra';
 import { IPC_EVENTS, ANALYTIC_EVENTS, headlessDirectoryName } from './constants';
 import * as LocalMain from '@getflywheel/local/main';
+import { GenericObject, IProcessOpts } from '@getflywheel/local';
+
 
 const { execFilePromise, getServiceContainer } = LocalMain;
 
 const serviceContainer = getServiceContainer();
 
-type GenericObject = { [key: string]: any };
 const resourcesPath = path.resolve(__dirname, '..');
 const nodeModulesPath = path.resolve(resourcesPath, 'node_modules');
 
@@ -86,18 +87,16 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					fs.writeFileSync(envFilePath, updatedEnvFileContent);
 				}
 			} else {
+				const atlasUrl = this._site?.customOptions?.atlasUrl ?? 'https://github.com/wpengine/faustjs/tree/main/examples/next/getting-started';
+
 				await execFilePromise(this.bin!.electron, [
 					path.resolve(nodeModulesPath, 'npm', 'bin', 'npx-cli.js'),
 					'create-next-app',
 					'--example',
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-					// @ts-ignore
-					`${this._site?.customOptions?.atlasUrl}`,
+					`${atlasUrl}`,
 					'--use-npm',
 					headlessDirectoryName,
 				], {
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-					// @ts-ignore
 					cwd: this._site.longPath,
 					env: this.defaultEnv,
 				});
@@ -221,7 +220,7 @@ FAUSTWP_SECRET_KEY=${secretKey}
 		};
 	}
 
-	start () {
+	start (): IProcessOpts[] {
 		return [
 			{
 				name: 'nodejs',

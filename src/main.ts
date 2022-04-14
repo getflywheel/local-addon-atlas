@@ -37,8 +37,6 @@ export default function (): void {
 		'modifyAddSiteObjectBeforeCreation',
 		(site: Site, newSiteInfo) => {
 			if (newSiteInfo?.customOptions?.useAtlasFramework === 'on') {
-				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				//@ts-ignore
 				site.customOptions = { ...newSiteInfo.customOptions };
 			}
 		},
