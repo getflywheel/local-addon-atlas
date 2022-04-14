@@ -125,7 +125,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		}
 	}
 
-	async finalizeNewSite (): Promise<void> {
+	async finalizeNewSite(): Promise<void> {
 		LocalMain.sendIPCEvent('updateSiteMessage', this._site.id, 'Installing headless WordPress plugins');
 		const { wpCli, siteDatabase, siteProcessManager, errorHandler } = serviceContainer.cradle;
 
@@ -215,7 +215,7 @@ FAUSTWP_SECRET_KEY=${secretKey}
 		LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, ANALYTIC_EVENTS.SITE_PROVISIONED);
 	}
 
-	get devEnvVars (): GenericObject {
+	get devEnvVars(): GenericObject {
 		return {
 			PORT: this.port!.toString(),
 			WORDPRESS_URL: this._site.backendUrl,
@@ -223,7 +223,7 @@ FAUSTWP_SECRET_KEY=${secretKey}
 		};
 	}
 
-	start () {
+	start() {
 		return [
 			{
 				name: 'nodejs',
