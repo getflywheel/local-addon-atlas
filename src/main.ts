@@ -21,20 +21,6 @@ export default function (): void {
 		LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, ANALYTIC_EVENTS.OPEN_XTERM);
 	});
 
-	LocalMain.HooksMain.addFilter('modifyScriptContent', (site: Site, hookOrigin: string) => {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		const { atlasUrl, useAtlasFramework } = site.customOptions;
-
-		if (useAtlasFramework === 'on' && hookOrigin === 'atlas') {
-			const rawZipUrl = '/raw/main/acm-blueprint.zip';
-
-			return `wp acm blueprint import ${atlasUrl}${rawZipUrl}; exit;`;
-		}
-
-		return '';
-	});
-
 	LocalMain.HooksMain.addFilter('defaultSiteServices', (services, siteSettings) => {
 		if (siteSettings?.customOptions?.useAtlasFramework === 'on') {
 			services.nodejs = {
@@ -51,6 +37,8 @@ export default function (): void {
 		'modifyAddSiteObjectBeforeCreation',
 		(site: Site, newSiteInfo) => {
 			if (newSiteInfo?.customOptions?.useAtlasFramework === 'on') {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
 				site.customOptions = { ...newSiteInfo.customOptions };
 			}
 		},

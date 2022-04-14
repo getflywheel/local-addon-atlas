@@ -88,6 +88,8 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					fs.writeFileSync(envFilePath, updatedEnvFileContent);
 				}
 			} else {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
 				const atlasUrl = this._site?.customOptions?.atlasUrl ?? 'https://github.com/wpengine/faustjs/tree/main/examples/next/getting-started';
 
 				await execFilePromise(this.bin!.electron, [
@@ -155,8 +157,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'--activate',
 			]);
 
-			LocalMain.sendIPCEvent('siteShellEntry:launch', this._site, 'atlas');
-
 			// Add the FaustWP plugin.
 			await wpCli.run(this._site, [
 				'plugin',
@@ -164,6 +164,13 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'faustwp',
 				'--activate',
 			]);
+
+			const rawZipUrl = '/raw/main/acm-blueprint.zip';
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			const cmd = `wp acm blueprint import ${this._site.customOptions.atlasUrl}${rawZipUrl}; exit;`;
+
+			LocalMain.sendIPCEvent('siteShellEntry:launch', this._site, cmd);
 
 			// Add the atlas-search plugin.
 			await wpCli.run(this._site, [
