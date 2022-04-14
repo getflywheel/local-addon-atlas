@@ -56,16 +56,16 @@ export default function (context) {
 	/**
 	 * Add AtlasBlueprints as an option when creating a new site
 	 */
-	hooks.addFilter('CreateSite:Routes', (routes) => {
-		const atlasBlueprintRoutes = [
+	hooks.addFilter('CreateSite:Steps', (steps) => {
+		const atlasBlueprintSteps = [
 			{
 				key: 'add-atlas-blueprint-add-wordpress',
 				path: '/main/create-site/from-blueprint/add-wordpress',
-				stepName: 'Add WordPress',
+				name: 'Add WordPress',
 				component: AtlasAddWordPress,
 			},
 		];
-		return [...routes, ...atlasBlueprintRoutes];
+		return [...steps, ...atlasBlueprintSteps];
 	});
 
 	hooks.addFilter(
