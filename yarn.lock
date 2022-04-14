@@ -413,10 +413,10 @@
   resolved "https://registry.yarnpkg.com/@getflywheel/eslint-config-local/-/eslint-config-local-1.0.4.tgz#2fab6bb77b63ec123e831534f50e1d3c7c135571"
   integrity sha512-GvnhhT3XaNipDdVvHifWbKjoFpLAbezkKsYBGfDF4uG/9gWo5UX9YLANPlzSLRyvgBrX0+27S5Cu8YE/yM7kPg==
 
-"@getflywheel/local-components@^17.3.4":
-  version "17.3.4"
-  resolved "https://registry.yarnpkg.com/@getflywheel/local-components/-/local-components-17.3.4.tgz#a398419d26014c81641ea56e34d3dad71f510ca8"
-  integrity sha512-mwhXEQhhx/0xhK4o6/Zwh41geLkoL5kOjiJRXfzpeqt0xAxLJMAW+R/7NuB+g5FjKws3Za7s6jfx7Cwq+CyjTQ==
+"@getflywheel/local-components@^17.4.1":
+  version "17.4.1"
+  resolved "https://registry.yarnpkg.com/@getflywheel/local-components/-/local-components-17.4.1.tgz#e4ad64be6642428cec562cad5dedc1ddfbc2a90e"
+  integrity sha512-kPhl23bX5pO0lX1B6spfe2IErVsm95DIEyniFgOxpQ48bylRn0z/hhjeH+xD/wGntNhvOQ3Ubm6rBvXEU/B/2Q==
   dependencies:
     "@getflywheel/memoize-one-ts" "^0.0.2"
     "@popperjs/core" "^2.9.2"
