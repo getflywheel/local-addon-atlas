@@ -147,19 +147,21 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'--activate',
 			]);
 
-			// Add the FaustWP plugin.
-			await wpCli.run(this._site, [
-				'plugin',
-				'install',
-				'faustwp',
-				'--activate',
-			]);
-
 			// Add the atlas-content-modeler plugin.
 			await wpCli.run(this._site, [
 				'plugin',
 				'install',
 				'atlas-content-modeler',
+				'--activate',
+			]);
+
+			LocalMain.sendIPCEvent('siteShellEntry:launch', this._site, 'atlas');
+
+			// Add the FaustWP plugin.
+			await wpCli.run(this._site, [
+				'plugin',
+				'install',
+				'faustwp',
 				'--activate',
 			]);
 
