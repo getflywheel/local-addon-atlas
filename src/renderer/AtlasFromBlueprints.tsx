@@ -19,7 +19,7 @@ interface IProps {
 const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 	const atlasBlueprintOptions = atlasBlueprints.reduce((prev, current) => ({
 		...prev,
-		[current.title]: {
+		[current.id]: {
 			key: current.repoHref,
 			content:
 				<AtlasBlueprintCard
