@@ -3,7 +3,7 @@ import os from 'os';
 import fs from 'fs-extra';
 import { IPC_EVENTS, ANALYTIC_EVENTS, headlessDirectoryName } from './constants';
 import * as LocalMain from '@getflywheel/local/main';
-import { GenericObject, IProcessOpts } from '@getflywheel/local';
+import { IProcessOpts } from '@getflywheel/local';
 
 
 const { execFilePromise, getServiceContainer } = LocalMain;
@@ -48,7 +48,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		return PATH.join(path.delimiter);
 	}
 
-	get defaultEnv (): GenericObject {
+	get defaultEnv () {
 		return {
 			LOCAL_ELECTRON_PATH: this.bin!.electron,
 			ELECTRON_RUN_AS_NODE: '1',
@@ -221,7 +221,7 @@ FAUSTWP_SECRET_KEY=${secretKey}
 		LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, ANALYTIC_EVENTS.SITE_PROVISIONED);
 	}
 
-	get devEnvVars (): GenericObject {
+	get devEnvVars () {
 		return {
 			PORT: this.port!.toString(),
 			WORDPRESS_URL: this._site.backendUrl,
