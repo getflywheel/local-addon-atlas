@@ -45,7 +45,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		return PATH.join(path.delimiter);
 	}
 
-	get defaultEnv () {
+	get defaultEnv (): GenericObject {
 		return {
 			LOCAL_ELECTRON_PATH: this.bin!.electron,
 			ELECTRON_RUN_AS_NODE: '1',
