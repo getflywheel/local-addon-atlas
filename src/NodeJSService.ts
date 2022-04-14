@@ -149,7 +149,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'--activate',
 			]);
 
-			LocalMain.sendIPCEvent('siteShellEntry:launch', this._site, true);
+			LocalMain.sendIPCEvent('siteShellEntry:launch', this._site, 'atlas');
 
 			// Add the FaustWP plugin.
 			await wpCli.run(this._site, [
