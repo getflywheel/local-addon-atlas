@@ -8,6 +8,7 @@ import type { Site } from '@getflywheel/local';
 import { sendIPCEvent } from '@getflywheel/local/renderer';
 import { AtlasAddWordPress } from './renderer/AtlasAddWordPress';
 import { TextButtonExternal } from '@getflywheel/local-components';
+import blueprintsContent from '../atlas-blueprints/blueprintsContent';
 
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 const title = `Front-end Node.js`;
@@ -71,17 +72,12 @@ export default function (context) {
 	hooks.addFilter(
 		'Blueprints_FromBlueprintsContinue',
 		(siteSettings: Local.NewSiteInfo) => {
-			const bpUrls = {
-				'Basic Blueprint': 'https://github.com/wpengine/atlas-blueprint-basic',
-				'Blog Blueprint': 'https://github.com/wpengine/atlas-blueprint-blog',
-				'Portfolio Blueprint': 'https://github.com/wpengine/atlas-blueprint-portfolio',
-			};
-			const isAtlas = Object.keys(bpUrls).includes(siteSettings.blueprint);
+			const atlasBlueprint = blueprintsContent.find((blueprint) => blueprint.id === siteSettings.blueprint);
 
-			if (isAtlas) {
+			if (atlasBlueprint) {
 				const customOptions = {
 					bpName: siteSettings.blueprint,
-					atlasUrl: bpUrls[siteSettings.blueprint],
+					atlasUrl: atlasBlueprint.repoHref,
 					useAtlasFramework: 'on',
 				};
 
