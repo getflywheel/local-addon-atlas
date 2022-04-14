@@ -21,6 +21,20 @@ export default function (): void {
 		LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, ANALYTIC_EVENTS.OPEN_XTERM);
 	});
 
+	LocalMain.HooksMain.addFilter('modifyScriptContent', (site: Site) => {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		const { atlasUrl, useAtlasFramework } = site.customOptions;
+		const baseUrl = 'https://github.com/wpengine/';
+		const rawZipUrl = '/raw/main/acm-blueprint.zip';
+
+		if (useAtlasFramework === 'on') {
+			return `wp acm blueprint import ${baseUrl}${atlasUrl}${rawZipUrl}; exit;`;
+		}
+
+		return '';
+	});
+
 	LocalMain.HooksMain.addFilter('defaultSiteServices', (services, siteSettings) => {
 		if (siteSettings?.customOptions?.useAtlasFramework === 'on') {
 			services.nodejs = {

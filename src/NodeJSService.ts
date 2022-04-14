@@ -7,7 +7,6 @@ const { execFilePromise, getServiceContainer } = LocalMain;
 
 const serviceContainer = getServiceContainer();
 
-type GenericObject = { [key: string]: any };
 const resourcesPath = path.resolve(__dirname, '..');
 const nodeModulesPath = path.resolve(resourcesPath, 'node_modules');
 
@@ -46,7 +45,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		return PATH.join(path.delimiter);
 	}
 
-	get defaultEnv (): GenericObject {
+	get defaultEnv () {
 		return {
 			LOCAL_ELECTRON_PATH: this.bin!.electron,
 			ELECTRON_RUN_AS_NODE: '1',
@@ -92,7 +91,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					'--example',
 					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 					// @ts-ignore
-					`${this._site?.customOptions?.atlasUrl}`,
+					`https://github.com/wpengine/${this._site?.customOptions?.atlasUrl}`,
 					'--use-npm',
 					headlessDirectoryName,
 				], {
@@ -141,19 +140,21 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'--activate',
 			]);
 
-			// Add the FaustWP plugin.
-			await wpCli.run(this._site, [
-				'plugin',
-				'install',
-				'faustwp',
-				'--activate',
-			]);
-
 			// Add the atlas-content-modeler plugin.
 			await wpCli.run(this._site, [
 				'plugin',
 				'install',
 				'atlas-content-modeler',
+				'--activate',
+			]);
+
+			LocalMain.sendIPCEvent('siteShellEntry:launch', this._site, true);
+
+			// Add the FaustWP plugin.
+			await wpCli.run(this._site, [
+				'plugin',
+				'install',
+				'faustwp',
 				'--activate',
 			]);
 
