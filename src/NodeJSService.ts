@@ -7,6 +7,7 @@ const { execFilePromise, getServiceContainer } = LocalMain;
 
 const serviceContainer = getServiceContainer();
 
+type GenericObject = { [key: string]: any };
 const resourcesPath = path.resolve(__dirname, '..');
 const nodeModulesPath = path.resolve(resourcesPath, 'node_modules');
 
