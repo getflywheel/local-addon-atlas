@@ -7,6 +7,8 @@ import {
 	// TextButton,
 	TextButtonExternal,
 } from '@getflywheel/local-components';
+import { sendIPCEvent } from '@getflywheel/local/main';
+import { IPC_EVENTS } from '../constants';
 
 interface AtlasBlueprintCardProps extends IReactComponentProps {
 	thumbnailSrc: string;
@@ -43,7 +45,10 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 				<TextButtonExternal
 					inline
 					href={previewHref}
-					onClick={(e) => e.stopPropagation()}
+					onClick={(e) => {
+						e.stopPropagation();
+						sendIPCEvent(IPC_EVENTS.TRACK_EVENT, 'v2_blueprint_atlas_preview', { title });
+					}}
 					privateOptions={{ fontWeight: 'medium' }}
 					style={{ marginBottom: '10px' }}
 				>
@@ -52,7 +57,10 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 				<TextButtonExternal
 					inline
 					href={repoHref}
-					onClick={(e) => e.stopPropagation()}
+					onClick={(e) => {
+						e.stopPropagation();
+						sendIPCEvent(IPC_EVENTS.TRACK_EVENT, 'v2_blueprint_atlas_code', { title });
+					}}
 					privateOptions={{ fontWeight: 'medium' }}
 				>
 					Open the code on GitHub
