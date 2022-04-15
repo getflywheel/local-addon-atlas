@@ -149,34 +149,19 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'--activate',
 			]);
 
-			// Add the atlas-content-modeler plugin.
-			await wpCli.run(this._site, [
-				'plugin',
-				'install',
-				'atlas-content-modeler',
-				'--activate',
-			]);
-
-			const rawZipUrl = '/raw/main/acm-blueprint.zip';
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore
-			const cmd = `wp acm blueprint import ${this._site.customOptions.atlasUrl}${rawZipUrl} && exit;`;
-
-			LocalMain.sendIPCEvent('siteShellEntry:launch', this._site, cmd);
-
-			// Add the atlas-search plugin.
-			await wpCli.run(this._site, [
-				'plugin',
-				'install',
-				'atlas-search',
-				'--activate',
-			]);
-
 			// Add the FaustWP plugin.
 			await wpCli.run(this._site, [
 				'plugin',
 				'install',
 				'faustwp',
+				'--activate',
+			]);
+
+			// Add the atlas-content-modeler plugin.
+			await wpCli.run(this._site, [
+				'plugin',
+				'install',
+				'atlas-content-modeler',
 				'--activate',
 			]);
 
@@ -186,6 +171,14 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'get',
 				'faustwp_settings',
 				'--format=json',
+			]);
+
+			// Add the atlas-search plugin.
+			await wpCli.run(this._site, [
+				'plugin',
+				'install',
+				'atlas-search',
+				'--activate',
 			]);
 
 			// eslint-disable-next-line camelcase
@@ -212,6 +205,14 @@ FAUSTWP_SECRET_KEY=${secretKey}
 
 			// Next.js needs to be restarted after writing the env file.
 			await siteProcessManager.restart(this._site);
+
+			const rawZipUrl = '/raw/main/acm-blueprint.zip';
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			const cmd = `wp acm blueprint import ${this._site.customOptions.atlasUrl}${rawZipUrl}`;
+			const exit = os.platform() === 'win32' ? ' & exit' : '; exit';
+			const customShellEntry = `${cmd}${exit}`;
+			LocalMain.sendIPCEvent('siteShellEntry:launch', this._site, customShellEntry);
 		} catch (e) {
 			// Report the error to the user, the Local log, and Sentry.
 			errorHandler.handleError({
