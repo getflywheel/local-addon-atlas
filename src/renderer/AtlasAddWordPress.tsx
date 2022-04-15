@@ -36,7 +36,6 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 					adminEmail,
 				},
 				goToSite: true,
-				installWP: true,
 			});
 		}
 	};
