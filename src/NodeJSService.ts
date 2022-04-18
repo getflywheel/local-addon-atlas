@@ -214,6 +214,10 @@ FAUSTWP_SECRET_KEY=${secretKey}
 			// Next.js needs to be restarted after writing the env file.
 			await siteProcessManager.restart(this._site);
 
+			/**
+			 * The below ipcEvent is wrapped in an if block so that the customShellEntry script
+			 * does not get executed on the creation of non Blueprint Atlas sites.
+			*/
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			if (this._site.customOptions.atlasUrl) {
