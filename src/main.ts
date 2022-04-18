@@ -39,7 +39,7 @@ export default function (): void {
 			if (newSiteInfo?.customOptions?.useAtlasFramework === 'on') {
 				LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, 'v2_site_new_added_atlas', {
 					environment: site.environment,
-					multiSite: site.multiSite !== '',
+					multiSite: site.multiSite,
 					isAtlasBlueprint: !!newSiteInfo.customOptions.atlasUrl,
 					siteServices: site.services,
 					blueprint: newSiteInfo.customOptions.bpId,
