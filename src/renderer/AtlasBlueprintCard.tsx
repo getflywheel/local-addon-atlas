@@ -7,7 +7,7 @@ import {
 	// TextButton,
 	TextButtonExternal,
 } from '@getflywheel/local-components';
-import { sendIPCEvent } from '@getflywheel/local/main';
+import { sendIPCEvent } from '@getflywheel/local/renderer';
 import { IPC_EVENTS } from '../constants';
 
 interface AtlasBlueprintCardProps extends IReactComponentProps {
