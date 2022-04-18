@@ -36,14 +36,14 @@ export default function (): void {
 	LocalMain.HooksMain.addFilter(
 		'modifyAddSiteObjectBeforeCreation',
 		(site: Site, newSiteInfo) => {
-			LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, 'v2_site_new_added', {
-				environment: site.environment,
-				multiSite: site.multiSite !== '',
-				isAtlasBlueprint: true,
-				name: site.name,
-			});
-
 			if (newSiteInfo?.customOptions?.useAtlasFramework === 'on') {
+				LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, 'v2_site_new_added_atlas', {
+					environment: site.environment,
+					multiSite: site.multiSite !== '',
+					isAtlasBlueprint: !!newSiteInfo.customOptions.atlasUrl,
+					siteServices: site.services,
+					blueprint: newSiteInfo.customOptions.bpId,
+				});
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				site.customOptions = { ...newSiteInfo.customOptions };
