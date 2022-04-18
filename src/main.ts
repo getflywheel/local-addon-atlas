@@ -40,9 +40,8 @@ export default function (): void {
 				LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, 'v2_site_new_added_atlas', {
 					environment: site.environment,
 					multiSite: site.multiSite,
-					isAtlasBlueprint: !!newSiteInfo.customOptions.atlasUrl,
 					siteServices: site.services,
-					blueprint: newSiteInfo.customOptions.bpId,
+					blueprint: newSiteInfo.customOptions.bpId ?? false,
 				});
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
