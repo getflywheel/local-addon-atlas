@@ -177,11 +177,17 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 				'--format=json',
 			]);
 
-			const rawZipUrl = '/raw/main/acm-blueprint.zip';
-
-			const customShellEntry = `wp acm blueprint import ${this._site.customOptions.atlasUrl}${rawZipUrl}; exit;`;
-
-			LocalMain.sendIPCEvent('siteShellEntry:launch', this._site, customShellEntry);
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			if (this._site.customOptions.atlasUrl) {
+				// Add the atlas-search plugin.
+				await wpCli.run(this._site, [
+					'plugin',
+					'install',
+					'atlas-search',
+					'--activate',
+				]);
+			}
 
 			// eslint-disable-next-line camelcase
 			const parsedFaustWPsettings: { secret_key: string } = JSON.parse(faustWPsettings);
