@@ -36,6 +36,13 @@ export default function (): void {
 	LocalMain.HooksMain.addFilter(
 		'modifyAddSiteObjectBeforeCreation',
 		(site: Site, newSiteInfo) => {
+			LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, 'v2_site_new_added', {
+				environment: site.environment,
+				multiSite: site.multiSite !== '',
+				isAtlasBlueprint: true,
+				name: site.name,
+			});
+
 			if (newSiteInfo?.customOptions?.useAtlasFramework === 'on') {
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
