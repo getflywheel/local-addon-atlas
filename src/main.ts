@@ -47,6 +47,8 @@ export default function (): void {
 				// @ts-ignore
 				site.customOptions = { ...newSiteInfo.customOptions };
 			}
+
+			return site;
 		},
 	);
 
