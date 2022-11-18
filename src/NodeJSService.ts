@@ -254,7 +254,7 @@ FAUSTWP_SECRET_KEY=${secretKey}
 			/**
 			 *  Do not prompt users for Faust Telemetry when running `npm run dev`
 			 */
-			FAUST_TELEMETRY_PROMPT: 'false',
+			FAUST_NO_INTERACTION: 'true',
 		};
 	}
 
