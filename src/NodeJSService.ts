@@ -251,6 +251,10 @@ FAUSTWP_SECRET_KEY=${secretKey}
 			PORT: this.port!.toString(),
 			WORDPRESS_URL: this._site.backendUrl,
 			WORDPRESS_API_URL: `${this._site.backendUrl}/graphql`,
+			/**
+			 *  Do not prompt users for Faust Telemetry when running `npm run dev`
+			 */
+			FAUST_TELEMETRY_PROMPT: 'false',
 		};
 	}
 
