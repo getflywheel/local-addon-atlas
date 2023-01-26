@@ -8,6 +8,11 @@
 
 .Theme__Dark .AtlasBlueprintCard {
 	background-color: #434344;
+	color: #c7c4c4;
+}
+
+.Theme__Light .AtlasBlueprintCard {
+	color: #262727;
 }
 
 .Theme__Light .AtlasCheckboxSelect {
@@ -17,6 +22,10 @@
 .AtlasBlueprintList .AtlasBlueprintCard_Content {
 	margin: 15px 19px 0 19px;
 	line-height: 1.5;
+}
+
+.AtlasBlueprintCard .Title {
+	margin-bottom: 0;
 }
 
 .AtlasTextLink {
@@ -64,6 +73,10 @@
 	margin-top: 20px;
 }
 
+.AtlasBlueprintCard_Links a {
+	font-weight: 700;
+}
+
 .AtlasBlueprintCard_Links div {
 	margin: 20px 0;
 }
@@ -74,6 +87,34 @@
 
 .AtlasBlueprintCard_Description {
 	flex: 1;
+}
+
+.AtlasBlueprintsDescription a,
+.AtlasBlueprintCard_Description a {
+	font-weight: 700;
+	color: #267048;
+	text-decoration: underline;
+}
+
+
+.AtlasBlueprintsDescription a:active,
+.AtlasBlueprintsDescription a:hover,
+.AtlasBlueprintCard_Description a:active,
+.AtlasBlueprintCard_Description a:hover {
+	color: #51bb7b;
+}
+
+
+.Theme__Dark .AtlasBlueprintsDescription a,
+.Theme__Dark .AtlasBlueprintCard_Description a {
+    color: #51bb7b;
+}
+
+.Theme__Dark .AtlasBlueprintsDescription a:active,
+.Theme__Dark .AtlasBlueprintsDescription a:hover,
+.Theme__Dark .AtlasBlueprintCard_Description a:active,
+.Theme__Dark .AtlasBlueprintCard_Description a:hover {
+    color: #419564;
 }
 
 .AtlasBlueprintCard img {

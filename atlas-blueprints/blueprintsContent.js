@@ -24,7 +24,7 @@ const atlasBlueprints = [
 		title: 'BigCommerce Blueprint',
 		byline: 'Headless WordPress',
 		excerpt:
-			'Build your headless store with WordPress content and BigCommerce product data. Install everything you need to get started quickly, including product and navigation pages. <br><strong><a href="https://developers.wpengine.com/docs/atlas-commerce-connector/introduction">Set up BigCommerce</a></strong>.',
+			'Build your headless store with WordPress content and BigCommerce product data. Install everything you need to get started quickly, including product and navigation pages. <br><a href="https://developers.wpengine.com/docs/atlas-commerce-connector/introduction">Set up BigCommerce</a>.',
 		previewHref:
 			'https://atlascommerce.wpengine.com/',
 		repoHref: 'https://github.com/wpengine/atlas-commerce-blueprint',
