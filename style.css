@@ -14,6 +14,11 @@
 	border-top: 1px solid #e7e7e7;
 }
 
+.AtlasBlueprintList .AtlasBlueprintCard_Content {
+	margin: 15px 19px 0 19px;
+	line-height: 1.5;
+}
+
 .AtlasTextLink {
 	line-height: 1.5;
 	margin-top: 5px;
