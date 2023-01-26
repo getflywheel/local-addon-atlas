@@ -38,7 +38,7 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 		contentDescriptionClassName="AtlasBlueprintCard_Description"
 		contentTitle={title}
 		contentSub={byline}
-		contentDescription={excerpt}
+		contentDescription={<span dangerouslySetInnerHTML={{ '__html': excerpt }}></span>}
 		{...otherProps}
 		content={
 			<Container className="AtlasBlueprintCard_Links">
@@ -54,6 +54,7 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 				>
 					Preview site
 				</TextButtonExternal>
+				<br />
 				<TextButtonExternal
 					inline
 					href={repoHref}
