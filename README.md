@@ -58,7 +58,7 @@ Or the renderer thread code with:
 1. Open Local and enable add-on
 
 ```
-Another option for testing this add-on in Local is to run `npm pack` in the root dir of this repo. Then, open Local and install the add-on from disk using the newly created `.tgz` file.
+Another option for testing this add-on in Local is to run `npm pack` in the root dir of this repo. Then, open Local and install the add-on from disk using the newly created `.tgz` file. Don't forget to enable the add-on afterwards!
 ```
 
 ### External Libraries
