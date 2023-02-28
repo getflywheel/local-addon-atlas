@@ -29,6 +29,20 @@ const atlasBlueprints = [
 			'https://atlascommerce.wpengine.com/',
 		repoHref: 'https://github.com/wpengine/atlas-commerce-blueprint',
 	},
+	{
+		id: 'faust-blueprint-atlas-1',
+		thumbnail: path.resolve(
+			__dirname,
+			'../atlas-blueprints/faust-boilerplate-blueprint.png',
+		),
+		title: 'Faust Scaffold Blueprint',
+		byline: 'Headless WordPress',
+		excerpt:
+			'Start a new Faust.js site from the beginning and craft it to your project. This blueprint is a basic project scaffold designed to get experienced developers moving quickly on new Faust.js projects.',
+		previewHref:
+			'',
+		repoHref: 'https://github.com/wpengine/faust-scaffold',
+	},
 ];
 
 export default atlasBlueprints;
