@@ -40,7 +40,7 @@ const atlasBlueprints = [
 		excerpt:
 			'Start a new Faust.js site from the beginning and craft it to your project. This blueprint is a basic project scaffold designed to get experienced developers moving quickly on new Faust.js projects.',
 		previewHref:
-			'',
+			'https://wpeng.in/faust-scaffold',
 		repoHref: 'https://github.com/wpengine/faust-scaffold',
 	},
 ];
