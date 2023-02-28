@@ -53,9 +53,13 @@ Or the renderer thread code with:
 ### Add Add-on to Local
 
 1. Clone repo directly into the add-ons folder (paths described above)
-1. `yarn install` or `npm install` (install dependencies)
-1. `yarn build` or `npm run build`
-1. Open Local and enable add-on
+2. `yarn install` or `npm install` (install dependencies)
+3. `yarn build` or `npm run build`
+4. Open Local and enable add-on
+
+```
+Another option for testing this add-on in Local is to run `npm pack` in the root dir of this repo. Then, open Local and install the add-on from disk using the newly created `.tgz` file.
+```
 
 ### External Libraries
 
