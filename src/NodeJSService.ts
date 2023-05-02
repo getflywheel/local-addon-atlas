@@ -110,15 +110,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 
 				await fs.writeFile(path.join(this.appNodePath, '.babelrc'), babelrc);
 			}
-
-			/**
-			 * @todo Next.js doesn't support an env var for the start port. This is a termpoary hack around it.
-			 *
-			 * @see https://github.com/vercel/next.js/issues/10338
-			 */
-			await LocalMain.replaceInFileAsync(path.join(this.appNodePath, 'package.json'), [
-				['"dev": "next dev",', '"dev": "next dev -p $PORT",'],
-			]);
 		} catch (e) {
 			// Report the error to the user, the Local log, and Sentry.
 			errorHandler.handleError({
