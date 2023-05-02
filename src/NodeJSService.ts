@@ -90,7 +90,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			} else {
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
-				const atlasUrl = this._site?.customOptions?.atlasUrl ?? 'https://github.com/wpengine/faustjs/tree/main/examples/next/getting-started';
+				const atlasUrl = this._site?.customOptions?.atlasUrl ?? 'https://github.com/wpengine/faustjs/tree/main/examples/next/faustwp-getting-started';
 
 				await execFilePromise(this.bin!.electron, [
 					path.resolve(nodeModulesPath, 'npm', 'bin', 'npx-cli.js'),
