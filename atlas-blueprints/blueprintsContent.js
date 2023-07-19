@@ -43,6 +43,20 @@ const atlasBlueprints = [
 			'https://atlascommerce.wpengine.com/',
 		repoHref: 'https://github.com/wpengine/atlas-commerce-blueprint',
 	},
+	{
+		id: 'shopify-blueprint-atlas-1',
+		thumbnail: path.resolve(
+			__dirname,
+			'../atlas-blueprints/shopify-blueprint.svg',
+		),
+		title: 'Shopify Blueprint',
+		byline: 'Headless WordPress',
+		excerpt:
+			'Build your headless store with WordPress content and Shopify product data. Install everything you need to get started quickly, including product and navigation pages. <br><a href="https://developers.wpengine.com/docs/atlas-shopify-blueprint/introduction">Set up Shopify</a>.',
+		previewHref:
+			'https://atlasshopify.wpengine.com/ ',
+		repoHref: 'https://github.com/wpengine/atlas-shopify-blueprint',
+	},
 ];
 
 export default atlasBlueprints;
