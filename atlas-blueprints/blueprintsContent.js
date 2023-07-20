@@ -47,7 +47,7 @@ const atlasBlueprints = [
 		id: 'shopify-blueprint-atlas-1',
 		thumbnail: path.resolve(
 			__dirname,
-			'../atlas-blueprints/shopify-blueprint.svg',
+			'../atlas-blueprints/shopify-blueprint.png',
 		),
 		title: 'Shopify Blueprint',
 		byline: 'Headless WordPress',
