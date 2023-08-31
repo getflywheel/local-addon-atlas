@@ -114,13 +114,13 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			// Report the error to the user, the Local log, and Sentry.
 			errorHandler.handleError({
 				error: e,
-				message: 'error encounted during preprovision step',
+				message: 'error encountered during preprovision step',
 				dialogTitle: 'Uh-oh! Local ran into an error.',
 				dialogMessage: e.toString(),
 			});
 
 			// Halt provisioning and cleanup.
-			throw new Error('error encounted during preprovision step');
+			throw new Error('error encountered during preprovision step');
 		}
 	}
 
