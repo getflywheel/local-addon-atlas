@@ -35,17 +35,15 @@ const atlasBlueprints = [
 			'Select this Blueprint to start building your new portfolio. Get started with our existing theme as you focus on the content of your portfolio.',
 		previewHref:
 			'https://wpeng.in/atlas-blueprint-portfolio',
-		// TODO: strip tree/acf-blueprint before committing.
-		repoHref: 'https://github.com/wpengine/atlas-blueprint-portfolio/tree/acf-blueprint',
+		repoHref: 'https://github.com/wpengine/atlas-blueprint-portfolio',
 		additionalPlugins: [
 			'advanced-custom-fields',
 			'https://github.com/wp-graphql/wpgraphql-acf/releases/latest/download/wp-graphql-acf.zip',
 			'https://wp-product-info.wpesvc.net/v1/plugins/wpe-atlas-headless-extension?download',
 			'atlas-search',
 		],
-		// TODO: change branch URL from 'acf-blueprint' to 'main' before committing.
 		installCommand:
-			'wp atlas blueprint import https://github.com/wpengine/atlas-blueprint-portfolio/raw/acf-blueprint/atlas-blueprint-portfolio.zip',
+			'wp atlas blueprint import https://github.com/wpengine/atlas-blueprint-portfolio/raw/main/atlas-blueprint-portfolio.zip',
 	},
 	{
 		id: 'ecommerce-blueprint-atlas-1',
