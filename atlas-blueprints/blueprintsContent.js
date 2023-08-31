@@ -14,6 +14,14 @@ const atlasBlueprints = [
 		previewHref:
 			'https://wpeng.in/faust-scaffold',
 		repoHref: 'https://github.com/wpengine/faust-scaffold',
+		additionalPlugins: [
+			'advanced-custom-fields',
+			'https://github.com/wp-graphql/wpgraphql-acf/releases/latest/download/wp-graphql-acf.zip',
+			'https://wp-product-info.wpesvc.net/v1/plugins/wpe-atlas-headless-extension?download',
+			'atlas-search',
+		],
+		installCommand:
+			'wp atlas blueprint import https://github.com/wpengine/faust-scaffold/raw/main/atlas-blueprint.zip',
 	},
 	{
 		id: 'portfolio-blueprint-atlas-1',
@@ -27,7 +35,17 @@ const atlasBlueprints = [
 			'Select this Blueprint to start building your new portfolio. Get started with our existing theme as you focus on the content of your portfolio.',
 		previewHref:
 			'https://wpeng.in/atlas-blueprint-portfolio',
-		repoHref: 'https://github.com/wpengine/atlas-blueprint-portfolio',
+		// TODO: strip tree/acf-blueprint before committing.
+		repoHref: 'https://github.com/wpengine/atlas-blueprint-portfolio/tree/acf-blueprint',
+		additionalPlugins: [
+			'advanced-custom-fields',
+			'https://github.com/wp-graphql/wpgraphql-acf/releases/latest/download/wp-graphql-acf.zip',
+			'https://wp-product-info.wpesvc.net/v1/plugins/wpe-atlas-headless-extension?download',
+			'atlas-search',
+		],
+		// TODO: change branch URL from 'acf-blueprint' to 'main' before committing.
+		installCommand:
+			'wp atlas blueprint import https://github.com/wpengine/atlas-blueprint-portfolio/raw/acf-blueprint/atlas-blueprint-portfolio.zip',
 	},
 	{
 		id: 'ecommerce-blueprint-atlas-1',
@@ -42,6 +60,14 @@ const atlasBlueprints = [
 		previewHref:
 			'https://atlascommerce.wpengine.com/',
 		repoHref: 'https://github.com/wpengine/atlas-commerce-blueprint',
+		additionalPlugins: [
+			'atlas-content-modeler',
+			'https://wp-product-info.wpesvc.net/v1/plugins/atlas-commerce-blocks?download',
+			'https://wp-product-info.wpesvc.net/v1/plugins/atlas-commerce-connector-bigcommerce?download',
+			'atlas-search',
+		],
+		installCommand:
+			'wp acm blueprint import https://github.com/wpengine/atlas-commerce-blueprint/raw/main/acm-blueprint.zip',
 	},
 	{
 		id: 'shopify-blueprint-atlas-1',
@@ -56,6 +82,12 @@ const atlasBlueprints = [
 		previewHref:
 			'https://atlasshopify.wpengine.com/ ',
 		repoHref: 'https://github.com/wpengine/atlas-shopify-blueprint',
+		additionalPlugins: [
+			'atlas-content-modeler',
+			'atlas-search',
+		],
+		installCommand:
+			'wp acm blueprint import https://github.com/wpengine/atlas-shopify-blueprint/raw/main/acm-blueprint.zip',
 	},
 ];
 

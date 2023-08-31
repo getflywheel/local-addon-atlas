@@ -78,6 +78,8 @@ export default function (context) {
 				const customOptions = {
 					bpId: siteSettings.blueprint,
 					atlasUrl: atlasBlueprint.repoHref,
+					additionalPlugins: atlasBlueprint.additionalPlugins,
+					installCommand: atlasBlueprint.installCommand,
 					useAtlasFramework: 'on',
 				};
 
