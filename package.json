@@ -116,6 +116,9 @@
 		"src/renderer/_browserWindows/xterm.html",
 		"src/renderer/_browserWindows/local-logo-background.png"
 	],
+	"resolutions": {
+		"tough-cookie": "^4.1.3"
+	},
 	"engines": {
 		"local-by-flywheel": "^6.5.2"
 	}
