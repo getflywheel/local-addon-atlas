@@ -1,7 +1,7 @@
 {
 	"name": "@getflywheel/local-addon-headless",
 	"productName": "Atlas: Headless WP",
-	"version": "1.7.0",
+	"version": "1.7.1",
 	"author": "Local Team",
 	"keywords": [
 		"local-addon"
@@ -34,7 +34,7 @@
 	},
 	"devDependencies": {
 		"@getflywheel/eslint-config-local": "1.0.4",
-		"@getflywheel/local": "^6.6.0",
+		"@getflywheel/local": "^8.0.0",
 		"@types/classnames": "^2.2.9",
 		"@types/dateformat": "^3.0.1",
 		"@types/enzyme": "^3.10.8",

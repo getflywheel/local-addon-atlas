@@ -18,6 +18,8 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 
 	readonly binVersion: string = '1.0.0';
 
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	get requiredPorts () {
 		return {
 			HTTP: 1,
@@ -28,6 +30,8 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		return path.join(this._site.longPath, headlessDirectoryName);
 	}
 
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	get bins () {
 		return {
 			[LocalMain.LightningServicePlatform.Darwin]: {
@@ -68,6 +72,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 
 		try {
 			if (appNodeExists) {
+				console.log('app node exists');
 				// node_modules are excluded from exports so install them on import.
 				await execFilePromise(this.bin!.electron, [
 					path.resolve(nodeModulesPath, 'npm', 'bin', 'npm-cli.js'),
@@ -88,6 +93,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					fs.writeFileSync(envFilePath, updatedEnvFileContent);
 				}
 			} else {
+				console.log('app node does not exist');
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				const atlasUrl = this._site?.customOptions?.atlasUrl ?? 'https://github.com/wpengine/faustjs/tree/main/examples/next/faustwp-getting-started';
@@ -125,14 +131,22 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	}
 
 	async finalizeNewSite (): Promise<void> {
+		console.log('finalizing new site...');
 		const { wpCli, siteDatabase, errorHandler } = serviceContainer.cradle;
 		const { additionalPlugins = [], installCommand = '' } = this._site.customOptions;
-		const requiredPlugins = ['faustwp', 'wp-graphql', ...additionalPlugins];
+		const requiredPlugins = [
+			'faustwp',
+			'wp-graphql',
+			'https://github.com/funkhaus/wp-graphql-cors/archive/refs/heads/master.zip',
+			...additionalPlugins,
+		];
 
 		try {
+			console.log('waiting for db...');
 			// eslint-disable-next-line default-case
 			await siteDatabase.waitForDB(this._site);
 
+			console.log('installing wordpress plugins...');
 			LocalMain.sendIPCEvent('updateSiteMessage', this._site.id, 'Installing WordPress plugins');
 
 			for (const plugin of requiredPlugins) {
@@ -194,7 +208,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 		// Write the required settings for the headless framework to `.env.local`.
 		const environmentFile = `NEXT_PUBLIC_WORDPRESS_URL=${this._site.backendUrl}
 # Plugin secret found in WordPress Settings->Headless
-FAUSTWP_SECRET_KEY=${secretKey}
+FAUST_SECRET_KEY=${secretKey}
 `;
 		await fs.writeFile(path.join(this.appNodePath, '.env.local'), environmentFile);
 
