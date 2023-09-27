@@ -120,9 +120,7 @@ export const createNewTerminalWindow = (site: Site): BrowserWindow => {
 		event.preventDefault();
 	});
 
-	terminalWindow.webContents.on('new-window', (event) => {
-		event.preventDefault();
-	});
+	terminalWindow.webContents.setWindowOpenHandler((details) => ({ action: 'deny' }));
 
 	// wait to show window
 	terminalWindow.once('ready-to-show', () => {
