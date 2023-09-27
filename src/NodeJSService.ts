@@ -72,7 +72,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 
 		try {
 			if (appNodeExists) {
-				console.log('app node exists');
 				// node_modules are excluded from exports so install them on import.
 				await execFilePromise(this.bin!.electron, [
 					path.resolve(nodeModulesPath, 'npm', 'bin', 'npm-cli.js'),
@@ -93,7 +92,6 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 					fs.writeFileSync(envFilePath, updatedEnvFileContent);
 				}
 			} else {
-				console.log('app node does not exist');
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore
 				const atlasUrl = this._site?.customOptions?.atlasUrl ?? 'https://github.com/wpengine/faustjs/tree/main/examples/next/faustwp-getting-started';
@@ -131,22 +129,18 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 	}
 
 	async finalizeNewSite (): Promise<void> {
-		console.log('finalizing new site...');
 		const { wpCli, siteDatabase, errorHandler } = serviceContainer.cradle;
 		const { additionalPlugins = [], installCommand = '' } = this._site.customOptions;
 		const requiredPlugins = [
 			'faustwp',
 			'wp-graphql',
-			'https://github.com/funkhaus/wp-graphql-cors/archive/refs/heads/master.zip',
 			...additionalPlugins,
 		];
 
 		try {
-			console.log('waiting for db...');
 			// eslint-disable-next-line default-case
 			await siteDatabase.waitForDB(this._site);
 
-			console.log('installing wordpress plugins...');
 			LocalMain.sendIPCEvent('updateSiteMessage', this._site.id, 'Installing WordPress plugins');
 
 			for (const plugin of requiredPlugins) {
