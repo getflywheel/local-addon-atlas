@@ -16,7 +16,7 @@ const atlasBlueprints = [
 		repoHref: 'https://github.com/wpengine/faust-scaffold',
 		additionalPlugins: [
 			'advanced-custom-fields',
-			'https://github.com/wp-graphql/wpgraphql-acf/releases/latest/download/wp-graphql-acf.zip',
+			'https://github.com/wp-graphql/wpgraphql-acf/releases/latest/download/wpgraphql-acf.zip',
 			'https://wp-product-info.wpesvc.net/v1/plugins/wpe-atlas-headless-extension?download',
 			'atlas-search',
 		],
@@ -38,7 +38,7 @@ const atlasBlueprints = [
 		repoHref: 'https://github.com/wpengine/atlas-blueprint-portfolio',
 		additionalPlugins: [
 			'advanced-custom-fields',
-			'https://github.com/wp-graphql/wpgraphql-acf/releases/latest/download/wp-graphql-acf.zip',
+			'https://github.com/wp-graphql/wpgraphql-acf/releases/latest/download/wpgraphql-acf.zip',
 			'https://wp-product-info.wpesvc.net/v1/plugins/wpe-atlas-headless-extension?download',
 			'atlas-search',
 		],
