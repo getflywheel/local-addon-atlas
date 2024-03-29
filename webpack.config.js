@@ -1,12 +1,12 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const path = require('path');
+const path = require('path'); // eslint-disable-line @typescript-eslint/no-var-requires
+const { merge } = require('webpack-merge'); // eslint-disable-line @typescript-eslint/no-var-requires
 
-module.exports = {
-	entry: {
-		renderer: path.join(__dirname, 'src', 'renderer.tsx'),
-		terminal: path.join(__dirname, 'src', 'renderer', '_browserWindows', 'terminal.ts'),
-	},
+const commonConf = {
+	mode: process.env.NODE_ENV || 'development',
+	context: path.resolve(__dirname, 'src'),
 	externals: [
+		'@getflywheel/local',
+		'@getflywheel/local/main',
 		'@getflywheel/local/renderer',
 		'react',
 		'@getflywheel/local-components',
@@ -14,7 +14,6 @@ module.exports = {
 		'react-router-dom',
 	],
 	devtool: 'source-map',
-	target: 'electron-renderer',
 	module: {
 		rules: [
 			{
@@ -26,37 +25,12 @@ module.exports = {
 						options: {
 							transpileOnly: true,
 							configFile: 'tsconfig.json',
-						},
-					},
-				],
-			},
-			{
-				test: /\.svg$/,
-				issuer: {
-					test: /\.[tj]sx?$/,
-				},
-				use: [
-					'babel-loader',
-					{
-						loader: 'react-svg-loader',
-						options: {
-							svgo: {
-								plugins: [
-									{
-										inlineStyles: { onlyMatchedOnce: false },
-									},
-								],
-							},
+							onlyCompileBundledFiles: true,
 						},
 					},
 				],
 			},
 		],
-	},
-	node: {
-		fs: 'empty',
-		child_process: 'empty',
-		__dirname: false,
 	},
 	resolve: {
 		extensions: ['.tsx', '.ts', '.jsx', '.js'],
@@ -67,3 +41,44 @@ module.exports = {
 		libraryTarget: 'commonjs2',
 	},
 };
+
+const configs = [
+	{
+		entry: {
+			renderer: './renderer.tsx',
+			terminal: path.join(__dirname, 'src', 'renderer', '_browserWindows', 'terminal.ts'),
+		},
+		module: {
+			rules: [
+				{
+					test: /\.svg$/,
+					issuer: /\.[tj]sx?$/,
+					use: [
+						'babel-loader',
+						{
+							loader: 'react-svg-loader',
+							options: {
+								svgo: {
+									plugins: [
+										{
+											inlineStyles: { onlyMatchedOnce: false },
+										},
+									],
+								},
+							},
+						},
+					],
+				},
+			],
+		},
+		target: 'electron-renderer',
+	},
+	{
+		entry: {
+			main: './main.ts',
+		},
+		target: 'electron-main',
+	},
+].map((config) => merge(commonConf, config));
+
+module.exports = configs;
