@@ -46,7 +46,7 @@ const configs = [
 	{
 		entry: {
 			renderer: './renderer.tsx',
-			terminal: path.join(__dirname, 'src', 'renderer', '_browserWindows', 'terminal.ts'),
+			terminal: './renderer/_browserWindows/terminal.ts',
 		},
 		module: {
 			rules: [
