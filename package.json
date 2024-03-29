@@ -34,7 +34,7 @@
 	},
 	"devDependencies": {
 		"@getflywheel/eslint-config-local": "1.0.4",
-		"@getflywheel/local": "^8.0.0",
+		"@getflywheel/local": "^9.0.0",
 		"@types/classnames": "^2.2.9",
 		"@types/dateformat": "^3.0.1",
 		"@types/enzyme": "^3.10.8",
@@ -71,7 +71,7 @@
 		"react-router-dom": "^4.3.1"
 	},
 	"dependencies": {
-		"@getflywheel/local-components": "^17.6.3",
+		"@getflywheel/local-components": "^17.8.0",
 		"classnames": "^2.2.6",
 		"dateformat": "^3.0.3",
 		"fs-extra": "^9.0.1",
