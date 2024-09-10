@@ -85,14 +85,14 @@ export default function (): void {
 
 				const parsedFaustWPsettings = JSON.parse(faustWPsettings);
 
-				if (parsedFaustWPsettings.frontend_uri !== site.frontendUrl) {
+				if (parsedFaustWPsettings.frontend_uri !== await site.queryUrl()) {
 					// update the frontend_uri to match the new site frontendUrl
 					await wpCli.run(site, [
 						'option',
 						'update',
 						'faustwp_settings',
 						// eslint-disable-next-line camelcase
-						JSON.stringify({ ...parsedFaustWPsettings, frontend_uri: site.frontendUrl }),
+						JSON.stringify({ ...parsedFaustWPsettings, frontend_uri: await site.queryUrl() }),
 						'--format=json', // Tell WordPress to seralize the JSON.
 					]);
 				}

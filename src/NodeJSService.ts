@@ -195,7 +195,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			'update',
 			'faustwp_settings',
 			// eslint-disable-next-line camelcase
-			JSON.stringify({ ...parsedFaustWPsettings, frontend_uri: this._site.frontendUrl }),
+			JSON.stringify({ ...parsedFaustWPsettings, frontend_uri: await this._site.queryUrl() }),
 			'--format=json', // Tell WordPress to serialize the JSON.
 		]);
 
