@@ -46,28 +46,6 @@ const atlasBlueprints = [
 			'wp atlas blueprint import https://github.com/wpengine/atlas-blueprint-portfolio/raw/main/atlas-blueprint-portfolio.zip',
 	},
 	{
-		id: 'ecommerce-blueprint-atlas-1',
-		thumbnail: path.resolve(
-			__dirname,
-			'../atlas-blueprints/ecommerce-blueprint.png',
-		),
-		title: 'BigCommerce Blueprint',
-		byline: 'Headless WordPress',
-		excerpt:
-			'Build your headless store with WordPress content and BigCommerce product data. Install everything you need to get started quickly, including product and navigation pages. <br><a href="https://developers.wpengine.com/docs/atlas-commerce-connector/introduction">Set up BigCommerce</a>.',
-		previewHref:
-			'https://atlascommerce.wpengine.com/',
-		repoHref: 'https://github.com/wpengine/atlas-commerce-blueprint',
-		additionalPlugins: [
-			'atlas-content-modeler',
-			'https://wp-product-info.wpesvc.net/v1/plugins/atlas-commerce-blocks?download',
-			'https://wp-product-info.wpesvc.net/v1/plugins/atlas-commerce-connector-bigcommerce?download',
-			'atlas-search',
-		],
-		installCommand:
-			'wp acm blueprint import https://github.com/wpengine/atlas-commerce-blueprint/raw/main/acm-blueprint.zip',
-	},
-	{
 		id: 'shopify-blueprint-atlas-1',
 		thumbnail: path.resolve(
 			__dirname,
