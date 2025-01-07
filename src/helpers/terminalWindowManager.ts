@@ -154,7 +154,7 @@ export const createNewTerminalWindow = (site: Site): BrowserWindow => {
 		deregisterBrowserWindowBySiteID(siteID);
 	});
 
-	terminalWindow.loadFile(path.resolve(__dirname, '../../src/renderer/_browserWindows/xterm.html'));
+	terminalWindow.loadFile(path.resolve(__dirname, '../src/renderer/_browserWindows/xterm.html'));
 
 	return terminalWindow;
 };
