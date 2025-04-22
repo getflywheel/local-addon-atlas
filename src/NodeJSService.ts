@@ -58,6 +58,7 @@ export default class LightningServiceNodeJS extends LocalMain.LightningService {
 			ELECTRON_RUN_AS_NODE: '1',
 			PATH: this.electronifiedPATH,
 			NPM_PATH: path.join(nodeModulesPath, 'npm', 'bin', 'npm-cli.js'),
+			NPM_CONFIG_PREFIX: resourcesPath,
 		};
 	}
 
