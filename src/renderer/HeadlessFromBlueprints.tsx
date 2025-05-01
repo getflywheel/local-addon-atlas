@@ -16,7 +16,7 @@ interface IProps {
 	setDisabled: (val: boolean) => void;
 }
 
-const AtlasFromBlueprints = (props: IProps): JSX.Element => {
+const HeadlessFromBlueprints = (props: IProps): JSX.Element => {
 	const headlessBlueprintOptions = headlessBlueprints.reduce((prev, current) => ({
 		...prev,
 		[current.id]: {
@@ -48,7 +48,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 	};
 
 	return (
-		<Container margin="l" marginBottom="none" className="FromAtlasBlueprints">
+		<Container margin="l" marginBottom="none" className="FromHeadlessBlueprints">
 			<Divider marginSizeBottom='l' />
 			<Title size="l" tag="h2">
 				Atlas Blueprints
@@ -82,4 +82,4 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 	);
 };
 
-export default AtlasFromBlueprints;
+export default HeadlessFromBlueprints;

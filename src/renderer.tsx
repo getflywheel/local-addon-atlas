@@ -2,7 +2,7 @@ import path from 'path';
 import * as Local from '@getflywheel/local';
 import { HeadlessEnvironmentSelect } from './renderer/HeadlessEnvironmentSelect';
 import HeadlessBlueprints from './renderer/HeadlessBlueprints';
-import AtlasFromBlueprints from './renderer/AtlasFromBlueprints';
+import HeadlessFromBlueprints from './renderer/HeadlessFromBlueprints';
 import SiteOverviewAddonSection from './renderer/SiteOverviewAddonSection';
 import type { Site } from '@getflywheel/local';
 import { sendIPCEvent } from '@getflywheel/local/renderer';
@@ -113,7 +113,7 @@ export default function (context) {
 	hooks.addContent(
 		'Blueprints_FromBlueprints:after',
 		(bpId, setBpId, setDisabled) => (
-			<AtlasFromBlueprints key="atlas-from-blueprints" bpId={bpId} setBpId={setBpId} setDisabled={setDisabled} />
+			<HeadlessFromBlueprints key="atlas-from-blueprints" bpId={bpId} setBpId={setBpId} setDisabled={setDisabled} />
 		),
 	);
 
