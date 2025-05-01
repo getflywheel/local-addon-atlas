@@ -6,12 +6,12 @@
 	border-top: 1px solid #5d5e5e;
 }
 
-.Theme__Dark .AtlasBlueprintCard {
+.Theme__Dark .HeadlessBlueprintCard {
 	background-color: #434344;
 	color: #c7c4c4;
 }
 
-.Theme__Light .AtlasBlueprintCard {
+.Theme__Light .HeadlessBlueprintCard {
 	color: #262727;
 }
 
@@ -19,12 +19,12 @@
 	border-top: 1px solid #e7e7e7;
 }
 
-.AtlasBlueprintList .AtlasBlueprintCard_Content {
+.AtlasBlueprintList .HeadlessBlueprintCard_Content {
 	margin: 15px 19px 0 19px;
 	line-height: 1.5;
 }
 
-.AtlasBlueprintCard .Title {
+.HeadlessBlueprintCard .Title {
 	margin-bottom: 0;
 }
 
@@ -61,7 +61,7 @@
 	flex-wrap: wrap;
 }
 
-.AtlasBlueprintCard {
+.HeadlessBlueprintCard {
 	width: 278px;
 	margin-bottom: 10px;
 	margin-right: 10px;
@@ -69,28 +69,28 @@
 	flex-shrink: initial;
 }
 
-.AtlasBlueprintCard_Links {
+.HeadlessBlueprintCard_Links {
 	margin-top: 20px;
 }
 
-.AtlasBlueprintCard_Links a {
+.HeadlessBlueprintCard_Links a {
 	font-weight: 700;
 }
 
-.AtlasBlueprintCard_Links div {
+.HeadlessBlueprintCard_Links div {
 	margin: 20px 0;
 }
 
-.AtlasBlueprintCard .AtlasBlueprintCard_HeaderIconContainer {
+.HeadlessBlueprintCard .HeadlessBlueprintCard_HeaderIconContainer {
 	padding: 0;
 }
 
-.AtlasBlueprintCard_Description {
+.HeadlessBlueprintCard_Description {
 	flex: 1;
 }
 
 .AtlasBlueprintsDescription a,
-.AtlasBlueprintCard_Description a {
+.HeadlessBlueprintCard_Description a {
 	font-weight: 700;
 	color: #267048;
 	text-decoration: underline;
@@ -99,25 +99,25 @@
 
 .AtlasBlueprintsDescription a:active,
 .AtlasBlueprintsDescription a:hover,
-.AtlasBlueprintCard_Description a:active,
-.AtlasBlueprintCard_Description a:hover {
+.HeadlessBlueprintCard_Description a:active,
+.HeadlessBlueprintCard_Description a:hover {
 	color: #51bb7b;
 }
 
 
 .Theme__Dark .AtlasBlueprintsDescription a,
-.Theme__Dark .AtlasBlueprintCard_Description a {
+.Theme__Dark .HeadlessBlueprintCard_Description a {
     color: #51bb7b;
 }
 
 .Theme__Dark .AtlasBlueprintsDescription a:active,
 .Theme__Dark .AtlasBlueprintsDescription a:hover,
-.Theme__Dark .AtlasBlueprintCard_Description a:active,
-.Theme__Dark .AtlasBlueprintCard_Description a:hover {
+.Theme__Dark .HeadlessBlueprintCard_Description a:active,
+.Theme__Dark .HeadlessBlueprintCard_Description a:hover {
     color: #419564;
 }
 
-.AtlasBlueprintCard img {
+.HeadlessBlueprintCard img {
 	width: 100%;
 	height: auto;
 }

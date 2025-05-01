@@ -5,7 +5,7 @@ import {
 	Text,
 	TextButtonExternal,
 } from '@getflywheel/local-components';
-import AtlasBlueprintCard from './AtlasBlueprintCard';
+import HeadlessBlueprintCard from './HeadlessBlueprintCard';
 import headlessBlueprints from '../../headless-blueprints/blueprintsContent';
 
 const AtlasBlueprints: React.FC = () => (
@@ -30,7 +30,7 @@ const AtlasBlueprints: React.FC = () => (
 		</Container>
 		<Container className="AtlasBlueprintList">
 			{headlessBlueprints.map((bp) => (
-				<AtlasBlueprintCard
+				<HeadlessBlueprintCard
 					key={bp.title}
 					thumbnailSrc={bp.thumbnail}
 					title={bp.title}

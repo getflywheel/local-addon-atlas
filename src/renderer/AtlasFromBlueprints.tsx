@@ -7,7 +7,7 @@ import {
 	TextButtonExternal,
 	Divider,
 } from '@getflywheel/local-components';
-import AtlasBlueprintCard from './AtlasBlueprintCard';
+import HeadlessBlueprintCard from './HeadlessBlueprintCard';
 import headlessBlueprints from '../../headless-blueprints/blueprintsContent';
 
 interface IProps {
@@ -22,7 +22,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 		[current.id]: {
 			key: current.repoHref,
 			content:
-				<AtlasBlueprintCard
+				<HeadlessBlueprintCard
 					key={current.title}
 					thumbnailSrc={current.thumbnail}
 					title={current.title}
