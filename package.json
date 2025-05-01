@@ -106,7 +106,7 @@
 		"npm"
 	],
 	"files": [
-		"atlas-blueprints",
+		"headless-blueprints",
 		"lib/",
 		"icon.svg",
 		"electron-node/",

@@ -8,7 +8,7 @@ import {
 	Divider,
 } from '@getflywheel/local-components';
 import AtlasBlueprintCard from './AtlasBlueprintCard';
-import atlasBlueprints from '../../atlas-blueprints/blueprintsContent';
+import headlessBlueprints from '../../headless-blueprints/blueprintsContent';
 
 interface IProps {
 	bpId: string;
@@ -17,7 +17,7 @@ interface IProps {
 }
 
 const AtlasFromBlueprints = (props: IProps): JSX.Element => {
-	const atlasBlueprintOptions = atlasBlueprints.reduce((prev, current) => ({
+	const headlessBlueprintOptions = headlessBlueprints.reduce((prev, current) => ({
 		...prev,
 		[current.id]: {
 			key: current.repoHref,
@@ -75,7 +75,7 @@ const AtlasFromBlueprints = (props: IProps): JSX.Element => {
 					default={props.bpId}
 					onChange={(option) => onChange(option)}
 					heightSize='none'
-					options={atlasBlueprintOptions}
+					options={headlessBlueprintOptions}
 				/>
 			</Container>
 		</Container>

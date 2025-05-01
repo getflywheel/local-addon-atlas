@@ -1,11 +1,11 @@
 import path from 'path';
 
-const atlasBlueprints = [
+const headlessBlueprints = [
 	{
 		id: 'faust-blueprint-atlas-1',
 		thumbnail: path.resolve(
 			__dirname,
-			'../atlas-blueprints/faust-boilerplate-blueprint.png',
+			'../headless-blueprints/faust-boilerplate-blueprint.png',
 		),
 		title: 'Faust.js Scaffolding',
 		byline: 'Headless WordPress',
@@ -27,7 +27,7 @@ const atlasBlueprints = [
 		id: 'portfolio-blueprint-atlas-1',
 		thumbnail: path.resolve(
 			__dirname,
-			'../atlas-blueprints/portfolio-blueprint.png',
+			'../headless-blueprints/portfolio-blueprint.png',
 		),
 		title: 'Faust.js Portfolio Blueprint',
 		byline: 'Headless WordPress',
@@ -49,7 +49,7 @@ const atlasBlueprints = [
 		id: 'shopify-blueprint-atlas-1',
 		thumbnail: path.resolve(
 			__dirname,
-			'../atlas-blueprints/shopify-blueprint.png',
+			'../headless-blueprints/shopify-blueprint.png',
 		),
 		title: 'Shopify Blueprint',
 		byline: 'Headless WordPress',
@@ -67,4 +67,4 @@ const atlasBlueprints = [
 	},
 ];
 
-export default atlasBlueprints;
+export default headlessBlueprints;

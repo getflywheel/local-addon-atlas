@@ -8,7 +8,7 @@ import type { Site } from '@getflywheel/local';
 import { sendIPCEvent } from '@getflywheel/local/renderer';
 import { AtlasAddWordPress } from './renderer/AtlasAddWordPress';
 import { TextButtonExternal } from '@getflywheel/local-components';
-import blueprintsContent from '../atlas-blueprints/blueprintsContent';
+import blueprintsContent from '../headless-blueprints/blueprintsContent';
 
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 const title = `Front-end Node.js`;
@@ -107,7 +107,7 @@ export default function (context) {
 	);
 
 	hooks.addContent('Blueprints_BlueprintsList:after', () => (
-		<AtlasBlueprints key="atlas-blueprints" />
+		<AtlasBlueprints key="headless-blueprints" />
 	));
 
 	hooks.addContent(
