@@ -122,17 +122,17 @@
 	height: auto;
 }
 
-.AtlasAddWordPress_Inputs {
+.HeadlessAddWordPress_Inputs {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
 }
 
-.AtlasAddWordPress_Inputs_FormField {
+.HeadlessAddWordPress_Inputs_FormField {
 	margin: 0 5px;
 }
 
-.AtlasAddWordPress_Inputs > div > label {
+.HeadlessAddWordPress_Inputs > div > label {
 	display: block;
 	margin-bottom: 10px;
 }

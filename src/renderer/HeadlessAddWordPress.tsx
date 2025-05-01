@@ -17,7 +17,7 @@ interface IProps extends RouteComponentProps {
 	defaults: NewSiteDefaults;
 }
 
-export const AtlasAddWordPress = (props: IProps): JSX.Element => {
+export const HeadlessAddWordPress = (props: IProps): JSX.Element => {
 	const [adminUsername, setUsername] = useState('');
 	const [adminPassword, setPassword] = useState('');
 	const [adminEmail, setEmail] = useState(props.defaults.adminEmail);
@@ -45,8 +45,8 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 			<Title size="l" container={{ margin: 'l 0' }}>Set up WordPress</Title>
 
 			<div className="Inner">
-				<div className="AtlasAddWordPress_Inputs">
-					<div className="AtlasAddWordPress_Inputs_FormField">
+				<div className="HeadlessAddWordPress_Inputs">
+					<div className="HeadlessAddWordPress_Inputs_FormField">
 						<label htmlFor="adminUsername">WordPress username</label>
 						<BasicInput
 							invalid={!isValid.user}
@@ -60,7 +60,7 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 						/>
 					</div>
 
-					<div className="AtlasAddWordPress_Inputs_FormField">
+					<div className="HeadlessAddWordPress_Inputs_FormField">
 						<label htmlFor='adminPassword'>WordPress password</label>
 						<InputPasswordToggle
 							invalid={!isValid.pass}
@@ -75,7 +75,7 @@ export const AtlasAddWordPress = (props: IProps): JSX.Element => {
 						/>
 					</div>
 
-					<div className="AtlasAddWordPress_Inputs_FormField">
+					<div className="HeadlessAddWordPress_Inputs_FormField">
 						<label htmlFor="adminEmail">WordPress email</label>
 						<BasicInput
 							invalid={!isValid.email}

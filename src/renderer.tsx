@@ -6,7 +6,7 @@ import AtlasFromBlueprints from './renderer/AtlasFromBlueprints';
 import SiteOverviewAddonSection from './renderer/SiteOverviewAddonSection';
 import type { Site } from '@getflywheel/local';
 import { sendIPCEvent } from '@getflywheel/local/renderer';
-import { AtlasAddWordPress } from './renderer/AtlasAddWordPress';
+import { HeadlessAddWordPress } from './renderer/HeadlessAddWordPress';
 import { TextButtonExternal } from '@getflywheel/local-components';
 import blueprintsContent from '../headless-blueprints/blueprintsContent';
 
@@ -63,7 +63,7 @@ export default function (context) {
 				key: 'add-atlas-blueprint-add-wordpress',
 				path: '/main/create-site/from-blueprint/add-wordpress',
 				name: 'Add WordPress',
-				component: AtlasAddWordPress,
+				component: HeadlessAddWordPress,
 			},
 		];
 		return [...steps, ...atlasBlueprintSteps];
