@@ -1,7 +1,7 @@
 import path from 'path';
 import * as Local from '@getflywheel/local';
 import { HeadlessEnvironmentSelect } from './renderer/HeadlessEnvironmentSelect';
-import AtlasBlueprints from './renderer/AtlasBlueprints';
+import HeadlessBlueprints from './renderer/HeadlessBlueprints';
 import AtlasFromBlueprints from './renderer/AtlasFromBlueprints';
 import SiteOverviewAddonSection from './renderer/SiteOverviewAddonSection';
 import type { Site } from '@getflywheel/local';
@@ -107,7 +107,7 @@ export default function (context) {
 	);
 
 	hooks.addContent('Blueprints_BlueprintsList:after', () => (
-		<AtlasBlueprints key="headless-blueprints" />
+		<HeadlessBlueprints key="headless-blueprints" />
 	));
 
 	hooks.addContent(

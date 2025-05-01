@@ -19,7 +19,7 @@
 	border-top: 1px solid #e7e7e7;
 }
 
-.AtlasBlueprintList .HeadlessBlueprintCard_Content {
+.HeadlessBlueprintList .HeadlessBlueprintCard_Content {
 	margin: 15px 19px 0 19px;
 	line-height: 1.5;
 }
@@ -45,18 +45,18 @@
 	right: 30px;
 }
 
-.AtlasBlueprintsDescription {
+.HeadlessBlueprintsDescription {
 	max-width: 760px;
 }
 
-.AtlasBlueprintsDescription a {
+.HeadlessBlueprintsDescription a {
 	text-transform: initial;
 	font-weight: 500;
 	padding-left: 0px;
 	padding-right: 0px;
 }
 
-.AtlasBlueprintList {
+.HeadlessBlueprintList {
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -89,7 +89,7 @@
 	flex: 1;
 }
 
-.AtlasBlueprintsDescription a,
+.HeadlessBlueprintsDescription a,
 .HeadlessBlueprintCard_Description a {
 	font-weight: 700;
 	color: #267048;
@@ -97,21 +97,21 @@
 }
 
 
-.AtlasBlueprintsDescription a:active,
-.AtlasBlueprintsDescription a:hover,
+.HeadlessBlueprintsDescription a:active,
+.HeadlessBlueprintsDescription a:hover,
 .HeadlessBlueprintCard_Description a:active,
 .HeadlessBlueprintCard_Description a:hover {
 	color: #51bb7b;
 }
 
 
-.Theme__Dark .AtlasBlueprintsDescription a,
+.Theme__Dark .HeadlessBlueprintsDescription a,
 .Theme__Dark .HeadlessBlueprintCard_Description a {
     color: #51bb7b;
 }
 
-.Theme__Dark .AtlasBlueprintsDescription a:active,
-.Theme__Dark .AtlasBlueprintsDescription a:hover,
+.Theme__Dark .HeadlessBlueprintsDescription a:active,
+.Theme__Dark .HeadlessBlueprintsDescription a:hover,
 .Theme__Dark .HeadlessBlueprintCard_Description a:active,
 .Theme__Dark .HeadlessBlueprintCard_Description a:hover {
     color: #419564;
@@ -137,6 +137,6 @@
 	margin-bottom: 10px;
 }
 
-.FromAtlasBlueprints {
+.FromHeadlessBlueprints {
 	max-width: 890px;
 }

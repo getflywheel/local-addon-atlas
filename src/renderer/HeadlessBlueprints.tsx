@@ -8,19 +8,19 @@ import {
 import HeadlessBlueprintCard from './HeadlessBlueprintCard';
 import headlessBlueprints from '../../headless-blueprints/blueprintsContent';
 
-const AtlasBlueprints: React.FC = () => (
-	<Container margin="l" className="AtlasBlueprints">
+const HeadlessBlueprints: React.FC = () => (
+	<Container margin="l" className="HeadlessBlueprints">
 		<Title size="l" tag="h2">
-			Atlas Blueprints
+			Headless Blueprints
 		</Title>
 		<Container
 			marginTop="m"
 			marginBottom="l"
-			className="AtlasBlueprintsDescription"
+			className="HeadlessBlueprintsDescription"
 		>
 			<Text container={{ marginBottom: '10' }}>
 				Blueprints come with starter code, plugins, content models, and
-				page structure to get your Atlas app off the ground faster.
+				page structure to get your Headless app off the ground faster.
 			</Text>
 			<TextButtonExternal
 				href={'https://developers.wpengine.com/roadmap'}
@@ -28,7 +28,7 @@ const AtlasBlueprints: React.FC = () => (
 				Learn more about headless WordPress development
 			</TextButtonExternal>
 		</Container>
-		<Container className="AtlasBlueprintList">
+		<Container className="HeadlessBlueprintList">
 			{headlessBlueprints.map((bp) => (
 				<HeadlessBlueprintCard
 					key={bp.title}
@@ -45,4 +45,4 @@ const AtlasBlueprints: React.FC = () => (
 	</Container>
 );
 
-export default AtlasBlueprints;
+export default HeadlessBlueprints;
