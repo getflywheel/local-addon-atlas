@@ -1,8 +1,8 @@
-.AtlasCheckboxSelect {
+.HeadlessCheckboxSelect {
 	padding-top: 30px;
 }
 
-.Theme__Dark .AtlasCheckboxSelect {
+.Theme__Dark .HeadlessCheckboxSelect {
 	border-top: 1px solid #5d5e5e;
 }
 
@@ -15,7 +15,7 @@
 	color: #262727;
 }
 
-.Theme__Light .AtlasCheckboxSelect {
+.Theme__Light .HeadlessCheckboxSelect {
 	border-top: 1px solid #e7e7e7;
 }
 
@@ -28,7 +28,7 @@
 	margin-bottom: 0;
 }
 
-.AtlasTextLink {
+.HeadlessTextLink {
 	line-height: 1.5;
 	margin-top: 5px;
 	margin-left: 28px;
