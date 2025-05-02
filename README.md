@@ -1,4 +1,4 @@
-# Atlas: Headless WP
+# Local Addon: WP Engine Headless Platform
 
 A [Local](https://localwp.com/) add on for developing headless WordPress websites.
 
