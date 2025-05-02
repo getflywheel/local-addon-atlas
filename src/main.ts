@@ -22,7 +22,7 @@ export default function (): void {
 	});
 
 	LocalMain.HooksMain.addFilter('defaultSiteServices', (services, siteSettings) => {
-		if (siteSettings?.customOptions?.useAtlasFramework === 'on') {
+		if (siteSettings?.customOptions?.useHeadlessFramework === 'on') {
 			services.nodejs = {
 				version: '1.0.0',
 				type: Local.SiteServiceType.LIGHTNING,
@@ -36,7 +36,7 @@ export default function (): void {
 	LocalMain.HooksMain.addFilter(
 		'modifyAddSiteObjectBeforeCreation',
 		(site: Site, newSiteInfo) => {
-			if (newSiteInfo?.customOptions?.useAtlasFramework === 'on') {
+			if (newSiteInfo?.customOptions?.useHeadlessFramework === 'on') {
 				LocalMain.sendIPCEvent(IPC_EVENTS.TRACK_EVENT, 'v2_site_new_added_atlas', {
 					environment: site.environment,
 					multiSite: site.multiSite,
@@ -56,7 +56,7 @@ export default function (): void {
 		const modifiedManifest = { ...manifest };
 
 		if (site.getSiteServiceByRole(Local.SiteServiceRole.FRONTEND)) {
-			modifiedManifest.customOptions.useAtlasFramework = 'on';
+			modifiedManifest.customOptions.useHeadlessFramework = 'on';
 		}
 
 		return modifiedManifest;

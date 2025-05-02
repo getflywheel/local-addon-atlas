@@ -49,7 +49,7 @@ export default function (context) {
 	const { React, hooks } = context;
 
 	hooks.addAction('FromBlueprintSiteDetails:OnContinue', (siteSettings: Local.NewSiteInfo) => {
-		if (siteSettings?.customOptions?.useAtlasFramework === 'on') {
+		if (siteSettings?.customOptions?.useHeadlessFramework === 'on') {
 			sendIPCEvent('goToRoute', '/main/create-site/from-blueprint/add-wordpress');
 		}
 	});
@@ -80,7 +80,7 @@ export default function (context) {
 					headlessUrl: atlasBlueprint.repoHref,
 					additionalPlugins: atlasBlueprint.additionalPlugins,
 					installCommand: atlasBlueprint.installCommand,
-					useAtlasFramework: 'on',
+					useHeadlessFramework: 'on',
 				};
 
 				return { ...siteSettings, customOptions };
