@@ -13,7 +13,7 @@ import blueprintsContent from '../headless-blueprints/blueprintsContent';
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 const title = `Front-end Node.js`;
 
-export const atlasDocsUrl = `https://developers.wpengine.com`;
+export const headlessDocsUrl = `https://wpengine.com/builders/headless`;
 export const faustJsDocsUrl = `https://github.com/wpengine/faustjs`;
 
 const nodeJSSiteOverviewHook = (site: Site, siteStatus: string) => {
@@ -36,7 +36,7 @@ const renderTooltip = () => (
 	<div className="SiteOverviewAddonSectionTooltip">
 		Learn more about WP Engine Headless framework.
 		<TextButtonExternal
-			href={atlasDocsUrl}
+			href={headlessDocsUrl}
 			inline={false}
 			style={{ paddingTop: '7px' }}
 		>
@@ -55,31 +55,31 @@ export default function (context) {
 	});
 
 	/**
-	 * Add AtlasBlueprints as an option when creating a new site
+	 * Add Blueprints as an option when creating a new site
 	 */
 	hooks.addFilter('CreateSite:Steps', (steps) => {
-		const atlasBlueprintSteps = [
+		const headlessBlueprintSteps = [
 			{
-				key: 'add-atlas-blueprint-add-wordpress',
+				key: 'add-headless-blueprint-add-wordpress',
 				path: '/main/create-site/from-blueprint/add-wordpress',
 				name: 'Add WordPress',
 				component: HeadlessAddWordPress,
 			},
 		];
-		return [...steps, ...atlasBlueprintSteps];
+		return [...steps, ...headlessBlueprintSteps];
 	});
 
 	hooks.addFilter(
 		'Blueprints_FromBlueprintsContinue',
 		(siteSettings: Local.NewSiteInfo) => {
-			const atlasBlueprint = blueprintsContent.find((blueprint) => blueprint.id === siteSettings.blueprint);
+			const headlessBlueprint = blueprintsContent.find((blueprint) => blueprint.id === siteSettings.blueprint);
 
-			if (atlasBlueprint) {
+			if (headlessBlueprint) {
 				const customOptions = {
 					bpId: siteSettings.blueprint,
-					headlessUrl: atlasBlueprint.repoHref,
-					additionalPlugins: atlasBlueprint.additionalPlugins,
-					installCommand: atlasBlueprint.installCommand,
+					headlessUrl: headlessBlueprint.repoHref,
+					additionalPlugins: headlessBlueprint.additionalPlugins,
+					installCommand: headlessBlueprint.installCommand,
 					useHeadlessFramework: 'on',
 				};
 
@@ -93,7 +93,7 @@ export default function (context) {
 	hooks.addContent('stylesheets', () => (
 		<link
 			rel="stylesheet"
-			key="localAtlas-addon-stylesheet"
+			key="local-headless-addon-stylesheet"
 			href={stylesheetPath}
 		/>
 	));
@@ -113,7 +113,7 @@ export default function (context) {
 	hooks.addContent(
 		'Blueprints_FromBlueprints:after',
 		(bpId, setBpId, setDisabled) => (
-			<HeadlessFromBlueprints key="atlas-from-blueprints" bpId={bpId} setBpId={setBpId} setDisabled={setDisabled} />
+			<HeadlessFromBlueprints key="headless-from-blueprints" bpId={bpId} setBpId={setBpId} setDisabled={setDisabled} />
 		),
 	);
 
