@@ -1,7 +1,7 @@
 {
 	"name": "@getflywheel/local-addon-headless",
 	"productName": "WP Engine Headless Platform",
-	"version": "1.7.5",
+	"version": "1.7.6",
 	"author": "Local Team",
 	"keywords": [
 		"local-addon"
