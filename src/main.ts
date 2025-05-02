@@ -9,6 +9,12 @@ import {
 } from './helpers/terminalWindowManager';
 import type { Site } from '@getflywheel/local';
 import { IPC_EVENTS, ANALYTIC_EVENTS, headlessDirectoryName } from './constants';
+import logger from './logger';
+
+const log = logger.child({
+	thread: 'main',
+	class: 'main.ts',
+});
 
 const serviceContainer = LocalMain.getServiceContainer();
 
@@ -72,8 +78,7 @@ export default function (): void {
 	});
 
 	LocalMain.HooksMain.addAction('importSiteChangeDomain', async (site: Site) => {
-		const { wpCli, localLogger } = serviceContainer.cradle;
-
+		const { wpCli } = serviceContainer.cradle;
 		if (site.getSiteServiceByRole(Local.SiteServiceRole.FRONTEND)) {
 			try {
 				const faustWPsettings = await wpCli.run(site, [
@@ -97,7 +102,7 @@ export default function (): void {
 					]);
 				}
 			} catch (error) {
-				localLogger.error(`Atlas addon: importSiteChangeDomain hook: ${error.message}`);
+				log.error(`Error while updating site to use Headless domain: ${error.message}`);
 			}
 		}
 
