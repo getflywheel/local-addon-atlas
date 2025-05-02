@@ -6,7 +6,7 @@
 	"keywords": [
 		"local-addon"
 	],
-	"bgColor": "#7A1BA6",
+	"bgColor": "#002447",
 	"icon": "icon.svg",
 	"slug": "local-addon-headless",
 	"description": "",
