@@ -1,33 +1,14 @@
 import React from 'react';
 import {
 	Container,
-	Title,
-	Text,
-	TextButtonExternal,
 } from '@getflywheel/local-components';
 import HeadlessBlueprintCard from './HeadlessBlueprintCard';
 import headlessBlueprints from '../../headless-blueprints/blueprintsContent';
+import { HeadlessBlueprintsOverview } from './HeadlessBlueprintsOverview';
 
 const HeadlessBlueprints: React.FC = () => (
 	<Container margin="l" className="HeadlessBlueprints">
-		<Title size="l" tag="h2">
-			Headless Blueprints
-		</Title>
-		<Container
-			marginTop="m"
-			marginBottom="l"
-			className="HeadlessBlueprintsDescription"
-		>
-			<Text container={{ marginBottom: '10' }}>
-				Blueprints come with starter code, plugins, content models, and
-				page structure to get your Headless app off the ground faster.
-			</Text>
-			<TextButtonExternal
-				href={'https://developers.wpengine.com/roadmap'}
-			>
-				Learn more about headless WordPress development
-			</TextButtonExternal>
-		</Container>
+		<HeadlessBlueprintsOverview />
 		<Container className="HeadlessBlueprintList">
 			{headlessBlueprints.map((bp) => (
 				<HeadlessBlueprintCard
