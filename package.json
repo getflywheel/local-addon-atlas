@@ -1,12 +1,12 @@
 {
 	"name": "@getflywheel/local-addon-headless",
-	"productName": "Atlas: Headless WP",
-	"version": "1.7.5",
+	"productName": "WP Engine Headless Platform",
+	"version": "1.7.6",
 	"author": "Local Team",
 	"keywords": [
 		"local-addon"
 	],
-	"bgColor": "#7A1BA6",
+	"bgColor": "#002447",
 	"icon": "icon.svg",
 	"slug": "local-addon-headless",
 	"description": "",
@@ -43,7 +43,6 @@
 		"@types/node": "^18.15.0",
 		"@types/react": "^16.9.0",
 		"@types/react-dom": "^16.9.0",
-		"@types/react-redux": "^7.1.9",
 		"@typescript-eslint/eslint-plugin": "^4.7.0",
 		"@typescript-eslint/parser": "^4.7.0",
 		"babel-loader": "^8.1.0",
@@ -101,15 +100,13 @@
 		"lodash",
 		"md5",
 		"prop-types",
-		"react-redux",
 		"react-router-navigation-prompt",
 		"recursive-readdir",
-		"redux",
 		"xterm",
 		"npm"
 	],
 	"files": [
-		"atlas-blueprints",
+		"headless-blueprints",
 		"lib/",
 		"icon.svg",
 		"electron-node/",

@@ -1,19 +1,19 @@
 import path from 'path';
 import * as Local from '@getflywheel/local';
 import { HeadlessEnvironmentSelect } from './renderer/HeadlessEnvironmentSelect';
-import AtlasBlueprints from './renderer/AtlasBlueprints';
-import AtlasFromBlueprints from './renderer/AtlasFromBlueprints';
+import HeadlessBlueprints from './renderer/HeadlessBlueprints';
+import HeadlessFromBlueprints from './renderer/HeadlessFromBlueprints';
 import SiteOverviewAddonSection from './renderer/SiteOverviewAddonSection';
 import type { Site } from '@getflywheel/local';
 import { sendIPCEvent } from '@getflywheel/local/renderer';
-import { AtlasAddWordPress } from './renderer/AtlasAddWordPress';
+import { HeadlessAddWordPress } from './renderer/HeadlessAddWordPress';
 import { TextButtonExternal } from '@getflywheel/local-components';
-import blueprintsContent from '../atlas-blueprints/blueprintsContent';
+import blueprintsContent from '../headless-blueprints/blueprintsContent';
 
 const stylesheetPath = path.resolve(__dirname, '../style.css');
 const title = `Front-end Node.js`;
 
-export const atlasDocsUrl = `https://developers.wpengine.com`;
+export const headlessDocsUrl = `https://wpengine.com/builders/headless`;
 export const faustJsDocsUrl = `https://github.com/wpengine/faustjs`;
 
 const nodeJSSiteOverviewHook = (site: Site, siteStatus: string) => {
@@ -36,7 +36,7 @@ const renderTooltip = () => (
 	<div className="SiteOverviewAddonSectionTooltip">
 		Learn more about WP Engine Headless framework.
 		<TextButtonExternal
-			href={atlasDocsUrl}
+			href={headlessDocsUrl}
 			inline={false}
 			style={{ paddingTop: '7px' }}
 		>
@@ -49,38 +49,38 @@ export default function (context) {
 	const { React, hooks } = context;
 
 	hooks.addAction('FromBlueprintSiteDetails:OnContinue', (siteSettings: Local.NewSiteInfo) => {
-		if (siteSettings?.customOptions?.useAtlasFramework === 'on') {
+		if (siteSettings?.customOptions?.useHeadlessFramework === 'on') {
 			sendIPCEvent('goToRoute', '/main/create-site/from-blueprint/add-wordpress');
 		}
 	});
 
 	/**
-	 * Add AtlasBlueprints as an option when creating a new site
+	 * Add Blueprints as an option when creating a new site
 	 */
 	hooks.addFilter('CreateSite:Steps', (steps) => {
-		const atlasBlueprintSteps = [
+		const headlessBlueprintSteps = [
 			{
-				key: 'add-atlas-blueprint-add-wordpress',
+				key: 'add-headless-blueprint-add-wordpress',
 				path: '/main/create-site/from-blueprint/add-wordpress',
 				name: 'Add WordPress',
-				component: AtlasAddWordPress,
+				component: HeadlessAddWordPress,
 			},
 		];
-		return [...steps, ...atlasBlueprintSteps];
+		return [...steps, ...headlessBlueprintSteps];
 	});
 
 	hooks.addFilter(
 		'Blueprints_FromBlueprintsContinue',
 		(siteSettings: Local.NewSiteInfo) => {
-			const atlasBlueprint = blueprintsContent.find((blueprint) => blueprint.id === siteSettings.blueprint);
+			const headlessBlueprint = blueprintsContent.find((blueprint) => blueprint.id === siteSettings.blueprint);
 
-			if (atlasBlueprint) {
+			if (headlessBlueprint) {
 				const customOptions = {
 					bpId: siteSettings.blueprint,
-					atlasUrl: atlasBlueprint.repoHref,
-					additionalPlugins: atlasBlueprint.additionalPlugins,
-					installCommand: atlasBlueprint.installCommand,
-					useAtlasFramework: 'on',
+					headlessUrl: headlessBlueprint.repoHref,
+					additionalPlugins: headlessBlueprint.additionalPlugins,
+					installCommand: headlessBlueprint.installCommand,
+					useHeadlessFramework: 'on',
 				};
 
 				return { ...siteSettings, customOptions };
@@ -93,7 +93,7 @@ export default function (context) {
 	hooks.addContent('stylesheets', () => (
 		<link
 			rel="stylesheet"
-			key="localAtlas-addon-stylesheet"
+			key="local-headless-addon-stylesheet"
 			href={stylesheetPath}
 		/>
 	));
@@ -107,13 +107,13 @@ export default function (context) {
 	);
 
 	hooks.addContent('Blueprints_BlueprintsList:after', () => (
-		<AtlasBlueprints key="atlas-blueprints" />
+		<HeadlessBlueprints key="headless-blueprints" />
 	));
 
 	hooks.addContent(
 		'Blueprints_FromBlueprints:after',
 		(bpId, setBpId, setDisabled) => (
-			<AtlasFromBlueprints key="atlas-from-blueprints" bpId={bpId} setBpId={setBpId} setDisabled={setDisabled} />
+			<HeadlessFromBlueprints key="headless-from-blueprints" bpId={bpId} setBpId={setBpId} setDisabled={setDisabled} />
 		),
 	);
 

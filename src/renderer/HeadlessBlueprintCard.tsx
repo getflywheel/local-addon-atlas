@@ -10,7 +10,7 @@ import {
 import { sendIPCEvent } from '@getflywheel/local/renderer';
 import { IPC_EVENTS } from '../constants';
 
-interface AtlasBlueprintCardProps extends IReactComponentProps {
+interface HeadlessBlueprintCardProps extends IReactComponentProps {
 	thumbnailSrc: string;
 	title: string;
 	byline: string;
@@ -20,7 +20,7 @@ interface AtlasBlueprintCardProps extends IReactComponentProps {
 	detailsHref: string;
 }
 
-const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
+const HeadlessBlueprintCard: React.FC<HeadlessBlueprintCardProps> = ({
 	thumbnailSrc,
 	title,
 	byline,
@@ -31,23 +31,23 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 	...otherProps
 }) => (
 	<Card
-		className="AtlasBlueprintCard"
-		headerIconContainerClassName="AtlasBlueprintCard_HeaderIconContainer"
+		className="HeadlessBlueprintCard"
+		headerIconContainerClassName="HeadlessBlueprintCard_HeaderIconContainer"
 		headerIconPath={thumbnailSrc}
-		contentClassName="AtlasBlueprintCard_Content"
-		contentDescriptionClassName="AtlasBlueprintCard_Description"
+		contentClassName="HeadlessBlueprintCard_Content"
+		contentDescriptionClassName="HeadlessBlueprintCard_Description"
 		contentTitle={title}
 		contentSub={byline}
 		contentDescription={<span dangerouslySetInnerHTML={{ '__html': excerpt }}></span>}
 		{...otherProps}
 		content={
-			<Container className="AtlasBlueprintCard_Links">
+			<Container className="HeadlessBlueprintCard_Links">
 				<TextButtonExternal
 					inline
 					href={previewHref}
 					onClick={(e) => {
 						e.stopPropagation();
-						sendIPCEvent(IPC_EVENTS.TRACK_EVENT, 'v2_blueprint_atlas_preview', { title });
+						sendIPCEvent(IPC_EVENTS.TRACK_EVENT, 'v2_blueprint_headless_preview', { title });
 					}}
 					privateOptions={{ fontWeight: 'medium' }}
 					style={{ marginBottom: '10px' }}
@@ -60,7 +60,7 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 					href={repoHref}
 					onClick={(e) => {
 						e.stopPropagation();
-						sendIPCEvent(IPC_EVENTS.TRACK_EVENT, 'v2_blueprint_atlas_code', { title });
+						sendIPCEvent(IPC_EVENTS.TRACK_EVENT, 'v2_blueprint_headless_code', { title });
 					}}
 					privateOptions={{ fontWeight: 'medium' }}
 				>
@@ -71,7 +71,7 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 					privateOptions={{ fontWeight: 'medium', padding: 'none' }}
 					onClick={(e) => {
 						e.stopPropagation();
-						alert(`Atlas Blueprint Details: ${detailsHref}`);
+						alert(`Headless Blueprint Details: ${detailsHref}`);
 					}}
 				>
 						Show more details
@@ -81,4 +81,4 @@ const AtlasBlueprintCard: React.FC<AtlasBlueprintCardProps> = ({
 	/>
 );
 
-export default AtlasBlueprintCard;
+export default HeadlessBlueprintCard;

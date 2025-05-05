@@ -20,16 +20,16 @@ export const HeadlessEnvironmentSelect: React.FC<Props> = (props) => useObserver
 
 	return (
 		<div>
-			<div className="FormRow FormRow__Center AtlasCheckboxSelect" style={{ marginTop: 30 }}>
+			<div className="FormRow FormRow__Center HeadlessCheckboxSelect" style={{ marginTop: 30 }}>
 				<div>
 					<Checkbox
-						name="useAtlasFramework"
+						name="useHeadlessFramework"
 						style={{ marginTop: 10 }}
 						checked={checked}
-						label="Enable Atlas Add-on on this site."
+						label="Enable Headless Add-on on this site."
 						onChange={(checked) => onChange(checked)}
 					/>
-					<div className="AtlasTextLink">
+					<div className="HeadlessTextLink">
 						<Text>
 							(Site will be built with a Node.js front-end powered <br/>
 							by <TextButtonExternal href={faustJsDocsUrl}>WP Engine's Headless WordPress framework, Faust.js</TextButtonExternal>)

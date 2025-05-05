@@ -106,7 +106,7 @@ export const createNewTerminalWindow = (site: Site): BrowserWindow => {
 	const terminalWindow = new BrowserWindow({
 		acceptFirstMouse: true,
 		show: false,
-		title: `Local - Atlas - ${siteName}`,
+		title: `Local - WP Engine Headless Platform - ${siteName}`,
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false,
